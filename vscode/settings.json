@@ -1,0 +1,15 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "git.path": "C:\\Program Files\\Git\\bin\\git.exe",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "editor.formatOnSave": true,
+    "python.linting.pylintArgs": [
+        "--errors-only",
+        "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "workbench.colorTheme": "Dracula",
+    "extensions.ignoreRecommendations": false,
+    "python.formatting.provider": "yapf"
+}
