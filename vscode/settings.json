@@ -11,5 +11,8 @@
     "python.linting.pylintEnabled": false,
     "workbench.colorTheme": "Dracula",
     "extensions.ignoreRecommendations": false,
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.home": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.5.10-hotspot\\"
 }
