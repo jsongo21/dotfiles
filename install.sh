@@ -1,6 +1,7 @@
 #!bin/bash/
 
-for i in .*rc; do
+# rc files
+for i in .*rc .Xresources; do
   ln -sf "$(pwd)/$i" ~/$i
 done
 
