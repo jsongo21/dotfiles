@@ -25,7 +25,7 @@ set foldlevelstart=10
 set foldnestmax=10
 
 "colours & themes
-syntax enable 
+syntax on 
 colorscheme monokai
 set t_Co=256
 au InsertEnter * hi StatusLine guibg=Red

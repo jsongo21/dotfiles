@@ -1,4 +1,4 @@
-#!bin/bash/
+#!/bin/bash
 
 # rc files
 for i in .*rc .Xresources; do

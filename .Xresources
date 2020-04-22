@@ -19,12 +19,12 @@ URxvt.color2:   #a3be8c
 URxvt.color10:  #a3be8c
 
 ! yellow
-URxvt.color3:   #ebcb8b 
+URxvt.color3:   #ebcb8b
 URxvt.color11:  #ebcb8b
 
 ! blue
 URxvt.color4:   #8fa1b3
-URxvt.color12:  #8fa1b3 
+URxvt.color12:  #8fa1b3
 
 ! magenta
 URxvt.color5:   #b48ead
