@@ -26,6 +26,9 @@ set foldnestmax=10
 
 "colours & themes
 syntax enable 
-"colorscheme monokai
+colorscheme monokai
 au InsertEnter * hi StatusLine guibg=Red
 au InsertLeave * hi StatusLine guibg=#ccdc90
+
+"swap
+set noswapfile
