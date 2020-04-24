@@ -6,7 +6,12 @@ for i in .*rc .Xresources .config; do
 done
 
 # create vim colors directory
-mkdir -p ~/.vim/colors
+mkdir -pv ~/.vim/colors
 
-# download vim colours
-curl -G https://raw.githubusercontent.com/lsdr/monokai/master/colors/monokai.vim -o ~/.vim/colors/monokai.vim
+# git clone base-16 repos
+[[ -d ~/base16-xresources ]] || git clone https://github.com/base16-templates/base16-xresources.git ~/base16-xresources
+[[ -d ~/base16-vim ]] || git clone https://github.com/chriskempson/base16-vim.git ~/base16-vim
+[[ -d ~/.config/base16-shell ]] || git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+
+# copy vim colours
+cp ~/base16-vim/colors/*.vim ~/.vim/colors

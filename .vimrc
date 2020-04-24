@@ -26,8 +26,8 @@ set foldnestmax=10
 
 "colours & themes
 syntax on 
-colorscheme monokai
-set t_Co=256
+let base16colorspace=256
+colorscheme base16-gruvbox-dark-hard
 au InsertEnter * hi StatusLine guibg=Red
 au InsertLeave * hi StatusLine guibg=#ccdc90
 
