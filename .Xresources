@@ -16,7 +16,4 @@ URxvt.clipboard.autocopy: true
 URxvt.keysym.Ctrl-Insert: perl:clipboard:copy
 URxvt.keysym.Shift-Insert: perl:clipboard:paste
 
-! base-16 Xresources color theme
-#include "/home/jason/base16-xresources/xresources/base16-default-dark-256.Xresources"
 
-! base-16 vim color theme

@@ -2,16 +2,17 @@
 
 # rc files
 for i in .*rc .Xresources .config; do
-  ln -sf "$(pwd)/$i" ~/$i
+  ln -s "$(pwd)/$i" ~/$i
 done
 
 # create vim colors directory
 mkdir -pv ~/.vim/colors
 
 # git clone base-16 repos
-[[ -d ~/base16-xresources ]] || git clone https://github.com/base16-templates/base16-xresources.git ~/base16-xresources
+#[[ -d ~/base16-xresources ]] || git clone https://github.com/base16-templates/base16-xresources.git ~/base16-xresources
 [[ -d ~/base16-vim ]] || git clone https://github.com/chriskempson/base16-vim.git ~/base16-vim
-[[ -d ~/.config/base16-shell ]] || git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+[[ -d ~/base16-shell ]] || git clone https://github.com/chriskempson/base16-shell.git ~/base16-shell
 
-# copy vim colours
-cp ~/base16-vim/colors/*.vim ~/.vim/colors
+# copy files 
+cp -v ~/base16-shell/* ~/.config/base16-shell
+cp -v ~/base16-vim/colors/*.vim ~/.vim/colors 

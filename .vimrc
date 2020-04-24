@@ -27,7 +27,7 @@ set foldnestmax=10
 "colours & themes
 syntax on 
 let base16colorspace=256
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-dracula
 au InsertEnter * hi StatusLine guibg=Red
 au InsertLeave * hi StatusLine guibg=#ccdc90
 
