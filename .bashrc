@@ -4,12 +4,15 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
+alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='ls -l'
-alias sl='ll'
+alias la='ll -a'
+alias sl='ls'
 alias xrel='xrdb -I$HOME -merge ~/.Xresources'
+alias reload='source ~/.bashrc'
 
+# startx if there is graphical interface
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then 
     exec startx
 fi
