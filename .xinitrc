@@ -34,7 +34,6 @@ fi
 
 # run xresources and base16 shell theme
 xrdb -merge ~/.Xresources
-base16_monokai
 
 # change screen res and vbox options
 xrandr --output Virtual1 --mode 1440x900
