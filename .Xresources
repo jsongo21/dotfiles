@@ -4,8 +4,7 @@ URxvt.cursorBlink : 1
 URxvt.cursorUnderline : 1 
 URxvt.cursorColor: cyan
 URxvt*saveLines: 60000
-!URxvt.background: #1E262E
-URxvt.font: xft:monospace:size=10
+URxvt.font: xft:monospace:size=10,xft:DejaVu Sans Mono for Powerline:regular:size=10
 URxvt.scrollBar: false
 
 ! copy/paste

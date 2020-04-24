@@ -8,7 +8,7 @@ export ZSH="/home/jason/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
 
 # colors
 autoload -U colors && colors 
@@ -27,6 +27,9 @@ alias reload='source ~/.zshrc'
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]];then 
      exec startx
 fi
+# powerline fonts
+powerline-daemon -q 
+. /usr/lib/python3.8/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
