@@ -28,12 +28,6 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
      exec startx
 fi
 
-# start tmux on every login
-if [[ $DISPLAY ]]; then
-    # If not running interactively, do not do anything
-    [[ $- != *i* ]] && return
-    [[ -z "$TMUX" ]] && exec tmux
-fi
 
 # powerline fonts
 powerline-daemon -q 

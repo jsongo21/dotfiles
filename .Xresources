@@ -10,6 +10,7 @@ URxvt*saveLines: 60000
 URxvt.font: xft:Source Code Pro For Powerline:size=10
 URxvt*letterSpace: -1
 URxvt.scrollBar: false
+URxvt.internalBorder: 0
 
 ! copy/paste
 URxvt.iso14755: false
