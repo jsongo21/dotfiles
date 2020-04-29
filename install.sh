@@ -6,7 +6,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # link rc files
-for i in .*rc .Xresources; do 
+for i in .*rc .Xresources .tmux.conf; do 
     ln -sv "$(pwd)/$i" ~/$i
 done
 

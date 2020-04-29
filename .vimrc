@@ -48,6 +48,8 @@ call plug#begin('~/.vim/plugged')
 " declare the list of plugins.
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'pangloss/vim-javascript'
 
 " list ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -56,4 +58,13 @@ call plug#end()
 let base16colorspace=256
 set background=dark
 colorscheme gruvbox
+
+" syntax highlighting
+let g:javascript_plugin_jsdoc = 1
+
+
+
+
+
+
 

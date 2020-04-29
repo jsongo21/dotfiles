@@ -6,7 +6,8 @@ URxvt*saveLines: 60000
 !URxvt*font: xft:Terminess Powerline:size=12
 !URxvt.letterSpace: -2
 !URxvt.font: xft:Source Code Pro For Powerline:size=10
-URxvt.font: xft:DejaVu Sans Mono For Powerline:size=10
+!URxvt.font: xft:DejaVu Sans Mono For Powerline:size=10
+URxvt.font: xft:Source Code Pro For Powerline:size=10
 URxvt*letterSpace: -1
 URxvt.scrollBar: false
 
