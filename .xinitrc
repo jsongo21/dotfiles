@@ -6,37 +6,58 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
-if [ -f $sysresources ];then
+
+if [ -f $sysresources ]; then
+
+
+
+
+
+
+
     xrdb -merge $sysresources
+
 fi
 
-if [ -f $sysmodmap ];then
+if [ -f $sysmodmap ]; then
     xmodmap $sysmodmap
 fi
 
-if [ -f $userresources ];then
-    xrdb -merge $userresources
+if [ -f "$userresources" ]; then
+
+
+
+
+
+
+
+    xrdb -merge "$userresources"
+
 fi
 
-if [ -f $usermodmap ];then
-    xmodmap $usermodmap
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
 fi
-
-
 
 # start some nice programs
+
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
+ for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
 fi
 
-# run xresources and base16 shell theme
-xrdb -merge ~/.Xresources
+#twm &
+#xclock -geometry 50x50-1+1 &
+#xterm -geometry 80x50+494+51 &
+#xterm -geometry 80x20+494-0 &
+#exec xterm -geometry 80x66+0+0 -name login
 
-# change screen res and vbox options
-xrandr --output Virtual1 --mode 1440x900
-VBoxClient-all
+#bspwm stuffs
+picom -f &
+nitrogen --restore &
+xsetroot -cursor_name left_ptr
+exec bspwm
 
-exec i3
+
