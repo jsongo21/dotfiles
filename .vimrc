@@ -1,4 +1,4 @@
-syntax on
+syntax enable
 set relativenumber
 set nu
 set showcmd
@@ -15,14 +15,21 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
-set nohlsearch
 set showmatch
 set hlsearch
-set termguicolors
-set t_Co=16
 set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 
+"Alacritty show colours"
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
+    set termguicolors
+else
+    set t_Co=256
+endif
+
+"hi Normal ctermbg=none
 
 "Insert Mode Cursor & Delay
 let &t_SI = "\<esc>[5 q"
@@ -37,6 +44,12 @@ set ttyfast
 call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim',{'as':'dracula'}
 Plug 'lsdr/monokai'
+Plug 'gko/vim-coloresque'
+Plug 'gilgigilgil/anderson.vim'
 call plug#end()
 
-colorscheme monokai
+"let g:dracula_colorterm=0
+colorscheme anderson
+
+"key bindings
+nnoremap <silent> <Esc><Esc> :let @/=""<CR>

@@ -1,0 +1,178 @@
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/bar]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 55
+radius = 0
+fixed-center = true
+dpi = 192
+
+locale = en_AU.UTF-8 
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 0 
+border-color = #00000000
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = SourceCodeProMedium:pixelsize=11;1
+font-1 = HackNerdFont:pixelsize=10;0
+font-2 = NotoColorEmoji:fontformat=truetype:scale=10:antialias=false;3
+
+modules-left = bspwm xwindow 
+modules-right = pulseaudio backlight wlan battery date time-aus powermenu
+
+tray-position = right
+tray-padding = 0 
+;tray-background = #0063ff
+
+wm-restack = bspwm
+
+override-redirect = false
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-monitor = %name%
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+label-connected = wlan: %essid% 
+format-connected = <label-connected>
+format-disconnected = no connection
+
+
+[module/date]
+type = internal/date
+date = %a %d %b %Y
+time = %X
+label = %date% 
+
+
+[module/time-aus]
+type = custom/script
+exec = TZ=Australia/Melbourne date +"%X"
+interval = 1
+
+
+[module/backlight]
+type = internal/xbacklight
+format = <label>
+label = brightness: %percentage%%
+
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = ADP1
+poll-interval = 3
+label-charging = charging: %percentage%%
+label-discharging = discharging: %percentage%%
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = false
+interval = 5
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false 
+
+format-spacing = 1
+
+label-open = power 
+label-open-foreground = ${colors.secondary}
+label-close = cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = 🔁
+menu-0-0-exec = menu-open-1
+menu-0-1 = ⏹
+menu-0-1-exec = menu-open-2
+menu-0-2 = ⏸
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = reboot
+menu-1-0-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+
+menu-3-0 = suspend
+menu-3-0-exec = systemctl suspend
