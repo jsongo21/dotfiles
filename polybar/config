@@ -36,28 +36,32 @@ color13 = ${xrdb:color13}
 color14 = ${xrdb:color14}
 color15 = ${xrdb:color15}
 
-[bar/black]
+
+[bar/bar]
 monitor = eDP1
 width = 100%
 height = 50
+padding-left = 0
+dpi = 192
+
 offset-x = 0
 offset-y = 0
 background = ${colors.background}
 foreground = ${colors.foreground}
 bottom = false
-dpi = 192
+module-margin = 1
 
-line-size = 1
-
-font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=12;2
-;font-1 = Material Icons:style=Regular:size=12;2
-font-2 = FontAwesome5Brands:style=Regular:size=12:antialias=true;2
-
+line-size = 2
 wm-restack = bspwm
 override-redirect = true 
 
-tray-position = none
-modules-left = bspwm  repo
+modules-left = bspwm
+modules-center = xwindow 
+modules-right = cpu mem wlan volume xbacklight battery time powermenu
+
+font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=10;2
+font-1 = Material Design Icons:style=Regular:size=10;2
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -94,31 +98,6 @@ label-urgent = %icon%
 xxlabel-urgent-foreground = #88C0D0
 label-urgent-padding = 2
 
-[bar/bar]
-
-monitor = eDP1
-width = 100%
-height = 50
-padding-left = 0
-dpi = 192
-
-offset-x = 0
-offset-y = 0
-background = ${colors.background}
-foreground = ${colors.foreground}
-bottom = false
-module-margin = 1
-
-line-size = 2
-wm-restack = bspwm
-override-redirect = true 
-
-modules-left = bspwm
-modules-center = xwindow 
-modules-right = cpu mem wlan volume xbacklight battery time powermenu
-
-font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=9;2
-font-1 = Material Design Icons:style=Regular:size=9;2
 
 [module/xwindow]
 type = internal/xwindow
@@ -135,6 +114,7 @@ format =
 interval = 4600 
 label =  
 
+
 [module/updates]
 type = custom/script
 exec = xbps-updates 
@@ -143,6 +123,7 @@ interval = 4600
 label =  %output%  
 label-padding = 2
 label-foreground =  #81A1C1
+
 
 [module/cpu]
 type = internal/cpu
@@ -192,6 +173,7 @@ ramp-volume-0 = 󰕿
 ramp-volume-1 = 󰖀
 ramp-volume-2 = 󰕾
 ramp-volume-foreground = #BF616A
+
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -253,6 +235,7 @@ format = <label>
 date = 󰥔 %H:%M%{F-}
 time-alt = 󰃭 %a, %b %d%{F-}
 label = %date%%time%
+
 
 [module/powermenu]
 type = custom/text 
