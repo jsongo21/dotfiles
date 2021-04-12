@@ -57,7 +57,7 @@ override-redirect = true
 
 modules-left = bspwm
 modules-center = xwindow 
-modules-right = cpu mem wlan volume xbacklight battery time powermenu
+modules-right = cpu mem wlan volume xbacklight battery date time powermenu
 
 font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=10;2
 font-1 = Material Design Icons:style=Regular:size=10;2
@@ -228,14 +228,19 @@ animation-charging-framerate = 750
 ;format-discharging-padding = 1
 
 
-[module/time]
+[module/date]
 type = internal/date
 interval = 60
 format = <label>
-date = 󰥔 %H:%M%{F-}
-time-alt = 󰃭 %a, %b %d%{F-}
+date = 
+time = 
 label = %date%%time%
 
+[module/time]
+type = custom/script
+exec = TZ=Australia/Melbourne date +"󰃭 %a, %b %d %I:%M:%S %p"
+interval = 1
+format-foreground = #7292ab
 
 [module/powermenu]
 type = custom/text 
