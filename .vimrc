@@ -25,17 +25,6 @@ set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 
 
-"Alacritty show colours"
-"if exists('+termguicolors')
-"    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"    let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
-"    set termguicolors
-"else
-"    set t_Co=256
-"endif
-
-"hi Normal ctermbg=none
-
 "Insert Mode Cursor & Delay
 let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
@@ -52,8 +41,10 @@ Plug 'lsdr/monokai'
 Plug 'gko/vim-coloresque'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'vim-scripts/vim-gitgutter'
 call plug#end()
 
+"Colorschemes
 "let g:dracula_colorterm=0
 "colorscheme dracula
 colorscheme gruvbox
@@ -62,7 +53,7 @@ set bg=dark
 "key bindings
 
 
-
+"Trim WhiteSpace on Save
 fun! TrimWhiteSpace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -73,4 +64,3 @@ augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
-
