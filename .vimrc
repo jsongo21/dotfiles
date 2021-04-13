@@ -21,13 +21,13 @@ set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 
 "Alacritty show colours"
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
-    set termguicolors
-else
-    set t_Co=256
-endif
+"if exists('+termguicolors')
+"    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"    let &t_8b = "\<Esc>[48:2;%lu;%lu;%lum"
+"    set termguicolors
+"else
+"    set t_Co=256
+"endif
 
 "hi Normal ctermbg=none
 
@@ -46,10 +46,13 @@ Plug 'dracula/vim',{'as':'dracula'}
 Plug 'lsdr/monokai'
 Plug 'gko/vim-coloresque'
 Plug 'gilgigilgil/anderson.vim'
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 
 "let g:dracula_colorterm=0
-colorscheme anderson
+"colorscheme dracula
+colorscheme gruvbox
+set bg=dark
 
 "key bindings
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>

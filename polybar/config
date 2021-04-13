@@ -146,7 +146,7 @@ format-foreground = #f9a713
 type = custom/script
 exec = free -m | sed -n 's/^Mem:\s\+[0-9]\+\s\+\([0-9]\+\)\s.\+/\1/p'
 format = <label>
-label =󰳡 %output% M
+label =󰳡 %output% MB
 label-foreground = #88C0D0
 
 
