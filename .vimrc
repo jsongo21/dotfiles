@@ -2,8 +2,11 @@ syntax enable
 set relativenumber
 set nu
 set showcmd
+set signcolumn=yes
 set laststatus=2
 set hidden
+set cmdheight=2
+
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -16,9 +19,11 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set showmatch
-set hlsearch
+set noshowmode
+set nohlsearch
 set scrolloff=8
 set completeopt=menuone,noinsert,noselect
+
 
 "Alacritty show colours"
 "if exists('+termguicolors')
@@ -55,4 +60,17 @@ colorscheme gruvbox
 set bg=dark
 
 "key bindings
-nnoremap <silent> <Esc><Esc> :let @/=""<CR>
+
+
+
+fun! TrimWhiteSpace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+augroup THE_PRIMEAGEN
+    autocmd!
+    autocmd BufWritePre * :call TrimWhiteSpace()
+augroup END
+
