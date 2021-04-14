@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-   $TERM 
+   $TERM
 
 # program launcher
 super + @space
@@ -13,6 +13,9 @@ super + @space
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+# launch browser
+super + shift + b
+    $BROWSER
 
 #
 # bspwm hotkeys
