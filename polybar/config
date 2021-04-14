@@ -53,11 +53,11 @@ module-margin = 1
 
 line-size = 2
 wm-restack = bspwm
-override-redirect = true 
+override-redirect = true
 
 modules-left = bspwm
-modules-center = xwindow 
-modules-right = cpu mem wlan volume xbacklight battery date time powermenu
+modules-center = xwindow
+modules-right = pacman-packages cpu mem wlan volume xbacklight battery date time powermenu
 
 font-0 = JetBrainsMono Nerd Font:style=Bold:pixelsize=10;2
 font-1 = Material Design Icons:style=Regular:size=10;2
@@ -75,10 +75,10 @@ reverse-scroll = true
 format = <label-state>
 
 ;ws-icon-0 = I;%{F#ffcb8e}
-;ws-icon-1 = II;%{F#BF616A}    
-;ws-icon-2 = III;%{F#81A1C1}    
-;ws-icon-3 = IV;%{F#A3BE8C}     
-;ws-icon-4 = V 
+;ws-icon-1 = II;%{F#BF616A}
+;ws-icon-2 = III;%{F#81A1C1}
+;ws-icon-3 = IV;%{F#A3BE8C}
+;ws-icon-4 = V
 
 label-monitor = %name%
 label-focused = %index%
@@ -107,22 +107,14 @@ format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
 
-[module/repo]
-type = custom/script
-exec = doas xbps-install -S
-format = 
-interval = 4600 
-label =  
 
-
-[module/updates]
+[module/pacman-packages]
 type = custom/script
-exec = xbps-updates 
+exec = pacman -Qu | wc -l
 format = <label>
-interval = 4600 
-label =  %output%  
-label-padding = 2
-label-foreground =  #81A1C1
+interval = 4600
+label = 󰏔 %output%
+label-foreground = ${colors.color4}
 
 
 [module/cpu]
@@ -137,9 +129,9 @@ interval = 2.5
 ;   <bar-load>
 ;   <ramp-load>
 ;   <ramp-coreload>
-format =  <label> 
+format =  <label>
 label = CPU %percentage%%
-format-foreground = #f9a713
+format-foreground = ${colors.color3}
 
 
 [module/mem]
@@ -147,7 +139,7 @@ type = custom/script
 exec = free -m | sed -n 's/^Mem:\s\+[0-9]\+\s\+\([0-9]\+\)\s.\+/\1/p'
 format = <label>
 label =󰳡 %output% MB
-label-foreground = #88C0D0
+label-foreground = ${colors.color1}
 
 
 [module/wlan]
@@ -155,8 +147,8 @@ type = internal/network
 interface = wlan0
 interval = 3.0
 format-connected =  <label-connected>
-label-connected = 󰤨 %essid% 
-label-connected-foreground = #A3BE8C 
+label-connected = 󰤨 %essid%
+label-connected-foreground = ${colors.color6}
 
 
 [module/volume]
@@ -165,14 +157,14 @@ use-ui-max = false
 interval = 5
 click-right = pavucontrol
 format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%% 
-label-volume-foreground = #BF616A
+label-volume = %percentage%%
+label-volume-foreground = ${colors.color5}
 label-muted = muted
 label-muted-foreground = #666
 ramp-volume-0 = 󰕿
 ramp-volume-1 = 󰖀
 ramp-volume-2 = 󰕾
-ramp-volume-foreground = #BF616A
+ramp-volume-foreground = ${colors.color5}
 
 
 [module/xbacklight]
@@ -181,8 +173,8 @@ format = <label>
 format-prefix = " "
 
 label = %percentage%%
-format-prefix-foreground = #B48EAD
-label-foreground =   #B48EAD
+format-prefix-foreground = ${colors.color3}
+label-foreground = ${colors.color3}
 
 
 [module/battery]
@@ -193,35 +185,35 @@ full-at = 99
 
 format-charging = <animation-charging> <label-charging>
 label-charging = %percentage%%
-format-charging-foreground = ${colors.color4}
+format-charging-foreground = ${colors.color2}
 format-charging-background = ${colors.background}
 
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = %percentage%%
-format-discharging-foreground = ${colors.foreground}
+format-discharging-foreground = ${colors.color2}
 format-discharging-background = ${colors.background}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.color4}
-format-foreground = ${colors.color4}
+format-full-prefix-foreground = ${colors.color2}
+format-foreground = ${colors.color2}
 format-background = ${colors.background}
 
-label-discharging-foreground = ${colors.foreground}
-label-charging-foreground = ${colors.color4}
+label-discharging-foreground = ${colors.color2}
+label-charging-foreground = ${colors.color2}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.foreground}
+ramp-capacity-foreground = ${colors.color2}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.color4}
+animation-charging-foreground = ${colors.color2}
 animation-charging-framerate = 750
 
 ;format-charging-padding = 1
@@ -232,18 +224,19 @@ animation-charging-framerate = 750
 type = internal/date
 interval = 60
 format = <label>
-date = 
-time = 
+date =
+time =
 label = %date%%time%
 
 [module/time]
 type = custom/script
 exec = TZ=Australia/Melbourne date +"󰃭 %a, %b %d %I:%M:%S %p"
 interval = 1
-format-foreground = #7292ab
+format-foreground = ${colors.color5}
 
 [module/powermenu]
-type = custom/text 
-content = 
-click-left = doas zzz &
-content-padding = 2
+type = custom/text
+content = 
+click-left =
+
+content-margin= 1
