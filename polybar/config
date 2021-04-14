@@ -41,19 +41,20 @@ color15 = ${xrdb:color15}
 monitor = eDP1
 width = 100%
 height = 50
-padding-left = 0
 dpi = 192
-
 offset-x = 0
 offset-y = 0
+module-margin = 1
+fixed-center = true
+
 background = ${colors.background}
 foreground = ${colors.foreground}
-bottom = false
-module-margin = 1
 
 line-size = 2
 wm-restack = bspwm
 override-redirect = true
+
+tray-position = right
 
 modules-left = bspwm
 modules-center = xwindow
@@ -115,6 +116,7 @@ format = <label>
 interval = 4600
 label = 󰏔 %output%
 label-foreground = ${colors.color4}
+click-left = $TERM -e sudo pacman -Su && polybar-msg -p "$(pidof "polybar")" hook pacman-packages 1
 
 
 [module/cpu]
