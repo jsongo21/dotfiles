@@ -10,7 +10,7 @@ alias ll='ls -l'
 alias la='ll -a'
 alias sl='ls'
 alias reload='source ~/.bashrc'
-alias xreload='source xrdb ~/.Xresources'
+alias xreload='xrdb ~/.Xresources'
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
