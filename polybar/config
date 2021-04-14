@@ -232,7 +232,7 @@ label = %date%%time%
 type = custom/script
 exec = TZ=Australia/Melbourne date +"󰃭 %a, %b %d %I:%M:%S %p"
 interval = 1
-format-foreground = ${colors.color5}
+format-foreground = ${colors.color7}
 
 [module/powermenu]
 type = custom/text
