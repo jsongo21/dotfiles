@@ -238,5 +238,6 @@ format-foreground = ${colors.color7}
 type = custom/text
 content = 
 click-left =
+content-foreground = ${colors.color1}
 
 content-margin= 1
