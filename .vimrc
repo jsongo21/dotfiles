@@ -42,6 +42,7 @@ Plug 'gko/vim-coloresque'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-scripts/vim-gitgutter'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 "Colorschemes
