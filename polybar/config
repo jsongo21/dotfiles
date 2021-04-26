@@ -110,12 +110,12 @@ format-background = ${colors.background}
 
 [module/pacman-packages]
 type = custom/script
-exec = pacman -Qu | wc -l
+exec = yay -Qu | wc -l
 format = <label>
 interval = 4600
 label = 󰏔 %output%
 label-foreground = ${colors.color4}
-click-left = $TERM -e sudo pacman -Su && polybar-msg -p "$(pidof "polybar")" hook pacman-packages 1
+click-left = $TERM -e yay -Syu && polybar-msg -p "$(pidof "polybar")" hook pacman-packages 1
 
 
 [module/cpu]
