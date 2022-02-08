@@ -1,3 +1,4 @@
+"""""""" Vim Set Options
 syntax enable
 set relativenumber
 set nu
@@ -23,8 +24,9 @@ set nohlsearch
 set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 set termguicolors
+""""""""
 
-"Insert Mode Cursor & Delay
+"""""""" Insert Mode Cursor & Delay
 let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
 let &t_EI = "\<esc>[2 q"
@@ -32,8 +34,9 @@ set ttimeout
 set ttimeoutlen=1
 set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
 set ttyfast
+""""""""
 
-"Vim-Plug
+"""""""" Vim-Plug
 call plug#begin('~/.vim/plugged')
 Plug 'gko/vim-coloresque'
 Plug 'gruvbox-community/gruvbox'
@@ -42,15 +45,24 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+""""""""
 
-"Colorschemes
+"""""""" Colorschemes
 colorscheme gruvbox
 set bg=dark
+""""""""
 
-"key bindings
+"""""""" Key Bindings
 let mapleader = " "
 
-"Trim WhiteSpace on Save
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+""""""""
+
+"""""""" Functions
+" Trim WhiteSpace on Save
 fun! TrimWhiteSpace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -61,3 +73,8 @@ augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
+""""""""
+
+"""""""" CoC extensions
+let g:coc_global_extensions = ["coc-tsserver", "coc-json"]
+""""""""
