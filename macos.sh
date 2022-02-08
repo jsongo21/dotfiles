@@ -16,6 +16,7 @@ brew install yarn
 
 # Setup Terminal Install apps
 brew install macvim
+brew install tmux
 brew install --cask google-chrome
 brew install --cask iterm2
 brew install --cask visual-studio-code
