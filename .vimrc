@@ -43,6 +43,9 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'vim-scripts/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 """"""""
@@ -57,8 +60,15 @@ let mapleader = " "
 
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ac  <Plug>(coc-codeaction)
+
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+
+" NERDTree Bindings
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 """"""""
 
 """""""" Functions
