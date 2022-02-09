@@ -7,7 +7,7 @@ set signcolumn=yes
 set laststatus=2
 set hidden
 set cmdheight=2
-set tabstop=4 softtabstop=4
+set tabstop=2 softtabstop=2
 set shiftwidth=4
 set expandtab
 set smartindent
@@ -19,7 +19,6 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set showmatch
-set noshowmode
 set nohlsearch
 set scrolloff=8
 set completeopt=menuone,noinsert,noselect
@@ -47,6 +46,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'jparise/vim-graphql'        " GraphQL syntax
 call plug#end()
 """"""""
 
