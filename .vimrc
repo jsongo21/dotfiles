@@ -55,6 +55,7 @@ Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'jiangmiao/auto-pairs'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 """"""""
 
@@ -77,6 +78,11 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" CoC
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
 """"""""
 
 """""""" Functions
@@ -86,6 +92,16 @@ fun! TrimWhiteSpace()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
+
+function! ShowDocIfNoDiagnostic(timer_id)
+    if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+        silent call CocActionAsync('doHover')
+    endif
+endfunction
+
+function! s:show_hover_doc()
+    call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
 """"""""
 
 """""""" Auto Commands
@@ -94,9 +110,14 @@ augroup THE_PRIMEAGEN
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 """"""""
 
-"""""""" CoC extensions
+"""""""" Extensions
 "let g:coc_global_extensions = ["coc-tsserver", "coc-json"]
+let g:indent_guides_enable_on_vim_startup = 1
 """"""""
