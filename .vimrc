@@ -68,10 +68,13 @@ set bg=dark
 let mapleader = " "
 
 " Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>do <Plug>(coc-codeaction)
 
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>fq <Plug>(coc-fix-current)
+
+" Rename symbol
+nmap <leader>rn <Plug>(coc-rename)
 
 " NERDTree Bindings
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -83,6 +86,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 """"""""
 
 """""""" Functions
@@ -100,7 +104,7 @@ function! ShowDocIfNoDiagnostic(timer_id)
 endfunction
 
 function! s:show_hover_doc()
-    call timer_start(500, 'ShowDocIfNoDiagnostic')
+    call timer_start(200, 'ShowDocIfNoDiagnostic')
 endfunction
 """"""""
 
@@ -112,9 +116,9 @@ augroup END
 
 autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
-
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
+autocmd VimEnter * NERDTree
 """"""""
 
 """""""" Extensions
