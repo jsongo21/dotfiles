@@ -7,7 +7,7 @@ set signcolumn=yes
 set laststatus=2
 set hidden
 set cmdheight=2
-set tabstop=2 softtabstop=2
+set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
@@ -46,6 +46,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-prettier'
+Plug 'neoclide/coc-eslint'
+Plug 'neoclide/coc-tslint'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
@@ -82,13 +86,17 @@ fun! TrimWhiteSpace()
     keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfun
+""""""""
 
+"""""""" Auto Commands
 augroup THE_PRIMEAGEN
     autocmd!
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
+
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 """"""""
 
 """""""" CoC extensions
-let g:coc_global_extensions = ["coc-tsserver", "coc-json"]
+"let g:coc_global_extensions = ["coc-tsserver", "coc-json"]
 """"""""
