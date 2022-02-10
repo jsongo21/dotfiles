@@ -53,21 +53,25 @@ Plug 'neoclide/coc-prettier'
 Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-tslint'
 Plug 'neoclide/coc-jest'
-Plug 'pangloss/vim-javascript'    " JavaScript support
+"Plug 'pangloss/vim-javascript'    " JavaScript support
 "Plug 'leafgarland/typescript-vim' " TypeScript syntax
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'herringtondarkholme/yats.vim' " Typescript Syntax
+"Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+"Plug 'jparise/vim-graphql'        " GraphQL syntax
+"Plug 'herringtondarkholme/yats.vim' " Typescript Syntax
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'neovim/nvim-lspconfig'
+endif
 call plug#end()
 """"""""
 
 """""""" Colorschemes
-colorscheme gruvbox
-"let g:dracula_colorterm=0
-"colorscheme dracula
+"colorscheme gruvbox
+let g:dracula_colorterm=0
+colorscheme dracula
 set bg=dark
 let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
@@ -139,3 +143,25 @@ let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
 let g:indent_guides_enable_on_vim_startup = 1
 let NERDTreeShowHidden=1
 """"""""
+
+"""""""" Tree Sitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {}
+  },
+  indent = {
+      enable = true
+  },
+  ensure_installed = {
+    "typescript",
+    "javascript",
+    "tsx",
+    "json",
+    "html",
+    "css",
+    "scss"
+  },
+}
+EOF
