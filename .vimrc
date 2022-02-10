@@ -50,6 +50,7 @@ Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/coc-prettier'
 Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-tslint'
+Plug 'neoclide/coc-jest'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
