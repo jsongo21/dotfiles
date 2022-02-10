@@ -118,10 +118,16 @@ autocmd CursorHoldI * :call <SID>show_hover_doc()
 autocmd CursorHold * :call <SID>show_hover_doc()
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expandtab
-autocmd VimEnter * NERDTree
+
+augroup NERD
+    au!
+    autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd p
+augroup END
 """"""""
 
 """""""" Extensions
-"let g:coc_global_extensions = ["coc-tsserver", "coc-json"]
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
 let g:indent_guides_enable_on_vim_startup = 1
+let NERDTreeShowHidden=1
 """"""""
