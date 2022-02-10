@@ -23,6 +23,7 @@ set nohlsearch
 set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 set termguicolors
+set re=0
 """"""""
 
 """""""" Insert Mode Cursor & Delay
@@ -39,6 +40,7 @@ set ttyfast
 call plug#begin('~/.vim/plugged')
 Plug 'gko/vim-coloresque'
 Plug 'gruvbox-community/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'vim-scripts/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -52,9 +54,10 @@ Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-tslint'
 Plug 'neoclide/coc-jest'
 Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
+"Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
+Plug 'herringtondarkholme/yats.vim' " Typescript Syntax
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -63,6 +66,8 @@ call plug#end()
 
 """""""" Colorschemes
 colorscheme gruvbox
+"let g:dracula_colorterm=0
+"colorscheme dracula
 set bg=dark
 let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
