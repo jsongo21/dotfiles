@@ -56,13 +56,15 @@ Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'jiangmiao/auto-pairs'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 """"""""
 
 """""""" Colorschemes
 colorscheme gruvbox
 set bg=dark
+let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
 
 """""""" Key Bindings
