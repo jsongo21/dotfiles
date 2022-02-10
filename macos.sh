@@ -15,7 +15,7 @@ brew install yarn
 
 
 # Setup Terminal Install apps
-brew install macvim
+brew install neovim
 brew install tmux
 brew install --cask google-chrome
 brew install --cask iterm2
