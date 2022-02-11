@@ -41,6 +41,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'gko/vim-coloresque'
 Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula'  }
+Plug 'tjdevries/colorbuddy.vim'
+Plug 'bkegley/gloombuddy'
+Plug 'rrethy/nvim-base16'
 Plug 'vim-scripts/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -69,10 +72,12 @@ call plug#end()
 """"""""
 
 """""""" Colorschemes
+"set bg=dark
 "colorscheme gruvbox
-let g:dracula_colorterm=0
-colorscheme dracula
-set bg=dark
+"let g:dracula_colorterm=0
+"colorscheme dracula
+"colorscheme gloombuddy
+colorscheme base16-gruvbox-dark-soft
 let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
 
