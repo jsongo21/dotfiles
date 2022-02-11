@@ -1,7 +1,6 @@
-ln -sf "${HOME}"/dotfiles/.zshrc "${HOME}"/.zshrc
-ln -sf "${HOME}"/dotfiles/.zprofile "${HOME}"/.zprofile
-ln -sf "${HOME}"/dotfiles/.tmux.conf "${HOME}"/.tmux.conf
-ln -sf "${HOME}"/dotfiles/.vimrc "${HOME}"/.vimrc
-mkdir -p "${HOME}"/.config/nvim
-ln -sf "${HOME}"/dotfiles/.config/nvim/init.vim "${HOME}"/.config/nvim/init.vim
-ln -sf "${HOME}"/dotfiles/coc-settings.json "${HOME}"/.vim/coc-settings.json
+ln -svf "${HOME}"/dotfiles/.zshrc "${HOME}"/.zshrc
+ln -svf "${HOME}"/dotfiles/.zprofile "${HOME}"/.zprofile
+ln -svf "${HOME}"/dotfiles/.tmux.conf "${HOME}"/.tmux.conf
+ln -svf "${HOME}"/dotfiles/.vimrc "${HOME}"/.vimrc
+ln -svf "${HOME}"/dotfiles/.config/nvim "${HOME}"/.config/nvim
+ln -svf "${HOME}"/dotfiles/coc-settings.json "${HOME}"/.vim/coc-settings.json
