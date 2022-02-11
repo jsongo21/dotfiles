@@ -24,6 +24,7 @@ set scrolloff=8
 set completeopt=menuone,noinsert,noselect
 set termguicolors
 set re=0
+set mouse=a
 """"""""
 
 """""""" Insert Mode Cursor & Delay
@@ -85,6 +86,9 @@ let g:airline_theme='base16_gruvbox_dark_hard'
 
 """""""" Key Bindings
 let mapleader = " "
+
+map <ScrollWheelDown> j
+map <ScrollWheelUp> k
 
 " Remap keys for applying codeAction to the current line.
 nmap <leader>do <Plug>(coc-codeaction)
@@ -225,7 +229,7 @@ lua<<EOF
 require'nvim-tree'.setup {
   disable_netrw        = true,
   hijack_netrw         = true,
-  open_on_setup        = false,
+  open_on_setup        = true,
   ignore_ft_on_setup   = {},
   auto_close           = false,
   auto_reload_on_write = true,
@@ -268,7 +272,7 @@ require'nvim-tree'.setup {
     height = 30,
     hide_root_folder = false,
     side = 'left',
-    auto_resize = false,
+    auto_resize = true,
     mappings = {
       custom_only = false,
       list = {}
