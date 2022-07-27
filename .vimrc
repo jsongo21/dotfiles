@@ -27,6 +27,7 @@ set re=0
 set mouse=a
 """"""""
 
+
 """""""" Insert Mode Cursor & Delay
 let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
@@ -76,11 +77,11 @@ call plug#end()
 
 """""""" Colorschemes
 "set bg=dark
-"colorscheme gruvbox
+colorscheme gruvbox
 "let g:dracula_colorterm=0
 "colorscheme dracula
 "colorscheme gloombuddy
-colorscheme base16-gruvbox-dark-soft
+"colorscheme base16-gruvbox-dark-soft
 let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
 
@@ -110,12 +111,45 @@ nnoremap <leader>n :NvimTreeFocus<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
 
+" Fzf
+nnoremap <leader>f :GFiles<CR>
 
 "CoC
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" cycle through completion list with tab/shift+tab
+inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Fugitive
+nmap <leader>gs :Git<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
 """"""""
 
 """""""" Functions
