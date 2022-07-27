@@ -22,6 +22,7 @@ nmap <leader>rn <Plug>(coc-rename)
 "nnoremap <C-f> :NERDTreeFind<CR>
 
 " nvim tree
+nnoremap <leader>t :NvimTreeToggle<CR>
 nnoremap <leader>n :NvimTreeFocus<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
