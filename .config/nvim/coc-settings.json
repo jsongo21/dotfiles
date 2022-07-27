@@ -9,5 +9,7 @@
     "typescriptreact",
     "typescript.tsx",
     "json"
-  ]
+  ],
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true
 }
