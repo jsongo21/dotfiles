@@ -3,6 +3,9 @@ let mapleader = " "
 map <ScrollWheelDown> j
 map <ScrollWheelUp> k
 
+" source vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
 " Remap keys for applying codeAction to the current line.
 nmap <leader>do <Plug>(coc-codeaction)
 
