@@ -114,3 +114,5 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit
 fi
+
+export HOMEBREW_FORCE_BREWED_CURL=1
