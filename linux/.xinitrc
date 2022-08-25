@@ -38,9 +38,10 @@ fi
 #xterm -geometry 80x20+494-0 &
 #exec xterm -geometry 80x66+0+0 -name login
 
+export TERM=alacritty
+
 #bspwm stuffs
 picom -f &
-nitrogen --restore &
 xsetroot -cursor_name left_ptr
 exec bspwm
 
