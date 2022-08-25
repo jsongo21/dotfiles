@@ -4,7 +4,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/powerline/fonts.git --depth=1 && cd fonts && ./install.sh && cd .. && rm -rf fonts
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd .. && rm -rf yay
-yay -S nvm
-nvm install --lts
+yay -S --noconfirm nvm ttf-material-design-icons nerd-fonts-jetbrains-mono
+source /usr/share/nvm/init-nvm.sh && nvm install --lts
 nvim +PlugInstall +qall
 
