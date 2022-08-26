@@ -52,7 +52,6 @@ colorscheme gruvbox
 "colorscheme dracula
 "colorscheme gloombuddy
 "colorscheme base16-gruvbox-dark-soft
-let g:airline_theme='base16_gruvbox_dark_hard'
 """"""""
 
 """""""" Key Bindings
@@ -99,4 +98,5 @@ autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=0 expand
 """""""" Extensions
 let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
 let g:indent_guides_enable_on_vim_startup = 1
-let NERDTreeShowHidden=1
+let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_powerline_fonts=1
