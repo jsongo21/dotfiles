@@ -32,6 +32,10 @@ brew install --cask discord
 brew install awscli
 brew install awslogs
 brew install jq
+brew install alacritty
+sudo xattr -r -d com.apple.quarantine /Applications/Alacritty.app/
+brew tap homebrew/cask-fonts
+brew install --cask font-jetbrains-mono-nerd-font
 
 vim +PluginInstall +qall
 
