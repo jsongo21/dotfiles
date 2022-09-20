@@ -1,7 +1,8 @@
 xcode-select --install
 
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+eval $(/opt/homebrew/bin/brew shellenv)
 brew update
 
 # Setup Terminal
@@ -39,5 +40,7 @@ sudo xattr -r -d com.apple.quarantine /opt/homebrew/bin/chromedriver
 brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono-nerd-font
 
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 vim +PluginInstall +qall
 
