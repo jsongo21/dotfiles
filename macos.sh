@@ -34,6 +34,7 @@ brew install --cask spotify
 brew install --cask postman
 brew install --cask discord
 brew install --cask chromedriver
+brew install docker-compose
 brew install awscli
 brew install awslogs
 brew install jq
