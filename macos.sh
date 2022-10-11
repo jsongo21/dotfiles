@@ -14,14 +14,15 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Node.js
-brew install npm
-brew install yarn
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- -L https://yarnpkg.com/install.sh | bash
 
 
 # Setup Terminal Install apps
 brew install neovim
 brew install tmux
 brew install --cask google-chrome
+brew install --cask brave-browser
 brew install --cask iterm2
 brew install --cask visual-studio-code
 brew install --cask rectangle
