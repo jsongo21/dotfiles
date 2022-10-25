@@ -21,6 +21,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 # Setup Terminal Install apps
 brew install neovim
 brew install tmux
+brew install go
 brew install --cask google-chrome
 brew install --cask brave-browser
 brew install --cask iterm2
