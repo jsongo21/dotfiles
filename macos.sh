@@ -51,6 +51,9 @@ brew install --cask font-jetbrains-mono-nerd-font
 brew install mkcert
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
+brew install coreutils
+brew install graphviz
+curl -s "https://get.sdkman.io" | bash
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
