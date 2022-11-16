@@ -114,6 +114,7 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+export AWS_SDK_LOAD_CONFIG=true
 export HOMEBREW_FORCE_BREWED_CURL=1
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
