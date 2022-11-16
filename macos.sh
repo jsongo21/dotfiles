@@ -37,7 +37,10 @@ brew install --cask postman
 brew install --cask discord
 brew install --cask chromedriver
 brew install docker-compose
+brew install docker-credential-helper
 brew install awscli
+brew install pipx
+brew install direnv
 brew install awslogs
 brew install jq
 brew install alacritty
@@ -53,3 +56,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 vim +PluginInstall +qall
 
+# install aws-sso-util
+pipx ensurepath
+pipx install aws-sso-util
