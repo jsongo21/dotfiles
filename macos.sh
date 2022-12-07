@@ -36,6 +36,7 @@ brew install --cask spotify
 brew install --cask postman
 brew install --cask discord
 brew install --cask chromedriver
+brew install --cask adobe-acrobat-reader
 brew install docker-compose
 brew install docker-credential-helper
 brew install awscli
