@@ -114,6 +114,18 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+okta() {
+  docker run --rm -it \
+  -v "${HOME}/.aws:/root/.aws" \
+  --entrypoint=oktashell \
+  cmdlabs/okta-utils:latest \
+  -u jason.ngo@digio.com.au \
+  -a runcmd \
+  -d 28800 \
+  -m push -o arn:aws:iam::198684731458:role/runcmd-role-idp-clientreadonly \
+  -p idp-readonly
+}
+
 export AWS_SDK_LOAD_CONFIG=true
 export HOMEBREW_FORCE_BREWED_CURL=1
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
