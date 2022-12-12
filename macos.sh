@@ -54,6 +54,8 @@ brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 brew install coreutils
 brew install graphviz
+brew tap microsoft/git
+brew install --cask git-credential-manager-core
 curl -s "https://get.sdkman.io" | bash
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
