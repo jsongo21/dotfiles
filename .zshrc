@@ -126,6 +126,15 @@ okta() {
   -p idp-readonly
 }
 
+breakglass() {
+  docker run --rm -it \
+    -v ~/.aws:/root/.aws \
+    --entrypoint=breakglass \
+    -e AWS_DEFAULT_REGION=ap-southeast-2 \
+    -e AWS_PROFILE=idp-readonly cmdsolutions/breakglass-utils:latest \
+    -u jason.ngo@digio.com.au $@
+}
+
 export AWS_SDK_LOAD_CONFIG=true
 export HOMEBREW_FORCE_BREWED_CURL=1
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
