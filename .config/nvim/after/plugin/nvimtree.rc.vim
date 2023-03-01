@@ -9,6 +9,10 @@ require("nvim-tree").setup {
   },
   git = {
     timeout = 500,
+    ignore = false
+  },
+  filters = {
+    dotfiles = false
   },
   view = {
     number = false,
@@ -17,7 +21,6 @@ require("nvim-tree").setup {
   },
   trash = {
     cmd = "trash",
-  }
+  },
 }
-
 EOF

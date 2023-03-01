@@ -22,7 +22,10 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <C-f> :NvimTreeFindFile<CR>
 
 " Fzf
-nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :GFiles<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <C-r> :Rg<CR>
 
 "CoC
 nmap <silent> gd <Plug>(coc-definition)
