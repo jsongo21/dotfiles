@@ -67,13 +67,13 @@ fun! TrimWhiteSpace()
 endfun
 
 function! ShowDocIfNoDiagnostic(timer_id)
-    if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
-        silent call CocActionAsync('doHover')
+    if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
     endif
 endfunction
 
 function! s:show_hover_doc()
-    call timer_start(200, 'ShowDocIfNoDiagnostic')
+    call timer_start(50, 'ShowDocIfNoDiagnostic')
 endfunction
 """"""""
 
