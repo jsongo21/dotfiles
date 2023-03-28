@@ -13,6 +13,26 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
+   ---- TOKYONIGHT ----
+    --[[ use({
+    	'folke/tokyonight.nvim',
+      	config = function()
+       		require("tokyonight").setup()
+       		vim.cmd('colorscheme tokyonight')
+       	end
+       }) ]]
+
+   ---- GRUVBOX ----
+     use({
+    	'ellisonleao/gruvbox.nvim',
+      	config = function()
+       		require("gruvbox").setup()
+            vim.o.background = 'dark'
+       		vim.cmd('colorscheme gruvbox')
+       	end
+       })
+
+   ---- ROSE PINE ----
     --use({
       --	'rose-pine/neovim',
       --	as = 'rose-pine',
@@ -21,24 +41,63 @@ return require('packer').startup(function(use)
         --		vim.cmd('colorscheme rose-pine')
         --	end
         --})
-    --use({
-    --  'rebelot/kanagawa.nvim',
-    --  config = function()
-    --    require('kanagawa').setup{
-    --    }
-    --    require('kanagawa').load('dragon')
-    --  end
-    --})
 
-    use({
+   ---- KANAGAWA ----
+    --[[ use({
+      'rebelot/kanagawa.nvim',
+      config = function()
+        require('kanagawa').setup{
+          colors = {
+            theme = {
+              all = {
+                ui = {
+                  bg_gutter = 'none',
+                  float = {
+                    bg = 'none'
+                  }
+                }
+              }
+            }
+          }
+        }
+        vim.cmd('colorscheme kanagawa')
+      end
+    }) ]]
+
+   ---- CATPPUCCIN ----
+    --[[ use({
+      'catppuccin/nvim',
+      as = 'catppuccin',
+      config = function()
+        require('catppuccin').setup({
+          flavour = 'mocha',
+        }) 
+        vim.cmd('colorscheme catppuccin')
+      end
+    }) ]]
+
+   ---- ONE DARK ----
+    --[[ use({
       'navarasu/onedark.nvim',
       config = function()
         require('onedark').setup {
+   --------------
           style = 'warm'
         }
         require('onedark').load()
       end
-    })
+    }) ]]
+
+   ---- DRACULA ----
+    --[[ use({
+      'Mofiqul/dracula.nvim',
+      config = function()
+        require('dracula').setup({
+        })
+        vim.cmd('colorscheme dracula')
+      end
+    }) ]]
+
     use('nvim-treesitter/nvim-treesitter',{	run = ':TSUpdate'})
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
@@ -91,18 +150,19 @@ return require('packer').startup(function(use)
 
       use {
         'lewis6991/gitsigns.nvim',
-        config = function()
-          require('gitsigns').setup()
-        end
       }
 
       use {
         'numToStr/Comment.nvim',
         config = function()
-          require('Comment').setup()
+          require('Comment').setup({
+            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+          })
         end
       }
 
-      use 'JoosepAlviste/nvim-ts-context-commentstring'
+      use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      }
 
     end)
