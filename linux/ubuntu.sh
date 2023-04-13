@@ -1,6 +1,6 @@
 sudo apt update && sudo apt upgrade
 
-sudo apt install tmux zsh ripgrep
+sudo apt install tmux zsh ripgrep build-essential nodejs npm
 # install zsh completions
 echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-completions/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-completions.list
 curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-completions/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-completions.gpg > /dev/null
@@ -14,9 +14,13 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # install neovim
 sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo add-apt-repository -r ppa:neovim-ppa/unstable ppa:longsleep/golang-backports
+sudo add-apt-repository -r ppa:longsleep/golang-backports
 sudo apt-get update
-sudo apt-get install neovim
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+sudo apt-get install golang-go neovim python-dev python-pip python3-dev python3-pip
+
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+	 ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 echo "Done"
