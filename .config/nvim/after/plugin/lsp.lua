@@ -31,6 +31,17 @@ cmp.event:on(
 --  sign_icons = { }
 --})
 
+-- Fix Undefined global 'vim'
+lsp.configure('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings
 })
@@ -64,3 +75,7 @@ lsp.configure('eslint', {
 })
 
 lsp.setup()
+
+vim.diagnostic.config({
+  virtual_text = true
+})
