@@ -22,6 +22,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 brew install neovim
 brew install tmux
 brew install go
+brew install golangci-lint
 brew install ripgrep
 brew install --cask google-chrome
 brew install --cask brave-browser

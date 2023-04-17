@@ -74,6 +74,20 @@ lsp.configure('eslint', {
   end
 })
 
+lsp.configure('gopls', {
+  settings = {
+    gopls = {
+      buildFlags = {"-tags=session1"}
+    }
+  }
+})
+
+lsp.format_on_save({
+  servers = {
+    ['gopls'] = {'go'},
+  }
+})
+
 lsp.setup()
 
 vim.diagnostic.config({
