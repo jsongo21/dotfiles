@@ -77,7 +77,7 @@ lsp.configure('eslint', {
 lsp.configure('gopls', {
   settings = {
     gopls = {
-      buildFlags = {"-tags=session1 session2 session3 session4"}
+      buildFlags = {"-tags=session1 session2 session3 session4 session5"}
     }
   }
 })
