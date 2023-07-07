@@ -61,10 +61,6 @@ brew install --cask git-credential-manager-core
 brew install asdf
 curl -s "https://get.sdkman.io" | bash
 
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-vim +PluginInstall +qall
-
 # install aws-sso-util
 pipx ensurepath
 pipx install aws-sso-util
