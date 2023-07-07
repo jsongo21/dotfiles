@@ -38,5 +38,7 @@ vim.keymap.set("n", "<leader><leader>", function()
   print("sourced")
 end)
 
+vim.keymap.set("n", "<C-s>", ":update<CR>")
+
 -- close all buffers except current
 vim.keymap.set("n", "<leader>bd", "<cmd>:%bd|e#|bd#<CR>")
