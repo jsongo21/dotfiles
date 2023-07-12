@@ -23,4 +23,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 	 ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
+# install tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Done"

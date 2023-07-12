@@ -66,3 +66,6 @@ curl -s "https://get.sdkman.io" | bash
 # install aws-sso-util
 pipx ensurepath
 pipx install aws-sso-util
+
+# asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0

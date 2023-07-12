@@ -148,4 +148,11 @@ export PATH="$PATH:/Users/jason/.local/bin"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# asdf
+if [[ $(uname) == "Darwin" ]]; then
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [[ $(uname) == "Darwin" ]]; then
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
+    . "$HOME/.asdf/asdf.sh"
+fi
+    
