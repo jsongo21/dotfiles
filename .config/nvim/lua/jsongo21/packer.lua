@@ -19,19 +19,10 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    -- or                            , branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
-  ---- TOKYONIGHT ----
-  --[[ use({
-    	'folke/tokyonight.nvim',
-      	config = function()
-       		require("tokyonight").setup()
-       		vim.cmd('colorscheme tokyonight')
-       	end
-       }) ]]
   ---- GRUVBOX ----
   use({
     'ellisonleao/gruvbox.nvim',
@@ -42,68 +33,6 @@ return require('packer').startup(function(use)
     end
   })
 
-  ---- ROSE PINE ----
-  --use({
-  --	'rose-pine/neovim',
-  --	as = 'rose-pine',
-  --	config = function()
-  --		require("rose-pine").setup()
-  --		vim.cmd('colorscheme rose-pine')
-  --	end
-  --})
-
-  ---- KANAGAWA ----
-  --[[ use({
-      'rebelot/kanagawa.nvim',
-      config = function()
-        require('kanagawa').setup{
-          colors = {
-            theme = {
-              all = {
-                ui = {
-                  bg_gutter = 'none',
-                  float = {
-                    bg = 'none'
-                  }
-                }
-              }
-            }
-          }
-        }
-        vim.cmd('colorscheme kanagawa')
-      end
-    }) ]]
-  ---- CATPPUCCIN ----
-  --[[ use({
-      'catppuccin/nvim',
-      as = 'catppuccin',
-      config = function()
-        require('catppuccin').setup({
-          flavour = 'mocha',
-        })
-        vim.cmd('colorscheme catppuccin')
-      end
-    }) ]]
-  ---- ONE DARK ----
-  --[[ use({
-      'navarasu/onedark.nvim',
-      config = function()
-        require('onedark').setup {
-   --------------
-          style = 'warm'
-        }
-        require('onedark').load()
-      end
-    }) ]]
-  ---- DRACULA ----
-  --[[ use({
-      'Mofiqul/dracula.nvim',
-      config = function()
-        require('dracula').setup({
-        })
-        vim.cmd('colorscheme dracula')
-      end
-    }) ]]
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
@@ -145,13 +74,7 @@ return require('packer').startup(function(use)
   use {
     "folke/trouble.nvim",
     requires = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
+    config = function() require("trouble").setup {} end
   }
 
   use {
@@ -176,21 +99,12 @@ return require('packer').startup(function(use)
   use {
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
-    config = function()
-      require('todo-comments').setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
+    config = function() require('todo-comments').setup {} end
   }
 
   use {
     'kylechui/nvim-surround',
-    config = function()
-      require("nvim-surround").setup({
-      })
-    end
+    config = function() require("nvim-surround").setup {} end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
@@ -198,4 +112,5 @@ return require('packer').startup(function(use)
   if packer_bootstrap then
     require('packer').sync()
   end 
+
 end)
