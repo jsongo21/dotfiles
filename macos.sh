@@ -20,6 +20,8 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Setup Terminal Install apps
 brew install neovim
+brew install luarocks
+brew install cmake
 brew install tmux
 brew install go
 brew install golangci-lint

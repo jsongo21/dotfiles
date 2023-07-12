@@ -1,6 +1,6 @@
+require("jsongo21.packer")
 require("jsongo21.remap")
 require("jsongo21.set")
-require("jsongo21.packer")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
