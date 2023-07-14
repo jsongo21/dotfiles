@@ -13,6 +13,22 @@ lsp.configure('lua_ls', {
     }
 })
 
+-- Fix Undefined global 'vim'
+lsp.nvim_workspace()
+
+local cmp = require('cmp')
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_mappings = lsp.defaults.cmp_mappings({
+  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+  ["<C-Space>"] = cmp.mapping.complete(),
+})
+
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
+})
+
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
   lsp.default_keymaps({buffer = bufnr})
@@ -27,7 +43,6 @@ lsp.on_attach(function(client, bufnr)
     print('formatted')
   end, opts)
 end)
- 
 
 lsp.configure('eslint', {
   on_attach = function(client, bufnr)
@@ -53,26 +68,6 @@ lsp.format_on_save({
 })
 
 lsp.setup()
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-      ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-      ["<C-Space>"] = cmp.mapping.complete(),
-})
-
--- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
 
 vim.diagnostic.config({
   virtual_text = true
