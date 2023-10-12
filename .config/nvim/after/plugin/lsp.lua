@@ -45,6 +45,11 @@ lsp.on_attach(function(client, bufnr)
     vim.lsp.buf.format { async = true }
     print('formatted')
   end, opts)
+  vim.keymap.set("n", "<leader>rs", function()
+    vim.cmd("LspRestart")
+    print("Lsp Restarted")
+  end, opts
+  )
 end)
 
 lsp.configure('eslint', {
