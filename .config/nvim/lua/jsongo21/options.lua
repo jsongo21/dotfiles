@@ -26,3 +26,4 @@ vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 
 vim.opt.updatetime = 50
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })

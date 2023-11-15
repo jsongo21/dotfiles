@@ -191,10 +191,12 @@ return {
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         },
+        event = { 'CmdlineEnter', 'InsertEnter' },
+        config = function() end,
     },
     {
         'stevearc/conform.nvim',
-        opts = {},
+        event = 'VeryLazy',
         config = function()
             require('conform').setup({
                 formatters_by_ft = {
