@@ -42,3 +42,14 @@ vim.keymap.set("n", "<C-s>", ":update<CR>")
 
 -- close all buffers except current
 vim.keymap.set("n", "<leader>bd", "<cmd>:%bd|e#|bd#<CR>")
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
