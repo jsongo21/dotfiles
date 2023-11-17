@@ -52,7 +52,8 @@ return {
     --     opts = {},
     --     config = function()
     --         require('tokyonight').setup({
-    --             style = 'moon',
+    --             -- storm, moon, night, day
+    --             style = 'storm',
     --         })
     --
     --         vim.o.background = 'dark'

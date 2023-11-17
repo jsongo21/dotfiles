@@ -8,6 +8,7 @@ return {
         build = ':MasonUpdate',
         opts = {
             ensure_installed = {
+                'black',
                 'stylua',
                 'shfmt',
             },
@@ -47,6 +48,7 @@ return {
                     'html',
                     'jsonls',
                     'lua_ls',
+                    'pyright',
                     'tailwindcss',
                     'tsserver',
                     'vimls',
@@ -73,19 +75,12 @@ return {
         },
         config = function()
             local lspconfig = require('lspconfig')
-
             local lsp_defaults = lspconfig.util.default_config
+
             lsp_defaults.capabilities =
                 require('cmp_nvim_lsp').default_capabilities(lsp_defaults.capabilities) -- additional capabilities from completions
 
-            lspconfig.eslint.setup({
-                on_attach = function(client, bufnr)
-                    vim.api.nvim_create_autocmd('BufWritePre', {
-                        buffer = bufnr,
-                        command = 'EslintFixAll',
-                    })
-                end,
-            })
+            -- Lua
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -95,12 +90,36 @@ return {
                     },
                 },
             })
+
+            -- Python
             lspconfig.pyright.setup({})
+
+            -- Rust
             lspconfig.rust_analyzer.setup({
                 -- Server-specific settings. See `:help lspconfig-setup`
                 settings = {
                     ['rust-analyzer'] = {},
                 },
+            })
+
+            -- JS/TS
+            lspconfig.eslint.setup({
+                settintgs = {
+                    autoFixOnSave = true,
+                },
+                on_attach = function(client, bufnr)
+                    local format_group = 'EslintFormat'
+                    -- need to set this
+                    -- Sometimes eslint doesn't register this capabilities.
+                    client.server_capabilities.documentFormattingProvider = true
+                    vim.notify('attaching eslint lsp', vim.log.levels.INFO)
+
+                    vim.api.nvim_create_autocmd('BufWritePre', {
+                        group = vim.api.nvim_create_augroup(format_group, { clear = true }),
+                        buffer = bufnr,
+                        command = 'EslintFixAll',
+                    })
+                end,
             })
             lspconfig.tailwindcss.setup({})
             lspconfig.tsserver.setup({})
@@ -169,12 +188,14 @@ return {
         end,
     },
     {
+
         -- Autocompletion
         'hrsh7th/nvim-cmp',
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
             'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
+            'rafamadriz/friendly-snippets',
+            'benfowler/telescope-luasnip.nvim',
 
             -- Adds LSP completion capabilities
             'hrsh7th/cmp-nvim-lsp',
@@ -183,16 +204,84 @@ return {
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
-
-            -- Adds a number of user-friendly snippets
-            'rafamadriz/friendly-snippets',
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
         },
         event = { 'CmdlineEnter', 'InsertEnter' },
-        config = function() end,
+        config = function()
+            local cmp = require('cmp')
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+            vim.tbl_map(
+                function(type) require('luasnip.loaders.from_' .. type).lazy_load() end,
+                { 'vscode', 'snipmate', 'lua' }
+            )
+            local luasnip = require('luasnip')
+            require('luasnip').filetype_extend('lua', { 'luadoc' })
+            require('luasnip').filetype_extend('python', { 'pydoc' })
+
+            -- keybinds
+            local cmp_mappings = cmp.mapping.preset.insert({
+                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                ['<C-Space>'] = cmp.mapping.complete(),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                        return
+                    end
+                    fallback()
+                end, { 'i', 'c' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                        return
+                    end
+                    fallback()
+                end, { 'i', 'c' }),
+                -- jump to next snippet placeholder
+                ['<C-k>'] = cmp.mapping(function(fallback)
+                    if luasnip.jumpable(1) then
+                        luasnip.jump(1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<C-j>'] = cmp.mapping(function(fallback)
+                    if luasnip.jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+            })
+
+            vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+            cmp.setup({
+                -- Snippet engine is required for completions
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    end,
+                },
+                mapping = cmp_mappings,
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+
+                -- Sources tell the snippet engine where to get suggestions from
+                -- The ordering here is used to sort into final list
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip' }, -- For luasnip users.
+                    { name = 'buffer' },
+                    { name = 'nvim_lua' },
+                    { name = 'path' },
+                    { name = 'nvim_lsp_signature_help' }, -- For function signature help
+                }),
+            })
+        end,
     },
     {
         'stevearc/conform.nvim',
@@ -202,11 +291,18 @@ return {
                 formatters_by_ft = {
                     javascript = { { 'eslint' } },
                     lua = { 'stylua' },
+                    python = { 'isort', 'black' },
+                },
+                formatters = {
+                    python = {
+                        require_cwd = false,
+                    },
                 },
                 format_on_save = {
                     timeout_ms = 500,
                     lsp_fallback = true,
                 },
+                notify_on_error = true,
             })
         end,
     },
