@@ -158,6 +158,7 @@ return {
                     nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
                     nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
                     nmap('K', vim.lsp.buf.hover, 'Hover definition')
+                    nmap('<leader>rn', vim.lsp.buf.rename, '[R]ename [S]ymbol')
                     nmap(
                         '<leader>ws',
                         require('telescope.builtin').lsp_dynamic_workspace_symbols,
