@@ -91,6 +91,9 @@ return {
                 },
             })
 
+            -- Go
+            lspconfig.gopls.setup({})
+
             -- Python
             lspconfig.pyright.setup({})
 
@@ -293,6 +296,7 @@ return {
                     javascript = { { 'eslint' } },
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
+                    go = { "gopls" }
                 },
                 formatters = {
                     python = {
