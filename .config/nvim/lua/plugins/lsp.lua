@@ -162,6 +162,7 @@ return {
                     nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
                     nmap('K', vim.lsp.buf.hover, 'Hover definition')
                     nmap('<leader>rn', vim.lsp.buf.rename, '[R]ename [S]ymbol')
+                    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
                     nmap(
                         '<leader>ws',
                         require('telescope.builtin').lsp_dynamic_workspace_symbols,
@@ -205,6 +206,7 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
@@ -261,6 +263,7 @@ return {
 
             vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+            ---@diagnostic disable-next-line: missing-fields
             cmp.setup({
                 -- Snippet engine is required for completions
                 snippet = {
@@ -282,8 +285,18 @@ return {
                     { name = 'buffer' },
                     { name = 'nvim_lua' },
                     { name = 'path' },
+                    { name = 'cmdline' },
                     { name = 'nvim_lsp_signature_help' }, -- For function signature help
                 }),
+            })
+
+            ---@diagnostic disable-next-line: missing-fields
+            cmp.setup.cmdline(':', {
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
             })
         end,
     },
@@ -296,7 +309,7 @@ return {
                     javascript = { { 'eslint' } },
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
-                    go = { "gopls" }
+                    go = { "gofumpt" }
                 },
                 formatters = {
                     python = {
@@ -311,4 +324,8 @@ return {
             })
         end,
     },
+    {
+        'folke/neodev.nvim',
+        opts = {}
+    }
 }
