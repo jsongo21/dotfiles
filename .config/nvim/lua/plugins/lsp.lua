@@ -206,7 +206,6 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
@@ -285,18 +284,8 @@ return {
                     { name = 'buffer' },
                     { name = 'nvim_lua' },
                     { name = 'path' },
-                    { name = 'cmdline' },
                     { name = 'nvim_lsp_signature_help' }, -- For function signature help
                 }),
-            })
-
-            ---@diagnostic disable-next-line: missing-fields
-            cmp.setup.cmdline(':', {
-                sources = cmp.config.sources({
-                    { name = 'path' }
-                }, {
-                    { name = 'cmdline' }
-                })
             })
         end,
     },
