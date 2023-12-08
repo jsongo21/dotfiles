@@ -193,7 +193,6 @@ return {
         end,
     },
     {
-
         -- Autocompletion
         'hrsh7th/nvim-cmp',
         dependencies = {
@@ -235,14 +234,14 @@ return {
                         return
                     end
                     fallback()
-                end, { 'i', 'c' }),
+                end, { 'i', 's' }),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
                         return
                     end
                     fallback()
-                end, { 'i', 'c' }),
+                end, { 'i', 's' }),
                 -- jump to next snippet placeholder
                 ['<C-k>'] = cmp.mapping(function(fallback)
                     if luasnip.jumpable(1) then
@@ -298,7 +297,7 @@ return {
                     javascript = { { 'eslint' } },
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
-                    go = { "gofumpt" }
+                    go = { 'gofumpt' },
                 },
                 formatters = {
                     python = {
@@ -315,6 +314,6 @@ return {
     },
     {
         'folke/neodev.nvim',
-        opts = {}
-    }
+        opts = {},
+    },
 }

@@ -39,6 +39,9 @@ end)
 
 vim.keymap.set('n', '<C-s>', ':update<CR>')
 
+-- Shift Tab
+vim.keymap.set('i', '<S-Tab>', '<C-d>')
+
 -- close all buffers except current
 vim.keymap.set('n', '<leader>bd', '<cmd>:%bd|e#|bd#<CR>')
 
