@@ -278,6 +278,7 @@ return {
                 -- Sources tell the snippet engine where to get suggestions from
                 -- The ordering here is used to sort into final list
                 sources = cmp.config.sources({
+                    { name = 'copilot' },
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' }, -- For luasnip users.
                     { name = 'buffer' },
