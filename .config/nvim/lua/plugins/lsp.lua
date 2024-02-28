@@ -72,6 +72,7 @@ return {
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
+            'mfussenegger/nvim-jdtls',
         },
         config = function()
             local lspconfig = require('lspconfig')
@@ -90,6 +91,9 @@ return {
                     },
                 },
             })
+
+            -- Java
+            lspconfig.jdtls.setup({})
 
             -- Go
             lspconfig.gopls.setup({})
