@@ -43,6 +43,7 @@ return {
         config = function()
             require('mason-lspconfig').setup({
                 ensure_installed = {
+                    'cssls',
                     'eslint',
                     'gopls',
                     'html',
@@ -109,7 +110,8 @@ return {
                 },
             })
 
-            -- JS/TS
+            -- JS/TS/CSS
+            lspconfig.cssls.setup({})
             lspconfig.eslint.setup({
                 settintgs = {
                     autoFixOnSave = true,

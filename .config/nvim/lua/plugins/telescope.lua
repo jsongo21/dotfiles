@@ -27,6 +27,8 @@ return {
                 require('telescope').extensions.live_grep_args.live_grep_args,
                 { noremap = true }
             )
+            vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+            vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
         end,
     },
 }
