@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-PATH=$PATH:/opt/homebrew/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/Caskroom:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.8/bin:$HOME/Library/Python/3.9/bin:$HOME/go/bin
+PATH=$PATH:/opt/homebrew/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/Caskroom:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.8/bin:$HOME/Library/Python/3.9/bin:$HOME/go/bin:/usr/local/go
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -156,3 +156,6 @@ elif [[ $(uname) == "Darwin" ]]; then
     . "$HOME/.asdf/asdf.sh"
 fi
     
+
+# direnv
+eval "$(direnv hook zsh)"
