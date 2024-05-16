@@ -10,6 +10,16 @@ return {
         end,
     },
 
+    -- Dracula
+    -- {
+    --     'Mofiqul/dracula.nvim',
+    --     priority = 1000,
+    --     config = function()
+    --         require('dracula').setup()
+    --         vim.cmd.colorscheme('dracula')
+    --     end,
+    -- },
+
     -- -- Rose Pine
     -- {
     --     'rose-pine/neovim',
