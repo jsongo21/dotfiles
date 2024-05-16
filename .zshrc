@@ -71,7 +71,7 @@ SAVEHIST=10000
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -147,15 +147,6 @@ export PATH="$PATH:/Users/jason/.local/bin"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# asdf
-if [[ $(uname) == "Darwin" ]]; then
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
-elif [[ $(uname) == "Darwin" ]]; then
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
-    . "$HOME/.asdf/asdf.sh"
-fi
-    
 
 # direnv
 eval "$(direnv hook zsh)"
