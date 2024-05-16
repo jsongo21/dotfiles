@@ -1,14 +1,14 @@
 return {
     -- Gruvbox
-    {
-        'ellisonleao/gruvbox.nvim',
-        priority = 1000,
-        config = function()
-            require('gruvbox').setup()
-            vim.o.background = 'dark'
-            vim.cmd('colorscheme gruvbox')
-        end,
-    },
+    -- {
+    --     'ellisonleao/gruvbox.nvim',
+    --     priority = 1000,
+    --     config = function()
+    --         require('gruvbox').setup()
+    --         vim.o.background = 'dark'
+    --         vim.cmd('colorscheme gruvbox')
+    --     end,
+    -- },
 
     -- Dracula
     -- {
@@ -55,19 +55,19 @@ return {
     -- },
 
     -- -- Tokyo Night
-    -- {
-    --     'folke/tokyonight.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     opts = {},
-    --     config = function()
-    --         require('tokyonight').setup({
-    --             -- storm, moon, night, day
-    --             style = 'storm',
-    --         })
-    --
-    --         vim.o.background = 'dark'
-    --         vim.cmd('colorscheme tokyonight')
-    --     end,
-    -- },
+    {
+        'folke/tokyonight.nvim',
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            require('tokyonight').setup({
+                -- storm, moon, night, day
+                style = 'storm',
+            })
+
+            vim.o.background = 'dark'
+            vim.cmd('colorscheme tokyonight')
+        end,
+    },
 }
