@@ -70,8 +70,8 @@ return {
 
     -- Auto Pairs
     {
-        'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup({}) end,
+        'echasnovski/mini.pairs',
+        config = function() require('mini.pairs').setup({}) end,
     },
     {
         'windwp/nvim-ts-autotag',
