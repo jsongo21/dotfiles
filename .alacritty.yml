@@ -143,216 +143,41 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
 
-# Colors (Ayu Dark)
+# TokyoNight Alacritty Colors
+# Default colors
 colors:
-  # Default colors
   primary:
-    background: "#0A0E14"
-    foreground: "#B3B1AD"
+    background: '#24283b'
+    foreground: '#c0caf5'
+
+  # cursor:
+  # text : '#24283b'
+  # cursor : '#c0caf5'
 
   # Normal colors
   normal:
-    black: "#01060E"
-    red: "#EA6C73"
-    green: "#91B362"
-    yellow: "#F9AF4F"
-    blue: "#53BDFA"
-    magenta: "#FAE994"
-    cyan: "#90E1C6"
-    white: "#C7C7C7"
+    black: '#1d202f'
+    red: '#f7768e'
+    green: '#9ece6a'
+    yellow: '#e0af68'
+    blue: '#7aa2f7'
+    magenta: '#bb9af7'
+    cyan: '#7dcfff'
+    white: '#a9b1d6'
 
   # Bright colors
   bright:
-    black: "#686868"
-    red: "#F07178"
-    green: "#C2D94C"
-    yellow: "#FFB454"
-    blue: "#59C2FF"
-    magenta: "#FFEE99"
-    cyan: "#95E6CB"
-    white: "#FFFFFF"
+    black: '#414868'
+    red: '#f7768e'
+    green: '#9ece6a'
+    yellow: '#e0af68'
+    blue: '#7aa2f7'
+    magenta: '#bb9af7'
+    cyan: '#7dcfff'
+    white: '#c0caf5'
 
-# # Colors (Ayu Mirage)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '#202734'
-#     foreground: '#CBCCC6'
-
-#   # Normal colors
-#   normal:
-#     black: '#191E2A'
-#     red: '#FF3333'
-#     green: '#BAE67E'
-#     yellow: '#FFA759'
-#     blue: '#73D0FF'
-#     magenta: '#FFD580'
-#     cyan: '#95E6CB'
-#     white: '#C7C7C7'
-
-#   # Bright colors
-#   bright:
-#     black: '#686868'
-#     red: '#F27983'
-#     green: '#A6CC70'
-#     yellow: '#FFCC66'
-#     blue: '#5CCFE6'
-#     magenta: '#FFEE99'
-#     cyan: '#95E6CB'
-#     white: '#FFFFFF'
-
-# Colors (Dracula)
-colors:
- # Default colors
- primary:
-   background: "#282a36"
-   foreground: "#f8f8f2"
-
- # Normal colors
- normal:
-   black: "#000000"
-   red: "#ff5555"
-   green: "#50fa7b"
-   yellow: "#f1fa8c"
-   blue: "#caa9fa"
-   magenta: "#ff79c6"
-   cyan: "#8be9fd"
-   white: "#bfbfbf"
-
- # Bright colors
- bright:
-   black: "#575b70"
-   red: "#ff6e67"
-   green: "#5af78e"
-   yellow: "#f4f99d"
-   blue: "#caa9fa"
-   magenta: "#ff92d0"
-   cyan: "#9aedfe"
-   white: "#e6e6e6"
-
-# Colors (Gruvbox dark)
-# colors:
-#    # Default colors
-#    primary:
-#      # hard contrast:
-#      #background: "0x1d2021"
-#      # soft contrast: background = '0x32302f'
-#      background: "0x282828"
-#      foreground: "0xebdbb2"
-
-#    # Normal colors
-#    normal:
-#      black: "0x282828"
-#      red: "0xcc241d"
-#      green: "0x98971a"
-#      yellow: "0xd79921"
-#      blue: "0x458588"
-#      magenta: "0xb16286"
-#      cyan: "0x689d6a"
-#      white: "0xa89984"
-
-#    # Bright colors
-#    bright:
-#      black: "0x928374"
-#      red: "0xfb4934"
-#      green: "0xb8bb26"
-#      yellow: "0xfabd2f"
-#      blue: "0x83a598"
-#      magenta: "0xd3869b"
-#      cyan: "0x8ec07c"
-#      white: "0xebdbb2"
-
-# Colors (Monokai Dark)
-# colors:
-#   # Default colors
-#   primary:
-#     background: "#272822"
-#     foreground: "#F8F8F2"
-
-#   # Normal colors
-#   normal:
-#     black: "#272822"
-#     red: "#F92672"
-#     green: "#A6E22E"
-#     yellow: "#F4BF75"
-#     blue: "#66D9EF"
-#     magenta: "#AE81FF"
-#     cyan: "#A1EFE4"
-#     white: "#F8F8F2"
-
-#   # Bright colors
-#   bright:
-#     black: "#75715E"
-#     red: "#F92672"
-#     green: "#A6E22E"
-#     yellow: "#F4BF75"
-#     blue: "#66D9EF"
-#     magenta: "#AE81FF"
-#     cyan: "#A1EFE4"
-#     white: "#F9F8F5"
-
-# # Colors (Monokai Pro)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '#2D2A2E'
-#     foreground: '#FCFCFA'
-
-#   # Normal colors
-#   normal:
-#     black:   '#403E41'
-#     red:     '#FF6188'
-#     green:   '#A9DC76'
-#     yellow:  '#FFD866'
-#     blue:    '#FC9867'
-#     magenta: '#AB9DF2'
-#     cyan:    '#78DCE8'
-#     white:   '#FCFCFA'
-
-#   # Bright colors
-#   bright:
-#     black:   '#727072'
-#     red:     '#FF6188'
-#     green:   '#A9DC76'
-#     yellow:  '#FFD866'
-#     blue:    '#FC9867'
-#     magenta: '#AB9DF2'
-#     cyan:    '#78DCE8'
-#     white:   '#FCFCFA'
-
-# Colors (Solarized Dark)
-# colors:
-#   # Default colors
-#   primary:
-#     background: "#002b36" # base03
-#     foreground: "#839496" # base0
-
-#   # Cursor colors
-#   cursor:
-#     text: "#002b36" # base03
-#     cursor: "#839496" # base0
-
-#   # Normal colors
-#   normal:
-#     black: "#073642" # base02
-#     red: "#dc322f" # red
-#     green: "#859900" # green
-#     yellow: "#b58900" # yellow
-#     blue: "#268bd2" # blue
-#     magenta: "#d33682" # magenta
-#     cyan: "#2aa198" # cyan
-#     white: "#eee8d5" # base2
-
-#   # Bright colors
-#   bright:
-#     black: "#002b36" # base03
-#     red: "#cb4b16" # orange
-#     green: "#586e75" # base01
-#     yellow: "#657b83" # base00
-#     blue: "#839496" # base0
-#     magenta: "#6c71c4" # violet
-#     cyan: "#93a1a1" # base1
-#     white: "#fdf6e3" # base3
+  # Indexed Colors
+  indexed_colors: [{index: 16, color: '#ff9e64'}, {index: 17, color: '#db4b4b'}]
 
 # The bell is rung every time the BEL control character is received.
 bell:
