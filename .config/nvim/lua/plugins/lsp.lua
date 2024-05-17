@@ -301,10 +301,11 @@ return {
         config = function()
             require('conform').setup({
                 formatters_by_ft = {
+                    go = { 'gofumpt' },
                     javascript = { { 'eslint' } },
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
-                    go = { 'gofumpt' },
+                    yaml = { 'yamlfmt' },
                 },
                 formatters = {
                     python = {
