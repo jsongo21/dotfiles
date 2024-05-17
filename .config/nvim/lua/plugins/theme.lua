@@ -64,6 +64,11 @@ return {
             require('tokyonight').setup({
                 -- storm, moon, night, day
                 style = 'storm',
+                on_highlights = function(highlights, colors)
+                    highlights.LineNr = { fg = colors.orange }
+                    highlights.LineNrAbove = { fg = colors.none }
+                    highlights.LineNrBelow = { fg = colors.none }
+                end,
             })
 
             vim.o.background = 'dark'
