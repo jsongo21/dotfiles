@@ -293,6 +293,12 @@ return {
                     { name = 'nvim_lsp_signature_help' }, -- For function signature help
                 }),
             })
+
+            local autocmd = vim.api.nvim_create_autocmd
+            autocmd('FileType', {
+                pattern = 'oil',
+                callback = function() require('cmp').setup.buffer({ enabled = false }) end,
+            })
         end,
     },
     {
