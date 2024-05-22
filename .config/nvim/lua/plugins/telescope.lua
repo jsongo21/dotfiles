@@ -10,7 +10,6 @@ return {
             -- requirements installed.
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                'nvim-telescope/telescope-live-grep-args.nvim',
                 -- NOTE: If you are having trouble with this installation,
                 --       refer to the README for telescope-fzf-native for more instructions.
                 build = 'make',
@@ -18,17 +17,22 @@ return {
             },
         },
         config = function()
+            local telescope = require('telescope')
+
+            telescope.setup({
+                pickers = {
+                    live_grep = {
+                        additional_args = function(opts) return { '--hidden' } end,
+                    },
+                },
+            })
+
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
             vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
-            vim.keymap.set(
-                'n',
-                '<leader>gs',
-                require('telescope').extensions.live_grep_args.live_grep_args,
-                { noremap = true }
-            )
             vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
             vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
+            vim.keymap.set('n', '<leader>gs', builtin.live_grep, { noremap = true })
         end,
     },
 }
