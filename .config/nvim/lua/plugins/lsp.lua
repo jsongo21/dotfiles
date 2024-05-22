@@ -79,62 +79,7 @@ return {
             local lspconfig = require('lspconfig')
             local lsp_defaults = lspconfig.util.default_config
 
-            lsp_defaults.capabilities =
-                require('cmp_nvim_lsp').default_capabilities(lsp_defaults.capabilities) -- additional capabilities from completions
-
-            -- Lua
-            lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' },
-                        },
-                    },
-                },
-            })
-
-            -- Java
-            lspconfig.jdtls.setup({})
-
-            -- Go
-            lspconfig.gopls.setup({})
-
-            -- Python
-            lspconfig.pyright.setup({})
-
-            -- Rust
-            lspconfig.rust_analyzer.setup({
-                -- Server-specific settings. See `:help lspconfig-setup`
-                settings = {
-                    ['rust-analyzer'] = {},
-                },
-            })
-
-            -- JS/TS/CSS
-            lspconfig.cssls.setup({})
-            lspconfig.eslint.setup({
-                settintgs = {
-                    autoFixOnSave = true,
-                },
-                on_attach = function(client, bufnr)
-                    local format_group = 'EslintFormat'
-                    -- need to set this
-                    -- Sometimes eslint doesn't register this capabilities.
-                    client.server_capabilities.documentFormattingProvider = true
-                    vim.notify('attaching eslint lsp', vim.log.levels.INFO)
-
-                    vim.api.nvim_create_autocmd('BufWritePre', {
-                        group = vim.api.nvim_create_augroup(format_group, { clear = true }),
-                        buffer = bufnr,
-                        command = 'EslintFixAll',
-                    })
-                end,
-            })
-            lspconfig.tailwindcss.setup({})
-            lspconfig.tsserver.setup({})
-
-            -- Global mappings.
-            -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+            local mason_lspconfig = require('mason-lspconfig')
 
             -- Use LspAttach autocommand to only map the following keys
             -- after the language server attaches to the current buffer
@@ -194,6 +139,54 @@ return {
                         vim.lsp.buf.format({ async = true })
                         print('formatted')
                     end, '[F]ormat')
+                end,
+            })
+
+            -- additional capabilities from completions
+            local capabilities =
+                require('cmp_nvim_lsp').default_capabilities(lsp_defaults.capabilities)
+            lsp_defaults.capabilities = capabilities
+
+            mason_lspconfig.setup_handlers({
+                function(server_name)
+                    lspconfig[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
+                ['eslint'] = function()
+                    lspconfig['eslint'].setup({
+                        capabilities = capabilities,
+                        settintgs = {
+                            autoFixOnSave = true,
+                        },
+                        on_attach = function(client, bufnr)
+                            local format_group = 'EslintFormat'
+                            -- need to set this
+                            -- Sometimes eslint doesn't register this capabilities.
+                            client.server_capabilities.documentFormattingProvider = true
+                            vim.notify('attaching eslint lsp', vim.log.levels.INFO)
+
+                            vim.api.nvim_create_autocmd('BufWritePre', {
+                                group = vim.api.nvim_create_augroup(format_group, { clear = true }),
+                                buffer = bufnr,
+                                command = 'EslintFixAll',
+                            })
+                        end,
+                    })
+                end,
+                ['lua_ls'] = function()
+                    -- configure lua server (with special settings)
+                    lspconfig['lua_ls'].setup({
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                -- make the language server recognize "vim" global
+                                diagnostics = {
+                                    globals = { 'vim' },
+                                },
+                            },
+                        },
+                    })
                 end,
             })
         end,
