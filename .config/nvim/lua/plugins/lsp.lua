@@ -111,7 +111,7 @@ return {
                     nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
                     nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
                     nmap('K', vim.lsp.buf.hover, 'Hover definition')
-                    nmap('<leader>rn', vim.lsp.buf.rename, '[R]ename [S]ymbol')
+                    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[N]ame Symbol')
                     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
                     nmap(
                         '<leader>ws',
@@ -137,7 +137,7 @@ return {
                     nmap('<leader>fm', function()
                         vim.lsp.buf.format({ async = true })
                         print('formatted')
-                    end, '[F]ormat')
+                    end, '[F]or[M]at Code')
                 end,
             })
 

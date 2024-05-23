@@ -28,11 +28,16 @@ return {
             })
 
             local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-            vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
-            vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-            vim.keymap.set('n', '<leader>fs', builtin.grep_string, {})
-            vim.keymap.set('n', '<leader>gs', builtin.live_grep, { noremap = true })
+            vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
+            vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [F]iles' })
+            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind [B]uffers' })
+            vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = '[F]ind [S]tring' })
+            vim.keymap.set(
+                'n',
+                '<leader>gs',
+                builtin.live_grep,
+                { desc = '[G]rep [S]tring', noremap = true }
+            )
         end,
     },
 }
