@@ -333,8 +333,8 @@ return {
                 vim.keymap.set(
                     'n',
                     '<leader>xx',
-                    function() require('trouble').toggle() end,
-                    { desc = 'Toggle Trouble' }
+                    function() require('trouble').toggle('diagnostics') end,
+                    { desc = 'Toggle Trouble Diagnostics' }
                 )
             end,
         },
