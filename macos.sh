@@ -14,7 +14,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Node.js
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
 
@@ -32,7 +32,7 @@ brew install --cask iterm2
 brew install --cask visual-studio-code
 brew install --cask rectangle
 brew install --cask slack
-brew install --cask notion
+brew install --cask obsidian
 brew install --cask scroll-reverser
 brew install --cask docker
 brew install --cask zoom
@@ -51,7 +51,6 @@ brew install jq
 brew install alacritty
 sudo xattr -r -d com.apple.quarantine /Applications/Alacritty.app/
 sudo xattr -r -d com.apple.quarantine /opt/homebrew/bin/chromedriver
-brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono-nerd-font
 brew install mkcert
 brew tap hashicorp/tap
@@ -61,11 +60,12 @@ brew install graphviz
 brew tap microsoft/git
 brew install --cask git-credential-manager-core
 brew install asdf
+brew install koekeishiya/formulae/skhd
+brew install koekeishiya/formulae/yabai
+
 curl -s "https://get.sdkman.io" | bash
 
 # install aws-sso-util
 pipx ensurepath
 pipx install aws-sso-util
 
-# asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
