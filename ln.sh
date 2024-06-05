@@ -13,6 +13,7 @@ if [ "$unamestr" = "Linux" ]; then
   mkdir -p "${HOME}"/.config/sxhkd && ln -svf "${HOME}"/dotfiles/linux/sxhkd/sxhkdrc "${HOME}"/.config/sxhkd/sxhkdrc
   mkdir -p "${HOME}"/.config && ln -svf "${HOME}"/dotfiles/linux/polybar "${HOME}"/.config/polybar
 else
+  ln -svf "${HOME}"/dotfiles/.yabairc "${HOME}"/.yabairc
   echo "Not-Linux"
 fi
 
