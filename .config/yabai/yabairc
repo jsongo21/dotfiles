@@ -12,7 +12,12 @@ yabai -m config right_padding  0
 yabai -m config window_gap     0
 
 # center mouse on window with focus
-yabai -m config mouse_follows_focus on
+# yabai -m config mouse_follows_focus on
+
+# App rules
+yabai -m rule --add app="^Google Chrome|Firefox|Brave$" space=1
+yabai -m rule --add app="^Alacritty$" space=1
+yabai -m rule --add app="^Microsoft Outlook|Microsoft Teams$" space=2
 
 # Ignore
 yabai -m rule --add app="^System Settings$" manage=off
