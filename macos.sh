@@ -64,6 +64,7 @@ brew install koekeishiya/formulae/skhd
 brew install koekeishiya/formulae/yabai
 
 curl -s "https://get.sdkman.io" | bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # install aws-sso-util
 pipx ensurepath
