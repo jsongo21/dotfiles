@@ -2,10 +2,10 @@
 cmd - return : open -na /Applications/Alacritty.app
 
 # change window focus within space
-ctrl - j : yabai -m window --focus south
-ctrl - k : yabai -m window --focus north
-ctrl - h : yabai -m window --focus west
-ctrl - l : yabai -m window --focus east
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
 
 # modifying layout
 ## rotate clockwise
@@ -22,7 +22,7 @@ shift + alt - t : yabai -m window --toggle float --grid 6:3:1:1:1:4
 
 # Modifying window size
 ## maximimse window
-shift + alt - m : yabai -m window --togle zoom-fullscreen
+shift + alt - m : yabai -m window --toggle zoom-fullscreen
 
 ## balance out tree of windows (resize to occupy same area)
 shift + alt - e : yabai -m space --balance
