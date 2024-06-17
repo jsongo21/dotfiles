@@ -190,7 +190,12 @@ return {
                 ['graphql'] = function()
                     lspconfig['graphql'].setup({
                         capabilities = capabilities,
-                        root_dir = lspconfig.util.root_pattern('.graphqlconfig','.graphqlrc', 'package.json', '.git'),
+                        root_dir = lspconfig.util.root_pattern(
+                            '.graphqlconfig',
+                            '.graphqlrc',
+                            'package.json',
+                            '.git'
+                        ),
                     })
                 end,
             })
