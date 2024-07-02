@@ -17,12 +17,19 @@ yabai -m config window_gap     0
 # App rules
 yabai -m rule --add app="^Google Chrome|Firefox|Brave$" space=1
 yabai -m rule --add app="^Alacritty$" space=1
-yabai -m rule --add app="^Microsoft Outlook|Microsoft Teams$" space=2
+yabai -m rule --add app="^Microsoft (Outlook|Teams)$" space=2
 
 # Ignore
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Slack$" manage=off
+yabai -m rule --add app="^Postman$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^1Password$" manage=off
 yabai -m rule --add app="^Cisco Secure Client$" manage=off
 yabai -m rule --add app="^Kandji Self Service$" manage=off
+yabai -m rule --add app="^Android Studio$" title="^Settings|Welcome to Android Studio$" manage=off
+
+set +x
+printf "yabai config loaded\\n"
