@@ -113,6 +113,11 @@ chars = "\u001B\u007F"
 key = "Back"
 mods = "Alt"
 
+[[keyboard.bindings]]
+chars = '\x00'
+key = "Space"
+mods = "Control"
+
 [scrolling]
 history = 10000
 multiplier = 3

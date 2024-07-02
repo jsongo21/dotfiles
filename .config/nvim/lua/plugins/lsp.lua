@@ -236,6 +236,7 @@ return {
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<C-Space>'] = cmp.mapping.complete(),
+                ['<C-x>'] = cmp.mapping.complete(),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
