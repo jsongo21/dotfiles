@@ -150,3 +150,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+export DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}')
