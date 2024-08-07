@@ -71,7 +71,7 @@ SAVEHIST=10000
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting asdf)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -151,3 +151,12 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # direnv
 eval "$(direnv hook zsh)"
 
+# asdf
+. "$HOME/.asdf/asdf.sh"
+
+# android studio
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$JAVA_HOME/bin:$PATH
