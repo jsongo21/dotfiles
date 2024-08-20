@@ -47,7 +47,6 @@ return {
                     'eslint',
                     'gopls',
                     'html',
-                    'jsonls',
                     'lua_ls',
                     'pyright',
                     'tailwindcss',
