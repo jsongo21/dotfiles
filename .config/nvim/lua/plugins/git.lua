@@ -36,13 +36,13 @@ return {
                     if vim.wo.diff then return ']c' end
                     vim.schedule(function() gs.next_hunk() end)
                     return '<Ignore>'
-                end, { expr = true })
+                end, { expr = true, desc = 'Jump to Next Hunk' })
 
                 map('n', '[c', function()
                     if vim.wo.diff then return '[c' end
                     vim.schedule(function() gs.prev_hunk() end)
                     return '<Ignore>'
-                end, { expr = true })
+                end, { expr = true, desc = 'Jump to Previous Hunk' })
 
                 -- Actions
                 map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
