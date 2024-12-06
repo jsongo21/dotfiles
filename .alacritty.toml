@@ -114,7 +114,7 @@ key = "Back"
 mods = "Alt"
 
 [[keyboard.bindings]]
-chars = '\x00'
+chars = "\u0000"
 key = "Space"
 mods = "Control"
 
