@@ -6,18 +6,18 @@ return {
         config = function()
             require('copilot').setup({
                 panel = {
-                    enabled = false,
+                    enabled = true,
                 },
                 suggestion = {
-                    enabled = false,
+                    enabled = true,
                 },
             })
         end,
     },
-    {
-        'zbirenbaum/copilot-cmp',
-        event = { 'InsertEnter', 'LspAttach' },
-        fix_pairs = true,
-        config = function() require('copilot_cmp').setup() end,
-    },
+    -- {
+    --     'zbirenbaum/copilot-cmp',
+    --     event = { 'InsertEnter', 'LspAttach' },
+    --     fix_pairs = true,
+    --     config = function() require('copilot_cmp').setup() end,
+    -- },
 }
