@@ -224,6 +224,7 @@ return {
             -- See the full "keymap" documentation for information on defining your own keymap.
             keymap = {
                 preset = 'enter',
+                ['<C-x>'] = { 'show', 'show_documentation', 'hide_documentation' },
                 ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
                 ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
                 ['<C-up>'] = { 'scroll_documentation_up', 'fallback' },
@@ -254,7 +255,7 @@ return {
                     draw = {
                         columns = {
                             { 'label', 'label_description', gap = 1 },
-                            { 'kind_icon', 'kind' },
+                            { 'kind_icon', 'kind', gap = 1 },
                         },
                         treesitter = {
                             'lsp',
