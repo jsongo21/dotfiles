@@ -224,7 +224,6 @@ return {
             -- See the full "keymap" documentation for information on defining your own keymap.
             keymap = {
                 preset = 'enter',
-                ['<C-x>'] = { 'show', 'show_documentation', 'hide_documentation' },
                 ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
                 ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
                 ['<C-up>'] = { 'scroll_documentation_up', 'fallback' },

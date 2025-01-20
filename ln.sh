@@ -1,8 +1,8 @@
 ln -svf "${HOME}"/dotfiles/.zshrc "${HOME}"/.zshrc
 ln -svf "${HOME}"/dotfiles/.zprofile "${HOME}"/.zprofile
 ln -svf "${HOME}"/dotfiles/.tmux.conf "${HOME}"/.tmux.conf
+ln -svf "${HOME}"/dotfiles/.alacritty.toml "${HOME}"/.alacritty.toml
 mkdir -p "${HOME}"/.config && ln -svf "${HOME}"/dotfiles/.config/nvim "${HOME}"/.config/nvim
-ln -svf "${HOME}"/dotfiles//.alacritty.toml "${HOME}"/.alacritty.toml
 
 unamestr=$(uname)
 if [ "$unamestr" = "Linux" ]; then
