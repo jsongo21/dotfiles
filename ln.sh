@@ -13,8 +13,7 @@ if [ "$unamestr" = "Linux" ]; then
   mkdir -p "${HOME}"/.config/sxhkd && ln -svf "${HOME}"/dotfiles/linux/sxhkd/sxhkdrc "${HOME}"/.config/sxhkd/sxhkdrc
   mkdir -p "${HOME}"/.config && ln -svf "${HOME}"/dotfiles/linux/polybar "${HOME}"/.config/polybar
 elif [ "$unamestr" = "Darwin"]; then
-  ln -svf "${HOME}"/dotfiles/.config/yabai "${HOME}"/.config/yabai
-  ln -svf "${HOME}"/dotfiles/.config/skhd "${HOME}"/.config/skhd
+  ln -svf "${HOME}"/dotfiles/.config/aerospace "${HOME}"/.config/aerospace
   echo "Mac OS"
 fi
 
