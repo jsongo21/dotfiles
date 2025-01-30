@@ -60,8 +60,7 @@ brew install graphviz
 brew tap microsoft/git
 brew install --cask git-credential-manager-core
 brew install asdf
-brew install koekeishiya/formulae/skhd
-brew install koekeishiya/formulae/yabai
+brew install --cask nikitabobko/tap/aerospace
 
 curl -s "https://get.sdkman.io" | bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

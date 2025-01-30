@@ -104,8 +104,6 @@ alias vim="nvim"
 alias rc="vim ~/.vimrc"
 
 RPROMPT="%{$fg[green]%}[%D{%c}]"
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -137,7 +135,6 @@ breakglass() {
 
 export AWS_SDK_LOAD_CONFIG=true
 export HOMEBREW_FORCE_BREWED_CURL=1
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -152,7 +149,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 eval "$(direnv hook zsh)"
 
 # asdf
-. "$HOME/.asdf/asdf.sh"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -160,4 +157,3 @@ export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$JAVA_HOME/bin:$PATH
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
