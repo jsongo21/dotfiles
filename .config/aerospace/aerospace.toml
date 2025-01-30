@@ -136,3 +136,8 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.cisco.secureclient.gui'
+run = 'layout floating'
+
