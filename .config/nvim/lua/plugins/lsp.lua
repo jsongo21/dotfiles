@@ -9,6 +9,7 @@ return {
         opts = {
             ensure_installed = {
                 'black',
+                'graphql-language-service-cli',
                 'stylua',
                 'shfmt',
             },

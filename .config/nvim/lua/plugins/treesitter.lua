@@ -15,6 +15,7 @@ return {
                     'bash',
                     'c',
                     'diff',
+                    'graphql',
                     'html',
                     'javascript',
                     'jsdoc',
