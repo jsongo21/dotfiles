@@ -5,6 +5,7 @@ return {
         branch = '0.1.x',
         dependencies = {
             'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-live-grep-args.nvim',
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
             -- Only load if `make` is available. Make sure you have the system
             -- requirements installed.
@@ -18,14 +19,44 @@ return {
         },
         config = function()
             local telescope = require('telescope')
+            local lga_actions = require('telescope-live-grep-args.actions')
 
             telescope.setup({
+                defaults = {
+                    file_ignore_patterns = { 'node_modules', 'yarn.lock', 'package-lock.json' },
+                },
                 pickers = {
+                    find_files = {
+                        theme = 'ivy',
+                        hidden = true,
+                    },
+                    git_files = {
+                        theme = 'ivy',
+                    },
                     live_grep = {
-                        additional_args = function(opts) return { '--hidden' } end,
+                        theme = 'ivy',
+                        live_grep = {
+                            additional_args = function(opts) return { '--hidden' } end,
+                        },
+                    },
+                    grep_string = {
+                        theme = 'ivy',
+                    },
+                },
+                extensions = {
+                    live_grep_args = {
+                        mappings = {
+                            i = {
+                                ['<C-k>'] = lga_actions.quote_prompt(),
+                                ['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
+                                -- freeze the current list and start a fuzzy search in the frozen list
+                                ['<C-space>'] = lga_actions.to_fuzzy_refine,
+                            },
+                        },
                     },
                 },
             })
+            telescope.load_extension('live_grep_args')
 
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
