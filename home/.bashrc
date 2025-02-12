@@ -4,7 +4,8 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ll -a'

@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
+alias vi="nvim"
 alias rc="vim ~/.vimrc"
 
 RPROMPT="%{$fg[green]%}[%D{%c}]"
@@ -112,26 +113,6 @@ if type brew &>/dev/null; then
     compinit
 fi
 
-okta() {
-  docker run --rm -it \
-  -v "${HOME}/.aws:/root/.aws" \
-  --entrypoint=oktashell \
-  cmdlabs/okta-utils:latest \
-  -u jason.ngo@digio.com.au \
-  -a runcmd \
-  -d 28800 \
-  -m push -o arn:aws:iam::198684731458:role/runcmd-role-idp-clientreadonly \
-  -p idp-readonly
-}
-
-breakglass() {
-  docker run --rm -it \
-    -v ~/.aws:/root/.aws \
-    --entrypoint=breakglass \
-    -e AWS_DEFAULT_REGION=ap-southeast-2 \
-    -e AWS_PROFILE=idp-readonly cmdsolutions/breakglass-utils:latest \
-    -u jason.ngo@digio.com.au $@
-}
 
 export AWS_SDK_LOAD_CONFIG=true
 export HOMEBREW_FORCE_BREWED_CURL=1
