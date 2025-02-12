@@ -129,7 +129,10 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # direnv
 eval "$(direnv hook zsh)"
 
-# golang asdf
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+## golang asdf
 . ~/.asdf/plugins/golang/set-env.zsh
 
 # android studio
