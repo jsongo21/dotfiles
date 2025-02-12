@@ -129,9 +129,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # direnv
 eval "$(direnv hook zsh)"
 
-## golang asdf
-. ~/.asdf/plugins/golang/set-env.zsh
-
 # android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
