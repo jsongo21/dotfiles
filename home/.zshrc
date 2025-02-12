@@ -102,7 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
 alias vi="nvim"
-alias rc="vim ~/.vimrc"
+alias zrc="source ~/.zshrc"
 
 RPROMPT="%{$fg[green]%}[%D{%c}]"
 
@@ -129,10 +129,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # direnv
 eval "$(direnv hook zsh)"
 
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-## golang asdf
+# golang asdf
 . ~/.asdf/plugins/golang/set-env.zsh
 
 # android studio
