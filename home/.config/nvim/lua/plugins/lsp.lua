@@ -90,6 +90,9 @@ return {
             },
 
             completion = {
+                accept = {
+                    dot_repeat = false,
+                },
                 list = {
                     selection = {
                         auto_insert = true,
@@ -168,12 +171,14 @@ return {
             signature = {
                 enabled = true,
             },
+            cmdline = {
+                sources = {},
+            },
 
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
                 default = { 'copilot', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
-                cmdline = {},
                 providers = {
                     lsp = {
                         score_offset = 0, -- Boost/penalize the score of the items
