@@ -135,3 +135,6 @@ export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$JAVA_HOME/bin:$PATH
+
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
