@@ -127,7 +127,10 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # direnv
-eval "$(direnv hook zsh)"
+if [[ "$(uname)" == "Darwin" ]]; then 
+    echo "Running direnv hook on Mac OS"
+    eval "$(direnv hook zsh)"
+fi
 
 # android studio
 export ANDROID_HOME=$HOME/Library/Android/sdk
