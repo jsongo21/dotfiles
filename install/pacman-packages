@@ -6,3 +6,5 @@ lua
 git-credential-manager-core
 pass
 hyprland-git
+rofi-wayland
+firefox
