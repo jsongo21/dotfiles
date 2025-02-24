@@ -30,3 +30,4 @@ for plugin in "${PLUGINS[@]}"; do
 done
 
 git config --global credential.helper manager-core
+git config --global credential.credentialStore gpg
