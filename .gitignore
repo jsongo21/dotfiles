@@ -1,3 +1,6 @@
 .DS_STORE
 home/.config/nvim/plugin/packer_compiled.lua
 home/.config/systemd
+home/.config/.avalonia-build-tasks
+
+yay-bin
