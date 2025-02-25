@@ -75,6 +75,11 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-s
 
 source $ZSH/oh-my-zsh.sh
 
+# Start Hyprland on wayland
+if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    exec Hyprland >/dev/null
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
