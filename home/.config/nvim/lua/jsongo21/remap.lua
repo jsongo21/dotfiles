@@ -31,6 +31,8 @@ vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>vpp', '<cmd>e ~/dotfiles/.config/nvim/lua/jsongo21/packer.lua<CR>')
 
+vim.keymap.set('c', '<tab>', '<C-z>', { silent = false })
+
 vim.keymap.set('n', '<leader><leader>', function()
     vim.cmd('so')
     print('sourced')

@@ -91,7 +91,7 @@ return {
 
             completion = {
                 accept = {
-                    dot_repeat = false,
+                    dot_repeat = true,
                 },
                 list = {
                     selection = {
