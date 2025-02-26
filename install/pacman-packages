@@ -12,7 +12,9 @@ asdf-vm
 waybar
 brightnessctl
 wireplumber
-pipwire
+pipewire
+pipewire-pulse
+pipewire-alsa
 mpd
-spotify
-
+spotify-launcher
+gobject-introspection
