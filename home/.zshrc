@@ -80,6 +80,13 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     exec Hyprland >/dev/null
 fi
 
+rtmux() {
+	cd ~/.local/share/tmux/resurrect/ || exit # Your save path
+	find . | sort | tail -n 1 | xargs rm
+	find . -printf "%f\n" | sort | tail -n 1 | xargs -I {} ln -sf {} last
+	cd - || exit
+}
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

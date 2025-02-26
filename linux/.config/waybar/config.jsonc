@@ -60,7 +60,7 @@
     //     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     // },
     "custom/spotify": {
-        "exec": "python3 /full/path/to/mediaplayer.py --player spotify",
+        "exec": "python3 $HOME/.config/waybar/mediaplayer.py --player spotify",
         "format": "{}  ",
         "return-type": "json",
         "on-click": "playerctl play-pause",
