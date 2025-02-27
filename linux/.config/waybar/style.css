@@ -144,6 +144,7 @@ label:focus {
 #wireplumber {
     background-color: @yellow;
     color: @mantle;
+    padding-right: 12px;
 }
 
 #network.disconnected {

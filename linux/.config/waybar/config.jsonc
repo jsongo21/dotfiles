@@ -36,7 +36,7 @@
         "format": "{name} {icon}",
         "format-icons": {
             "1": "",
-            "2": "",
+            "2": "",
             "3": "",
             // "4": "",
             "5": "",
@@ -121,7 +121,7 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
