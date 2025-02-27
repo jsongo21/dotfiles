@@ -61,7 +61,7 @@
     // },
     "custom/spotify": {
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
-        "exec-if": "pgrep spotify-launcher",
+        "exec-if": "pgrep spotify",
         "format": " {}   ",
         "return-type": "json",
         "on-click": "playerctl play-pause",
