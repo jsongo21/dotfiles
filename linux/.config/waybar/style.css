@@ -175,7 +175,6 @@ label:focus {
 #battery {
     background-color: @sapphire;
     color: @mantle;
-    padding-right: 12px;
 }
 
 #tray {
