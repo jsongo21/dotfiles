@@ -114,4 +114,12 @@ return {
             vim.keymap.set('n', '<leader>pq', require('peek').open, { desc = 'Close Peek Preview' })
         end,
     },
+
+    --- CSS Colours
+    {
+        'brenoprata10/nvim-highlight-colors',
+        config = function()
+            require('nvim-highlight-colors').setup()
+        end
+    }
 }

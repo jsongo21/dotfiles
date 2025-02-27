@@ -1,0 +1,206 @@
+@import url("./colours.css");
+
+* {
+    border: none;
+    border-radius: 1px;
+    font-family: JetBrainsMono Nerd Font, Font Awesome;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @mantle;
+    color: @text;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+tooltip {
+    background-color: @base;
+    border: 1px solid @surface1;
+}
+
+tooltip label {
+    color: @text;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 1px;
+}
+
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px @text;
+}
+
+#workspaces button {
+    padding: 4px 16px 4px 12px;
+    background-color: @mantle;
+    color: @text;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background-image: linear-gradient(0deg, @surface1, @mantle);
+}
+
+#workspaces button.focused {
+    background-image: linear-gradient(0deg, @mauve, @surface1);
+    box-shadow: inset 0 -3px @text;
+}
+
+#workspaces button.urgent {
+    background-image: linear-gradient(0deg, @red, @mantle);
+}
+
+#workspaces button.active {
+    background-color: @mauve;
+}
+
+#mode {
+    background-color: @base;
+    box-shadow: inset 0 -2px @text;
+}
+
+#mpris,
+#custom-weather,
+#clock,
+#language,
+#pulseaudio,
+#bluetooth,
+#network,
+#memory,
+#cpu,
+#temperature,
+#backlight,
+#battery,
+#disk,
+#custom-power,
+#wireplumber,
+#idle_inhibitor,
+#scratchpad,
+#mode,
+#tray {
+    padding: 4px 8px;
+    margin: 4px 2px;
+    color: @text;
+}
+
+#window,
+#workspaces {
+    margin: 0 0;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+    /* padding-right: 4px; */
+}
+
+
+#clock {
+    background-color: @green;
+    color: @mantle;
+}
+
+label:focus {
+    background-color: @mantle;
+}
+
+#network {
+    background-color: @mauve;
+    color: @mantle;
+}
+
+#cpu {
+    background-color: @peach;
+    color: @mantle;
+}
+
+#memory {
+    background-color: @red;
+    color: @mantle;
+}
+
+#disk {
+    background-color: @flamingo;
+    color: @mantle;
+}
+
+#wireplumber {
+    background-color: @yellow;
+    color: @mantle;
+}
+
+#network.disconnected {
+    background-color: red;
+    color: @mantle;
+}
+
+#bluetooth {
+    background-color: @maroon;
+    color: @mantle;
+}
+
+#temperature {
+    background-color: @pink;
+    color: @mantle;
+}
+
+#temperature.critical {
+    background-color: red;
+    color: @mantle;
+}
+
+#backlight {
+    background-color: @maroon;
+    color: @mantle;
+}
+
+#battery {
+    background-color: @sapphire;
+    color: @mantle;
+    padding-right: 12px;
+}
+
+#tray {
+    background-color: @overlay0;
+    color: @text;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @mantle;
+}
+
+#idle_inhibitor {
+    background-color: @base;
+    color: @text;
+    font-family: Inter;
+}
+
+#idle_inhibitor.activated {
+    background-color: @text;
+    color: @base;
+}
+
+#scratchpad {
+    background-color: @base;
+    color: @text;
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+}
