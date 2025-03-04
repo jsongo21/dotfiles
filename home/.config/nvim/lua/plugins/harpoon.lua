@@ -5,6 +5,9 @@ return {
         local harpoon = require('harpoon')
         ---@diagnostic disable-next-line: missing-parameter
         harpoon:setup({
+            menu = {
+                width = vim.api.nvim_win_get_width(0) - 4,
+            },
             settings = {
                 sync_on_ui_close = true,
                 save_on_toggle = true,
