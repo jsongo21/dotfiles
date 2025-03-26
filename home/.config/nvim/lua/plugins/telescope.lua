@@ -24,6 +24,8 @@ return {
             telescope.setup({
                 defaults = {
                     file_ignore_patterns = { 'node_modules', 'yarn.lock', 'package-lock.json' },
+                    dynamic_preview_title = true,
+                    path_display = { 'filename_first' },
                 },
                 pickers = {
                     find_files = {
