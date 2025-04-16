@@ -85,9 +85,13 @@ return {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
         opts = {
-            hooks = {
-                pre = function()
-                    require('ts_context_commentstring.internal').update_commentstring()
+            options = {
+                custom_commentstring = function()
+                    require('ts_context_commentstring').setup({
+                        enable_autocmd = false,
+                    })
+                    return require('ts_context_commentstring').calculate_commentstring()
+                        or vim.bo.commentstring
                 end,
             },
         },
@@ -118,8 +122,6 @@ return {
     --- CSS Colours
     {
         'brenoprata10/nvim-highlight-colors',
-        config = function()
-            require('nvim-highlight-colors').setup()
-        end
-    }
+        config = function() require('nvim-highlight-colors').setup() end,
+    },
 }
