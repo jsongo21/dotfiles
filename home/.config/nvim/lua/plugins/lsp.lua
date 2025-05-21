@@ -105,7 +105,7 @@ return {
 
                     -- Errors inspection
                     nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-                    nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
+                    nmap('[d', vim.diagnostic.jump, 'Goto [N]ext')
                     nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
                     nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
 
@@ -128,19 +128,6 @@ return {
                 settings = {
                     autoFixOnSave = true,
                 },
-                on_attach = function(client, bufnr)
-                    local format_group = 'EslintFormat'
-                    -- need to set this
-                    -- Sometimes eslint doesn't register this capabilities.
-                    client.server_capabilities.documentFormattingProvider = true
-                    vim.notify('attaching eslint lsp', vim.log.levels.INFO)
-
-                    vim.api.nvim_create_autocmd('BufWritePre', {
-                        group = vim.api.nvim_create_augroup(format_group, { clear = true }),
-                        buffer = bufnr,
-                        command = 'EslintFixAll',
-                    })
-                end,
             })
             vim.lsp.config('lua_ls', {
                 capabilities = capabilities,
