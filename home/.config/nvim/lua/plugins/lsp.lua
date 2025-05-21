@@ -42,8 +42,8 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
-        config = function()
-            require('mason-lspconfig').setup({
+        opts = {
+            ensure_installed = {
                 'cssls',
                 'eslint',
                 'gopls',
@@ -53,8 +53,110 @@ return {
                 'tailwindcss',
                 'vimls',
                 'yamlls',
+            },
+            automatic_enable = false,
+        },
+        config = function(_, opts)
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local lspconfig = require('lspconfig')
+            local on_attach = function(client, bufnr)
+                -- Enable completion triggered by <c-x><c-o>
+                vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+                -- Buffer local mappings.
+                -- See `:help vim.lsp.*` for documentation on any of the below functions
+                local opts = { buffer = ev.buf }
+
+                -- In this case, we create a function that lets us more easily define mappings specific
+                -- for LSP related items. It sets the mode, buffer and description for us each time.
+                local nmap = function(keys, func, desc)
+                    if desc then desc = 'LSP: ' .. desc end
+
+                    vim.keymap.set('n', keys, func, { buffer = ev.buf, desc = desc, remap = false })
+                end
+
+                -- Go to definitions and references
+                nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+                nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+                nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
+                nmap('K', vim.lsp.buf.hover, 'Hover definition')
+                nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[N]ame Symbol')
+                nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+                nmap(
+                    '<leader>ws',
+                    require('telescope.builtin').lsp_dynamic_workspace_symbols,
+                    '[W]orkspace [S]ymbol'
+                )
+                nmap(
+                    '<leader>ds',
+                    require('telescope.builtin').lsp_document_symbols,
+                    '[D]ocument [S]ymbol'
+                )
+                vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+
+                -- Errors inspection
+                nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
+                nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
+                nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
+                nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
+
+                -- Restart server
+                nmap('<leader>rs', '<cmd>LspRestart<CR>', '[R]estart [S]erver')
+                -- Formatting
+                nmap('<leader>fm', function()
+                    vim.lsp.buf.format({ async = true })
+                    print('formatted')
+                end, '[F]or[M]at Code')
+            end
+
+            vim.lsp.config('*', {
+                on_attach = on_attach,
             })
-            -- automatic_installation = true,
+
+            vim.lsp.config('eslint', {
+                capabilities = capabilities,
+                settings = {
+                    autoFixOnSave = true,
+                },
+                on_attach = function(client, bufnr)
+                    local format_group = 'EslintFormat'
+                    -- need to set this
+                    -- Sometimes eslint doesn't register this capabilities.
+                    client.server_capabilities.documentFormattingProvider = true
+                    vim.notify('attaching eslint lsp', vim.log.levels.INFO)
+
+                    vim.api.nvim_create_autocmd('BufWritePre', {
+                        group = vim.api.nvim_create_augroup(format_group, { clear = true }),
+                        buffer = bufnr,
+                        command = 'EslintFixAll',
+                    })
+                end,
+            })
+            vim.lsp.config('lua_ls', {
+                capabilities = capabilities,
+                -- configure lua server (with special settings)
+                settings = {
+                    Lua = {
+                        -- make the language server recognize "vim" global
+                        diagnostics = {
+                            globals = { 'vim' },
+                        },
+                    },
+                },
+            })
+            vim.lsp.config('graphql', {
+                capabilities = capabilities,
+                root_dir = lspconfig.util.root_pattern(
+                    '.graphqlconfig',
+                    '.graphqlrc',
+                    'package.json',
+                    '.git'
+                ),
+            })
+
+            require('mason').setup()
+            require('mason-lspconfig').setup() -- Automatically configures LSP servers
         end,
     },
     {
@@ -203,144 +305,6 @@ return {
             },
         },
         opts_extend = { 'sources.default' },
-    },
-    {
-        'neovim/nvim-lspconfig',
-        dependencies = { 'saghen/blink.cmp' },
-
-        -- example using `opts` for defining servers
-        opts = {
-            servers = {
-                lua_ls = {
-                    diagnostics = {
-                        globals = { 'vim' },
-                    },
-                },
-            },
-        },
-        config = function(_, opts)
-            local lspconfig = require('lspconfig')
-            local mason_lspconfig = require('mason-lspconfig')
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-            mason_lspconfig.setup_handlers({
-                function(server)
-                    lspconfig[server].setup({
-                        capabilities = capabilities,
-                        on_attach = function()
-                            -- Additional on_attach logic can go here if needed
-                        end,
-                    })
-                end,
-                ['eslint'] = function()
-                    lspconfig['eslint'].setup({
-                        capabilities = capabilities,
-                        settintgs = {
-                            autoFixOnSave = true,
-                        },
-                        on_attach = function(client, bufnr)
-                            local format_group = 'EslintFormat'
-                            -- need to set this
-                            -- Sometimes eslint doesn't register this capabilities.
-                            client.server_capabilities.documentFormattingProvider = true
-                            vim.notify('attaching eslint lsp', vim.log.levels.INFO)
-
-                            vim.api.nvim_create_autocmd('BufWritePre', {
-                                group = vim.api.nvim_create_augroup(format_group, { clear = true }),
-                                buffer = bufnr,
-                                command = 'EslintFixAll',
-                            })
-                        end,
-                    })
-                end,
-                ['lua_ls'] = function()
-                    -- configure lua server (with special settings)
-                    lspconfig['lua_ls'].setup({
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                -- make the language server recognize "vim" global
-                                diagnostics = {
-                                    globals = { 'vim' },
-                                },
-                            },
-                        },
-                    })
-                end,
-                ['graphql'] = function()
-                    lspconfig['graphql'].setup({
-                        capabilities = capabilities,
-                        root_dir = lspconfig.util.root_pattern(
-                            '.graphqlconfig',
-                            '.graphqlrc',
-                            'package.json',
-                            '.git'
-                        ),
-                    })
-                end,
-            })
-
-            -- Use LspAttach autocommand to only map the following keys
-            -- after the language server attaches to the current buffer
-            vim.api.nvim_create_autocmd('LspAttach', {
-                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-                callback = function(ev)
-                    -- Enable completion triggered by <c-x><c-o>
-                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-                    -- Buffer local mappings.
-                    -- See `:help vim.lsp.*` for documentation on any of the below functions
-                    local opts = { buffer = ev.buf }
-
-                    -- In this case, we create a function that lets us more easily define mappings specific
-                    -- for LSP related items. It sets the mode, buffer and description for us each time.
-                    local nmap = function(keys, func, desc)
-                        if desc then desc = 'LSP: ' .. desc end
-
-                        vim.keymap.set(
-                            'n',
-                            keys,
-                            func,
-                            { buffer = ev.buf, desc = desc, remap = false }
-                        )
-                    end
-
-                    -- Go to definitions and references
-                    nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-                    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-                    nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-                    nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
-                    nmap('K', vim.lsp.buf.hover, 'Hover definition')
-                    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[N]ame Symbol')
-                    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-                    nmap(
-                        '<leader>ws',
-                        require('telescope.builtin').lsp_dynamic_workspace_symbols,
-                        '[W]orkspace [S]ymbol'
-                    )
-                    nmap(
-                        '<leader>ds',
-                        require('telescope.builtin').lsp_document_symbols,
-                        '[D]ocument [S]ymbol'
-                    )
-                    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-
-                    -- Errors inspection
-                    nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-                    nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
-                    nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
-                    nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
-
-                    -- Restart server
-                    nmap('<leader>rs', '<cmd>LspRestart<CR>', '[R]estart [S]erver')
-                    -- Formatting
-                    nmap('<leader>fm', function()
-                        vim.lsp.buf.format({ async = true })
-                        print('formatted')
-                    end, '[F]or[M]at Code')
-                end,
-            })
-        end,
     },
     {
         'stevearc/conform.nvim',
