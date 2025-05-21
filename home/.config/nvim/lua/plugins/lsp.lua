@@ -58,7 +58,6 @@ return {
         },
         config = function(_, opts)
             local capabilities = require('blink.cmp').get_lsp_capabilities()
-            local lspconfig = require('lspconfig')
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -157,12 +156,12 @@ return {
             })
             vim.lsp.config('graphql', {
                 capabilities = capabilities,
-                root_dir = lspconfig.util.root_pattern(
+                root_markers = {
                     '.graphqlconfig',
                     '.graphqlrc',
                     'package.json',
-                    '.git'
-                ),
+                    '.git',
+                },
             })
 
             require('mason').setup()
@@ -347,6 +346,9 @@ return {
     },
     {
         'folke/neodev.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+        },
         opts = {},
     },
     {
@@ -364,12 +366,6 @@ return {
                 )
             end,
         },
-    },
-
-    {
-        'pmizio/typescript-tools.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-        config = function() require('typescript-tools').setup({}) end,
     },
 
     {
