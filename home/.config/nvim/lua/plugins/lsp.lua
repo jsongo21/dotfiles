@@ -367,7 +367,11 @@ return {
             end,
         },
     },
-
+    {
+        'pmizio/typescript-tools.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+        config = function() require('typescript-tools').setup({}) end,
+    },
     {
         'mfussenegger/nvim-lint',
         config = function()
