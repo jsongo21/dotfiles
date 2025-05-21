@@ -59,59 +59,69 @@ return {
         config = function(_, opts)
             local capabilities = require('blink.cmp').get_lsp_capabilities()
             local lspconfig = require('lspconfig')
-            local on_attach = function(client, bufnr)
-                -- Enable completion triggered by <c-x><c-o>
-                vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-                -- Buffer local mappings.
-                -- See `:help vim.lsp.*` for documentation on any of the below functions
-                local opts = { buffer = ev.buf }
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 
-                -- In this case, we create a function that lets us more easily define mappings specific
-                -- for LSP related items. It sets the mode, buffer and description for us each time.
-                local nmap = function(keys, func, desc)
-                    if desc then desc = 'LSP: ' .. desc end
+                callback = function(ev)
+                    -- Enable completion triggered by <c-x><c-o>
+                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-                    vim.keymap.set('n', keys, func, { buffer = ev.buf, desc = desc, remap = false })
-                end
+                    -- Buffer local mappings.
+                    -- See `:help vim.lsp.*` for documentation on any of the below functions
+                    local opts = { buffer = ev.buf }
 
-                -- Go to definitions and references
-                nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-                nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-                nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-                nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
-                nmap('K', vim.lsp.buf.hover, 'Hover definition')
-                nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[N]ame Symbol')
-                nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-                nmap(
-                    '<leader>ws',
-                    require('telescope.builtin').lsp_dynamic_workspace_symbols,
-                    '[W]orkspace [S]ymbol'
-                )
-                nmap(
-                    '<leader>ds',
-                    require('telescope.builtin').lsp_document_symbols,
-                    '[D]ocument [S]ymbol'
-                )
-                vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+                    -- In this case, we create a function that lets us more easily define mappings specific
+                    -- for LSP related items. It sets the mode, buffer and description for us each time.
+                    local nmap = function(keys, func, desc)
+                        if desc then desc = 'LSP: ' .. desc end
 
-                -- Errors inspection
-                nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-                nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
-                nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
-                nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
+                        vim.keymap.set(
+                            'n',
+                            keys,
+                            func,
+                            { buffer = ev.buf, desc = desc, remap = false }
+                        )
+                    end
 
-                -- Restart server
-                nmap('<leader>rs', '<cmd>LspRestart<CR>', '[R]estart [S]erver')
-                -- Formatting
-                nmap('<leader>fm', function()
-                    vim.lsp.buf.format({ async = true })
-                    print('formatted')
-                end, '[F]or[M]at Code')
-            end
+                    -- Go to definitions and references
+                    nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+                    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                    nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+                    nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
+                    nmap('K', vim.lsp.buf.hover, 'Hover definition')
+                    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[N]ame Symbol')
+                    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+                    nmap(
+                        '<leader>ws',
+                        require('telescope.builtin').lsp_dynamic_workspace_symbols,
+                        '[W]orkspace [S]ymbol'
+                    )
+                    nmap(
+                        '<leader>ds',
+                        require('telescope.builtin').lsp_document_symbols,
+                        '[D]ocument [S]ymbol'
+                    )
+                    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+
+                    -- Errors inspection
+                    nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
+                    nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
+                    nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
+                    nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
+
+                    -- Restart server
+                    nmap('<leader>rs', '<cmd>LspRestart<CR>', '[R]estart [S]erver')
+                    -- Formatting
+                    nmap('<leader>fm', function()
+                        vim.lsp.buf.format({ async = true })
+                        print('formatted')
+                    end, '[F]or[M]at Code')
+                end,
+            })
 
             vim.lsp.config('*', {
-                on_attach = on_attach,
+                capabilities = capabilities,
             })
 
             vim.lsp.config('eslint', {
