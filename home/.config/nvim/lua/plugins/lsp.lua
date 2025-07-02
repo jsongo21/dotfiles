@@ -105,12 +105,15 @@ return {
 
                     -- Errors inspection
                     nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-                    nmap('[d', vim.diagnostic.jump, 'Goto [N]ext')
+                    nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
                     nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
                     nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
 
                     -- Restart server
-                    nmap('<leader>rs', '<cmd>LspRestart<CR>', '[R]estart [S]erver')
+                    nmap('<leader>rs', function()
+                        vim.cmd('LspRestart')
+                        print('LSP server restarted')
+                    end, '[R]estart [S]erver')
                     -- Formatting
                     nmap('<leader>fm', function()
                         vim.lsp.buf.format({ async = true })
