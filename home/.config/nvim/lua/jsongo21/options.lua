@@ -28,6 +28,6 @@ vim.opt.isfname:append('@-@')
 vim.opt.updatetime = 50
 vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 
-vim.opt.encoding = "utf-8"
+vim.opt.encoding = 'utf-8'
 vim.opt.listchars = { lead = '·', tab = '→ ' }
 vim.opt.list = true
