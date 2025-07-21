@@ -55,3 +55,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
+
+vim.keymap.set('n', '<leader>ffu', function()
+    vim.cmd('set ff=unix')
+    print('Set File Format to Unix')
+end, { desc = 'Set [F]ile [F]ormat to [U]nix' })
