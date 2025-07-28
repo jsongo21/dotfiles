@@ -5,25 +5,54 @@ return {
     -- Time tracking
     'wakatime/vim-wakatime',
 
+    -- TODO comments
     {
-        -- Add indentation guides even on blank lines
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = {},
+    },
+
+    -- Highlight Patterns - Hex
+    {
+        'echasnovski/mini.hipatterns',
+        version = '*',
+        config = function()
+            local hipatterns = require('mini.hipatterns')
+            hipatterns.setup({
+                tailwind = {
+                    enabled = true,
+                },
+                highlighters = {
+                    -- Highlight hex color strings (`#rrggbb`) using that color
+                    shorthand = {
+                        pattern = '()#%x%x%x()%f[^%x%w]',
+                        group = function(_, _, data)
+                            ---@type string
+                            local match = data.full_match
+                            local r, g, b = match:sub(2, 2), match:sub(3, 3), match:sub(4, 4)
+                            local hex_color = '#' .. r .. r .. g .. g .. b .. b
+
+                            return hipatterns.compute_hex_color_group(hex_color, 'bg')
+                        end,
+                        extmark_opts = { priority = 2000 },
+                    },
+                },
+            })
+        end,
+    },
+
+    -- Add indentation guides even on blank lines
+    {
         'lukas-reineke/indent-blankline.nvim',
         -- Enable `lukas-reineke/indent-blankline.nvim`
         -- See `:help ibl`
         main = 'ibl',
-        opts = {},
     },
-    {
-        'folke/todo-comments.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
-    },
+
+    -- Highlights the indent guide
     {
         'echasnovski/mini.indentscope',
+        version = '*',
         name = 'mini.indentscope',
         event = 'VeryLazy',
         config = function()
@@ -39,13 +68,7 @@ return {
                 },
                 symbol = '┃',
                 options = {
-                    try_as_border = true,
-                },
-                mappings = {
-                    goto_top = '',
-                    goto_bottom = '',
-                    object_scope = '',
-                    object_scope_with_border = '',
+                    try_as_border = false,
                 },
             })
 
@@ -71,8 +94,11 @@ return {
     -- Auto Pairs
     {
         'echasnovski/mini.pairs',
+        version = '*',
         config = function() require('mini.pairs').setup({}) end,
     },
+
+    -- TS auto closing tags
     {
         'windwp/nvim-ts-autotag',
         config = function() require('nvim-ts-autotag').setup({}) end,
@@ -81,6 +107,7 @@ return {
     -- "gc" to comment visual regions/lines
     {
         'echasnovski/mini.comment',
+        version = '*',
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
@@ -117,12 +144,6 @@ return {
             vim.keymap.set('n', '<leader>po', require('peek').open, { desc = 'Open Peek Preview' })
             vim.keymap.set('n', '<leader>pq', require('peek').open, { desc = 'Close Peek Preview' })
         end,
-    },
-
-    --- CSS Colours
-    {
-        'brenoprata10/nvim-highlight-colors',
-        config = function() require('nvim-highlight-colors').setup() end,
     },
 
     --- Pretty Markdown
