@@ -1,4 +1,7 @@
 return {
+    {
+        'neovim/nvim-lspconfig',
+    },
     -- NOTE: This is where your plugins related to LSP can be installed.
     --  The configuration is done below. Search for lspconfig to find it below.
     {
@@ -283,7 +286,7 @@ return {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'copilot', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
+                default = { 'lazydev', 'copilot', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
                 providers = {
                     lsp = {
                         score_offset = 0, -- Boost/penalize the score of the items
@@ -304,6 +307,11 @@ return {
                         end,
                     },
                     dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+                    lazydev = {
+                        name = 'LazyDev',
+                        module = 'lazydev.integrations.blink',
+                        score_offset = 100,
+                    },
                 },
             },
         },
@@ -339,10 +347,8 @@ return {
         end,
     },
     {
-        'folke/neodev.nvim',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-        },
+        'folke/lazydev.nvim',
+        ft = 'lua',
         opts = {},
     },
     {
