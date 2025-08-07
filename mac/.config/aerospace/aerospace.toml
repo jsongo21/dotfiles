@@ -38,6 +38,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # alt-v = 'split vertical'
 
     alt-f = 'fullscreen'
+    alt-m = 'macos-native-fullscreen off'
+    alt-shift-m = 'macos-native-minimize'
 
     alt-s = 'layout v_accordion' # 'layout stacking' in i3
     alt-w = 'layout h_accordion' # 'layout tabbed' in i3
@@ -151,7 +153,7 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.whoosh.whooshgame'
-run = ['layout floating', 'move-node-to-workspace 3']
+run = ['layout floating', 'move-node-to-workspace 4']
 
 [[on-window-detected]]
 if.app-id = 'com.postmanlabs.mac'
