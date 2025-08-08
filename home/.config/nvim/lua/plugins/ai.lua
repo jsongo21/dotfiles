@@ -27,6 +27,11 @@ return {
                     adapter = 'copilot',
                 },
             },
+            adapters = {
+                opts = {
+                    show_model_choices = true,
+                },
+            },
             opts = {
                 -- Set debug logging
                 log_level = 'DEBUG',
@@ -39,6 +44,12 @@ return {
                 '<cmd>CodeCompanionChat Toggle<cr>',
                 mode = 'n',
                 desc = 'Toggle Chat',
+            },
+            {
+                '<leader>cp',
+                '<cmd>CodeCompanionActions <cr>',
+                mode = { 'n', 'v' },
+                desc = 'Actions',
             },
         },
     },
