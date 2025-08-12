@@ -44,6 +44,10 @@ return {
                     grep_string = {
                         theme = 'ivy',
                     },
+                    lsp_references = {
+                        theme = 'ivy',
+                        fname_width = 100,
+                    },
                 },
                 extensions = {
                     live_grep_args = {
