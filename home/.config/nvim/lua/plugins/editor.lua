@@ -157,4 +157,7 @@ return {
             },
         },
     },
+
+    --- Splitjoin
+    { 'nvim-mini/mini.splitjoin', version = false },
 }
