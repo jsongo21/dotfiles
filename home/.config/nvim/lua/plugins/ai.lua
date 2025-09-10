@@ -28,8 +28,10 @@ return {
                 },
             },
             adapters = {
-                opts = {
-                    show_model_choices = true,
+                http = {
+                    opts = {
+                        show_model_choices = true,
+                    },
                 },
             },
             opts = {
