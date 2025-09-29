@@ -170,7 +170,7 @@ return {
         -- optional: provides snippets for the snippet source
         dependencies = {
             'rafamadriz/friendly-snippets',
-            'giuxtaposition/blink-cmp-copilot',
+            'fang2hou/blink-copilot',
             'kristijanhusak/vim-dadbod-completion',
         },
 
@@ -293,7 +293,7 @@ return {
                     },
                     copilot = {
                         name = 'copilot',
-                        module = 'blink-cmp-copilot',
+                        module = 'blink-copilot',
                         score_offset = 100,
                         async = true,
                         transform_items = function(_, items)

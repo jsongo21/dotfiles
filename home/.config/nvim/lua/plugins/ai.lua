@@ -6,10 +6,10 @@ return {
         config = function()
             require('copilot').setup({
                 panel = {
-                    enabled = true,
+                    enabled = false,
                 },
                 suggestion = {
-                    enabled = true,
+                    enabled = false,
                 },
             })
         end,
