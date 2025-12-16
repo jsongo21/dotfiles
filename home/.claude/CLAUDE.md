@@ -236,6 +236,15 @@ Before declaring any task complete:
 </VERBOSE_THINKING_CONCISE_OUTPUT>
 
 ## Tool Usage
+<CLI_COMMANDS>
+- IMPORTANT: Use the `run_silent` command wrapper (a command you run prefixed before the command you want to run) to reduce token usage by only providing the exit status and any stderr.
+  - You MUST use run_silent to wrap any bash / CLI commands unless you need to see all the stdout.
+  - Good commands to prefix with run_silent include package installs, builds, tests, linting etc...
+  - Examples:
+    - run_silent pnpm install
+    - run_silent cargo check
+    - run_silent make lint
+</CLI_COMMANDS>
 <TOOL_PRIORITIES note="**IMPORTANT**">
 - Use purpose-built tools over manual approaches, using specific tools is often a better approach than searching the web (e.g. using get_library_docs for library documentation)
 - Use tools to search documentation before making assumptions
@@ -243,7 +252,6 @@ Before declaring any task complete:
 - When asked to do math that's more than adding one or two items, use the calculator tool to ensure accuracy
 - If you're exploring a large codebase or potentially very large files, use of the 'code_skim' tool (if you have it) to quickly understand the structure of the file(s) without all the implementation details
 - Delegate tasks to a sub-agents with instructions to use specific tools and instruct sub-agents to provide you with only the key information you're looking for, do this in parallel where possible
-- IMPORTANT: The `run_silent` command wrapper reduces token usage by only providing the exit status and any stderr. You MUST use run_silent to wrap any CLI command that you do not truly need to see all the output from such as installs, builds, tests, linting etc... example: `run_silent pnpm install`.
 </TOOL_PRIORITIES>
 
 <CLAUDE_FEATURES>
