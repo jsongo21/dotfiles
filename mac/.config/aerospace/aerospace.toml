@@ -175,3 +175,6 @@ run = ['layout floating', 'move-node-to-workspace 1']
 if.app-id = 'com.cisco.secureclient.gui'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = 'layout floating'
