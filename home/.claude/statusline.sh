@@ -171,12 +171,77 @@ fi
 usage_color() { if [ "$use_color" -eq 1 ]; then printf '\033[38;5;189m'; fi; }  # lavender
 cost_color() { if [ "$use_color" -eq 1 ]; then printf '\033[38;5;222m'; fi; }   # light gold
 burn_color() { if [ "$use_color" -eq 1 ]; then printf '\033[38;5;220m'; fi; }   # bright gold
-session_color() { 
+session_color() {
   rem_pct=$(( 100 - session_pct ))
   if   (( rem_pct <= 10 )); then SCLR='38;5;210'  # light pink
-  elif (( rem_pct <= 25 )); then SCLR='38;5;228'  # light yellow  
-  else                          SCLR='38;5;194'; fi  # light green
+  elif (( rem_pct <= 25 )); then SCLR='38;5;228'  # light yellow
+  else                        SCLR='38;5;194'; fi  # light green
   if [ "$use_color" -eq 1 ]; then printf '\033[%sm' "$SCLR"; fi
+}
+
+# ---- usage limit colors ----
+usage_limit_color() {
+  local util="$1"
+  if   (( util >= 95 )); then UCLR='38;5;88'   # dark red
+  elif (( util >= 75 )); then UCLR='33'        # yellow
+  else                        UCLR='32'; fi    # green
+  if [ "$use_color" -eq 1 ]; then printf '\033[%sm' "$UCLR"; fi
+}
+
+# ---- usage limit bar ----
+render_usage_bar() {
+  local util="$1"
+  local width="${2:-10}"
+  local full_blocks=$(( util * width / 100 ))
+  local has_half=$(( (util % (100 / width)) >= (50 / width) ? 1 : 0 ))
+  local empty=$(( width - full_blocks - has_half ))
+
+  local colour
+  colour=$(usage_limit_color "$util")
+
+  local bar="$colour"
+  if (( full_blocks > 0 )); then
+    bar+=$(printf '█%.0s' $(seq 1 "$full_blocks"))
+  fi
+  if (( has_half == 1 )); then
+    bar+='▌'
+  fi
+  bar+="$(rst)"
+  if (( empty > 0 )); then
+    bar+=$(printf ' %.0s' $(seq 1 "$empty"))
+  fi
+  echo -n "$bar"
+}
+
+# ---- query usage limits from API ----
+query_usage_limits() {
+  local keychain_data
+  keychain_data=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
+
+  [[ -z "$keychain_data" ]] && return 1
+
+  local token
+  if [ "$HAS_JQ" -eq 1 ]; then
+    token=$(echo "$keychain_data" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
+  else
+    token=$(echo "$keychain_data" | grep -o '"accessToken"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:[[:space:]]*"\([^"]*\)".*/\1/' | head -1)
+  fi
+
+  [[ -z "$token" ]] && return 1
+
+  local response
+  response=$(curl -s -w "\n%{http_code}" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer $token" \
+    -H "anthropic-beta: oauth-2025-04-20" \
+    "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
+
+  local http_code="${response##*$'\n'}"
+  local content="${response%$'\n'*}"
+
+  [[ "$http_code" != "200" ]] && return 1
+
+  echo "$content"
 }
 
 # ---- cost and usage extraction ----
@@ -268,6 +333,47 @@ if command -v ccusage >/dev/null 2>&1 && [ "$HAS_JQ" -eq 1 ]; then
   fi
 fi
 
+# ---- usage limits from API ----
+usage_limits_txt=""
+if [ "$HAS_JQ" -eq 1 ]; then
+  usage_json=$(query_usage_limits)
+  if [ -n "$usage_json" ]; then
+    # Get five_hour (current session) usage and convert to integer
+    five_hour_util=$(echo "$usage_json" | jq -r '.five_hour.utilization // empty' 2>/dev/null)
+    if [ -n "$five_hour_util" ] && [ "$five_hour_util" != "null" ]; then
+      five_hour_util=$(printf "%.0f" "$five_hour_util" 2>/dev/null)
+    fi
+
+    # Get seven_day_sonnet (current week Sonnet) usage, fall back to seven_day if null
+    seven_day_util=$(echo "$usage_json" | jq -r '.seven_day_sonnet.utilization // .seven_day.utilization // empty' 2>/dev/null)
+    if [ -n "$seven_day_util" ] && [ "$seven_day_util" != "null" ]; then
+      seven_day_util=$(printf "%.0f" "$seven_day_util" 2>/dev/null)
+    fi
+
+    parts=()
+
+    if [ -n "$five_hour_util" ] && [[ "$five_hour_util" =~ ^[0-9]+$ ]]; then
+      five_hour_bar=$(render_usage_bar "$five_hour_util" 10)
+      parts+=("Session: $(usage_limit_color "$five_hour_util")${five_hour_util}%$(rst) [${five_hour_bar}]")
+    fi
+
+    if [ -n "$seven_day_util" ] && [[ "$seven_day_util" =~ ^[0-9]+$ ]]; then
+      seven_day_bar=$(render_usage_bar "$seven_day_util" 10)
+      parts+=("Week: $(usage_limit_color "$seven_day_util")${seven_day_util}%$(rst) [${seven_day_bar}]")
+    fi
+
+    if [ ${#parts[@]} -gt 0 ]; then
+      usage_limits_txt="🎯 "
+      for i in "${!parts[@]}"; do
+        if [ "$i" -gt 0 ]; then
+          usage_limits_txt+="  "
+        fi
+        usage_limits_txt+="${parts[$i]}"
+      done
+    fi
+  fi
+fi
+
 # ---- render statusline ----
 # Line 1: Core info (directory, git, model, claude code version, output style)
 printf '📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)"
@@ -335,5 +441,8 @@ if [ -n "$line2" ]; then
 fi
 if [ -n "$line3" ]; then
   printf '\n%s' "$line3"
+fi
+if [ -n "$usage_limits_txt" ]; then
+  printf '\n%s' "$usage_limits_txt"
 fi
 printf '\n'
