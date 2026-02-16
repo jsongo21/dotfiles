@@ -170,7 +170,7 @@ return {
         -- optional: provides snippets for the snippet source
         dependencies = {
             'rafamadriz/friendly-snippets',
-            'fang2hou/blink-copilot',
+            -- 'fang2hou/blink-copilot',
             'kristijanhusak/vim-dadbod-completion',
         },
 
@@ -286,25 +286,34 @@ return {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lazydev', 'copilot', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
+                default = { 'minuet', 'lazydev', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
                 providers = {
                     lsp = {
                         score_offset = 0, -- Boost/penalize the score of the items
                     },
-                    copilot = {
-                        name = 'copilot',
-                        module = 'blink-copilot',
-                        score_offset = 100,
+                    -- copilot = {
+                    --     name = 'copilot',
+                    --     module = 'blink-copilot',
+                    --     score_offset = 100,
+                    --     async = true,
+                    --     transform_items = function(_, items)
+                    --         local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
+                    --         local kind_idx = #CompletionItemKind + 1
+                    --         CompletionItemKind[kind_idx] = 'Copilot'
+                    --         for _, item in ipairs(items) do
+                    --             item.kind = kind_idx
+                    --         end
+                    --         return items
+                    --     end,
+                    -- },
+                    minuet = {
+                        name = 'minuet',
+                        module = 'minuet.blink',
                         async = true,
-                        transform_items = function(_, items)
-                            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
-                            local kind_idx = #CompletionItemKind + 1
-                            CompletionItemKind[kind_idx] = 'Copilot'
-                            for _, item in ipairs(items) do
-                                item.kind = kind_idx
-                            end
-                            return items
-                        end,
+                        -- Should match minuet.config.request_timeout * 1000,
+                        -- since minuet.config.request_timeout is in seconds
+                        timeout_ms = 3000,
+                        score_offset = 50, -- Gives minuet higher priority among suggestions
                     },
                     dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
                     lazydev = {
@@ -316,6 +325,29 @@ return {
             },
         },
         opts_extend = { 'sources.default' },
+    },
+
+    {
+        'milanglacier/minuet-ai.nvim',
+        config = function()
+            require('minuet').setup({
+                provider = 'openai_fim_compatible',
+                n_completions = 3,
+                context_window = 512,
+                provider_options = {
+                    openai_fim_compatible = {
+                        api_key = 'TERM',
+                        name = 'Ollama',
+                        end_point = 'http://localhost:11434/v1/completions',
+                        model = 'qwen2.5-coder:7b',
+                        optional = {
+                            max_tokens = 56,
+                            top_p = 0.9,
+                        },
+                    },
+                },
+            })
+        end,
     },
     {
         'stevearc/conform.nvim',
