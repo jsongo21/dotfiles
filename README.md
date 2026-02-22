@@ -86,6 +86,26 @@ Core tools:
 - asdf (version manager)
 - docker + colima
 
+### Installing from Brewfile
+
+To install all packages, casks, and VS Code extensions listed in the Brewfile:
+
+```bash
+brew bundle install --file=~/dotfiles/mac/Brewfile
+```
+
+This installs all taps, formulae, casks, and VS Code extensions. To check what would be installed without making changes:
+
+```bash
+brew bundle check --file=~/dotfiles/mac/Brewfile
+```
+
+To list any installed packages not in the Brewfile (orphans):
+
+```bash
+brew bundle cleanup --file=~/dotfiles/mac/Brewfile
+```
+
 ### Updating Brewfile
 
 After installing new packages with Homebrew, update the Brewfile:
