@@ -6,6 +6,7 @@ STATUSLINE_VERSION="1.4.0"
 
 input=$(cat)
 
+
 # ---- check jq availability ----
 HAS_JQ=0
 if command -v jq >/dev/null 2>&1; then
@@ -375,40 +376,43 @@ if [ "$HAS_JQ" -eq 1 ]; then
 fi
 
 # ---- render statusline ----
-# Line 1: Core info (directory, git, model, claude code version, output style)
-printf '📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)"
+# Line 1: Directory
+line1="$(printf '📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)")"
+printf '%s' "$line1"
+
+# Line 2: Git branch
 if [ -n "$git_branch" ]; then
-  printf '  🌿 %s%s%s' "$(git_color)" "$git_branch" "$(rst)"
+  printf '\n%s' "$(printf '🌿 %s%s%s' "$(git_color)" "$git_branch" "$(rst)")"
 fi
-printf '  🤖 %s%s%s' "$(model_color)" "$model_name" "$(rst)"
+
+# Line 2: Model, Claude Code version, output style
+line2="$(printf '🤖 %s%s%s' "$(model_color)" "$model_name" "$(rst)")"
 if [ -n "$model_version" ] && [ "$model_version" != "null" ]; then
-  printf '  🏷️ %s%s%s' "$(version_color)" "$model_version" "$(rst)"
+  line2+="$(printf '  🏷️ %s%s%s' "$(version_color)" "$model_version" "$(rst)")"
 fi
 if [ -n "$cc_version" ] && [ "$cc_version" != "null" ]; then
-  printf '  📟 %sv%s%s' "$(cc_version_color)" "$cc_version" "$(rst)"
+  line2+="$(printf '  📟 %sv%s%s' "$(cc_version_color)" "$cc_version" "$(rst)")"
 fi
 if [ -n "$output_style" ] && [ "$output_style" != "null" ]; then
-  printf '  🎨 %s%s%s' "$(style_color)" "$output_style" "$(rst)"
+  line2+="$(printf '  🎨 %s%s%s' "$(style_color)" "$output_style" "$(rst)")"
 fi
+printf '\n%s' "$line2"
 
-# Line 2: Context and session time
-line2=""
+# Line 3: Context remaining
 if [ -n "$context_pct" ]; then
   context_bar=$(progress_bar "$context_remaining_pct" 10)
-  line2="🧠 $(context_color)Context Remaining: ${context_pct} [${context_bar}]$(rst)"
-fi
-if [ -n "$session_txt" ]; then
-  if [ -n "$line2" ]; then
-    line2="$line2  ⌛ $(session_color)${session_txt}$(rst) $(session_color)[${session_bar}]$(rst)"
-  else
-    line2="⌛ $(session_color)${session_txt}$(rst) $(session_color)[${session_bar}]$(rst)"
-  fi
-fi
-if [ -z "$line2" ] && [ -z "$context_pct" ]; then
-  line2="🧠 $(context_color)Context Remaining: TBD$(rst)"
+  line_ctx="🧠 $(context_color)Context Remaining: ${context_pct} [${context_bar}]$(rst)"
+else
+  line_ctx="🧠 $(context_color)Context Remaining: TBD$(rst)"
 fi
 
-# Line 3: Cost and usage analytics
+# Line 4: Session reset timer
+line_session=""
+if [ -n "$session_txt" ]; then
+  line_session="🔄 $(session_color)${session_txt}$(rst) $(session_color)[${session_bar}]$(rst)"
+fi
+
+# Line 5: Cost and usage analytics
 line3=""
 if [ -n "$cost_usd" ] && [[ "$cost_usd" =~ ^[0-9.]+$ ]]; then
   if [ -n "$cost_per_hour" ] && [[ "$cost_per_hour" =~ ^[0-9.]+$ ]]; then
@@ -436,8 +440,9 @@ if [ -n "$tot_tokens" ] && [[ "$tot_tokens" =~ ^[0-9]+$ ]]; then
 fi
 
 # Print lines
-if [ -n "$line2" ]; then
-  printf '\n%s' "$line2"
+printf '\n%s' "$line_ctx"
+if [ -n "$line_session" ]; then
+  printf '\n%s' "$line_session"
 fi
 if [ -n "$line3" ]; then
   printf '\n%s' "$line3"
