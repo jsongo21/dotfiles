@@ -85,15 +85,15 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     alt-equal = 'resize width +50'
 
 [workspace-to-monitor-force-assignment]
-1 = 'main'
-2 = 'main'
-3 = 'main'
-4 = 'main'
-5 = 'main'
-6 = ['secondary', 'main']
-7 = ['secondary', 'main']
-8 = ['secondary', 'main']
-9 = ['secondary', 'main']
+    1 = 'main'
+    2 = 'main'
+    3 = 'main'
+    4 = 'main'
+    5 = 'main'
+    6 = ['secondary', 'main']
+    7 = ['secondary', 'main']
+    8 = ['secondary', 'main']
+    9 = ['secondary', 'main']
 
 [mode.resize.binding]
     h = 'resize width -50'
@@ -104,77 +104,77 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     esc = 'mode main'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.AppStore'
-run = 'layout floating'
+    if.app-id = 'com.apple.AppStore'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.ActivityMonitor'
-run = 'layout floating'
+    if.app-id = 'com.apple.ActivityMonitor'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.calculator'
-run = 'layout floating'
+    if.app-id = 'com.apple.calculator'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
+    if.app-id = 'com.apple.finder'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.iCal'
-run = 'layout floating'
+    if.app-id = 'com.apple.iCal'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
+    if.app-id = 'com.apple.finder'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.iphonesimulator'
-run = 'layout floating'
+    if.app-id = 'com.apple.iphonesimulator'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = 'layout floating'
+    if.app-id = 'com.1password.1password'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.bitwarden.desktop'
-run = 'layout floating'
+    if.app-id = 'com.bitwarden.desktop'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.google.android.studio'
-run = 'layout floating'
+    if.app-id = 'com.google.android.studio'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.Outlook'
-run = 'move-node-to-workspace 3'
+    if.app-id = 'com.microsoft.Outlook'
+    run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace 4'
+    if.app-id = 'com.microsoft.teams2'
+    run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace 3'
+    if.app-id = 'com.microsoft.VSCode'
+    run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.app-id = 'com.whoosh.whooshgame'
-run = ['layout floating', 'move-node-to-workspace 4']
+    if.app-id = 'com.whoosh.whooshgame'
+    run = ['macos-native-fullscreen off']
 
 [[on-window-detected]]
-if.app-id = 'com.postmanlabs.mac'
-run = 'layout floating'
+    if.app-id = 'com.postmanlabs.mac'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'layout floating'
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.spotify.client'
-run = ['layout floating', 'move-node-to-workspace 1']
+    if.app-id = 'com.spotify.client'
+    run = ['layout floating', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'com.cisco.secureclient.gui'
-run = 'layout floating'
+    if.app-id = 'com.cisco.secureclient.gui'
+    run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'net.whatsapp.WhatsApp'
-run = 'layout floating'
+    if.app-id = 'net.whatsapp.WhatsApp'
+    run = 'layout floating'
