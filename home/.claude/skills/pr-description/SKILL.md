@@ -1,7 +1,6 @@
 ---
 name: pr-description
 description: Write a PR description for the current branch. Use when the user asks for a PR description, PR summary, or pull request description.
-disable-model-invocation: true
 argument-hint: [base-branch]
 ---
 
