@@ -153,3 +153,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 export ASDF_DATA_DIR="$HOME/.asdf"
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/jason/.lmstudio/bin"
+# End of LM Studio CLI section
+
