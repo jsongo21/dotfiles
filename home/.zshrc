@@ -158,3 +158,6 @@ export PATH="$ASDF_DATA_DIR/shims:$PATH"
 export PATH="$PATH:/Users/jason/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# opencode
+export PATH=/Users/jason/.opencode/bin:$PATH

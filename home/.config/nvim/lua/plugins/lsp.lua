@@ -332,14 +332,14 @@ return {
         config = function()
             require('minuet').setup({
                 provider = 'openai_fim_compatible',
-                n_completions = 3,
-                context_window = 512,
+                n_completions = 5,
+                context_window = 1024,
                 provider_options = {
                     openai_fim_compatible = {
                         api_key = 'TERM',
-                        name = 'Ollama',
-                        end_point = 'http://localhost:11434/v1/completions',
-                        model = 'qwen2.5-coder:7b',
+                        name = 'LMStudio',
+                        end_point = 'http://localhost:1234/v1/completions',
+                        model = 'mlx-qwen3.5-9b-claude-4.6-opus-reasoning-distilled',
                         optional = {
                             max_tokens = 56,
                             top_p = 0.9,
