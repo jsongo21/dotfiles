@@ -1,3 +1,16 @@
+local lmstudio_model = nil
+pcall(function()
+    local out =
+        vim.fn.system('curl -s --connect-timeout 1 http://localhost:1234/v1/models 2>/dev/null')
+    if vim.v.shell_error ~= 0 then return end
+    local data = vim.json.decode(out)
+    if data and data.data and data.data[1] then lmstudio_model = data.data[1].id end
+end)
+local lmstudio_running = lmstudio_model ~= nil
+
+local blink_default_sources = { 'lazydev', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' }
+if lmstudio_running then table.insert(blink_default_sources, 1, 'minuet') end
+
 return {
     {
         'neovim/nvim-lspconfig',
@@ -286,7 +299,7 @@ return {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'minuet', 'lazydev', 'lsp', 'dadbod', 'path', 'snippets', 'buffer' },
+                default = blink_default_sources,
                 providers = {
                     lsp = {
                         score_offset = 0, -- Boost/penalize the score of the items
@@ -329,6 +342,7 @@ return {
 
     {
         'milanglacier/minuet-ai.nvim',
+        cond = function() return lmstudio_running end,
         config = function()
             require('minuet').setup({
                 provider = 'openai_fim_compatible',
@@ -339,7 +353,7 @@ return {
                         api_key = 'TERM',
                         name = 'LMStudio',
                         end_point = 'http://localhost:1234/v1/completions',
-                        model = 'mlx-qwen3.5-9b-claude-4.6-opus-reasoning-distilled',
+                        model = lmstudio_model,
                         optional = {
                             max_tokens = 56,
                             top_p = 0.9,
