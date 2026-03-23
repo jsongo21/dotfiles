@@ -25,9 +25,8 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 
 ### Changes
 
-- `path/to/file`
-  - detail about what changed
-  - another detail if needed
+- Keep to 3-5 dot points max. One point per logical change, not per file
+- Group related changes aggressively -- if 10 files got the same kind of change, that is one dot point
 
 ### Notes
 
@@ -43,7 +42,7 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 
 - Output the description inside a plain fenced code block (triple backticks with no language hint)
 - No bold title -- the summary sentence is the opener, nothing before it
-- File names as top-level `-` bullets, sub-details as indented `-` bullets under each file. Use `-` for all bullet levels, never `*`
+- Use `-` for all bullet levels, never `*`. Do not list individual files -- summarise the changes at a higher level
 - No marketing language, no filler sentences
 - "Notes" section is optional -- only include it if there is something meaningful to flag
 - Use Australian English spelling
