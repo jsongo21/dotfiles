@@ -29,17 +29,6 @@ style_color() { if [ "$use_color" -eq 1 ]; then printf '\033[38;5;245m'; fi; } #
 rst() { if [ "$use_color" -eq 1 ]; then printf '\033[0m'; fi; }
 
 # ---- time helpers ----
-to_epoch() {
-  ts="$1"
-  if command -v gdate >/dev/null 2>&1; then gdate -d "$ts" +%s 2>/dev/null && return; fi
-  date -u -j -f "%Y-%m-%dT%H:%M:%S%z" "${ts/Z/+0000}" +%s 2>/dev/null && return
-  python3 - "$ts" <<'PY' 2>/dev/null
-import sys, datetime
-s=sys.argv[1].replace('Z','+00:00')
-print(int(datetime.datetime.fromisoformat(s).timestamp()))
-PY
-}
-
 fmt_time_hm() {
   epoch="$1"
   if date -r 0 +%s >/dev/null 2>&1; then date -r "$epoch" +"%H:%M"; else date -d "@$epoch" +"%H:%M"; fi
@@ -214,37 +203,6 @@ render_usage_bar() {
   echo -n "$bar"
 }
 
-# ---- query usage limits from API ----
-query_usage_limits() {
-  local keychain_data
-  keychain_data=$(security find-generic-password -s "Claude Code-credentials" -w 2>/dev/null)
-
-  [[ -z "$keychain_data" ]] && return 1
-
-  local token
-  if [ "$HAS_JQ" -eq 1 ]; then
-    token=$(echo "$keychain_data" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
-  else
-    token=$(echo "$keychain_data" | grep -o '"accessToken"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:[[:space:]]*"\([^"]*\)".*/\1/' | head -1)
-  fi
-
-  [[ -z "$token" ]] && return 1
-
-  local response
-  response=$(curl -s -w "\n%{http_code}" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer $token" \
-    -H "anthropic-beta: oauth-2025-04-20" \
-    "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
-
-  local http_code="${response##*$'\n'}"
-  local content="${response%$'\n'*}"
-
-  [[ "$http_code" != "200" ]] && return 1
-
-  echo "$content"
-}
-
 # ---- cost and usage extraction ----
 session_txt=""; session_pct=0; session_bar=""
 cost_usd=""; cost_per_hour=""; tpm=""; tot_tokens=""
@@ -299,79 +257,57 @@ else
   fi
 fi
 
-# Session reset time requires ccusage (only feature that needs external tool)
-if command -v ccusage >/dev/null 2>&1 && [ "$HAS_JQ" -eq 1 ]; then
-  blocks_output=""
-
-  # Try ccusage with timeout
-  if command -v timeout >/dev/null 2>&1; then
-    blocks_output=$(timeout 5s ccusage blocks --json 2>/dev/null)
-  elif command -v gtimeout >/dev/null 2>&1; then
-    blocks_output=$(gtimeout 5s ccusage blocks --json 2>/dev/null)
-  else
-    blocks_output=$(ccusage blocks --json 2>/dev/null)
-  fi
-
-  if [ -n "$blocks_output" ]; then
-    active_block=$(echo "$blocks_output" | jq -c '.blocks[] | select(.isActive == true)' 2>/dev/null | head -n1)
-    if [ -n "$active_block" ]; then
-      # Session time calculation from ccusage
-      reset_time_str=$(echo "$active_block" | jq -r '.usageLimitResetTime // .endTime // empty')
-      start_time_str=$(echo "$active_block" | jq -r '.startTime // empty')
-
-      if [ -n "$reset_time_str" ] && [ -n "$start_time_str" ]; then
-        start_sec=$(to_epoch "$start_time_str"); end_sec=$(to_epoch "$reset_time_str"); now_sec=$(date +%s)
-        total=$(( end_sec - start_sec )); (( total<1 )) && total=1
-        elapsed=$(( now_sec - start_sec )); (( elapsed<0 ))&&elapsed=0; (( elapsed>total ))&&elapsed=$total
-        session_pct=$(( elapsed * 100 / total ))
-        remaining=$(( end_sec - now_sec )); (( remaining<0 )) && remaining=0
-        rh=$(( remaining / 3600 )); rm=$(( (remaining % 3600) / 60 ))
-        end_hm=$(fmt_time_hm "$end_sec")
-        session_txt="$(printf '%dh %dm until reset at %s (%d%%)' "$rh" "$rm" "$end_hm" "$session_pct")"
-        session_bar=$(progress_bar "$session_pct" 10)
-      fi
-    fi
+# Session reset time from native rate_limits fields
+if [ "$HAS_JQ" -eq 1 ]; then
+  five_hour_resets_at=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty' 2>/dev/null)
+  if [ -n "$five_hour_resets_at" ] && [[ "$five_hour_resets_at" =~ ^[0-9]+$ ]]; then
+    now_sec=$(date +%s)
+    # 5-hour window: start is reset_time minus 5 hours (18000 seconds)
+    start_sec=$(( five_hour_resets_at - 18000 ))
+    total=18000
+    elapsed=$(( now_sec - start_sec )); (( elapsed<0 ))&&elapsed=0; (( elapsed>total ))&&elapsed=$total
+    session_pct=$(( elapsed * 100 / total ))
+    remaining=$(( five_hour_resets_at - now_sec )); (( remaining<0 )) && remaining=0
+    rh=$(( remaining / 3600 )); rm=$(( (remaining % 3600) / 60 ))
+    end_hm=$(fmt_time_hm "$five_hour_resets_at")
+    session_txt="$(printf '%dh %dm until reset at %s (%d%%)' "$rh" "$rm" "$end_hm" "$session_pct")"
+    session_bar=$(progress_bar "$session_pct" 10)
   fi
 fi
 
-# ---- usage limits from API ----
+# ---- usage limits from native rate_limits fields ----
 usage_limits_txt=""
 if [ "$HAS_JQ" -eq 1 ]; then
-  usage_json=$(query_usage_limits)
-  if [ -n "$usage_json" ]; then
-    # Get five_hour (current session) usage and convert to integer
-    five_hour_util=$(echo "$usage_json" | jq -r '.five_hour.utilization // empty' 2>/dev/null)
-    if [ -n "$five_hour_util" ] && [ "$five_hour_util" != "null" ]; then
-      five_hour_util=$(printf "%.0f" "$five_hour_util" 2>/dev/null)
-    fi
+  five_hour_util=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty' 2>/dev/null)
+  if [ -n "$five_hour_util" ] && [ "$five_hour_util" != "null" ]; then
+    five_hour_util=$(printf "%.0f" "$five_hour_util" 2>/dev/null)
+  fi
 
-    # Get seven_day_sonnet (current week Sonnet) usage, fall back to seven_day if null
-    seven_day_util=$(echo "$usage_json" | jq -r '.seven_day_sonnet.utilization // .seven_day.utilization // empty' 2>/dev/null)
-    if [ -n "$seven_day_util" ] && [ "$seven_day_util" != "null" ]; then
-      seven_day_util=$(printf "%.0f" "$seven_day_util" 2>/dev/null)
-    fi
+  seven_day_util=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty' 2>/dev/null)
+  if [ -n "$seven_day_util" ] && [ "$seven_day_util" != "null" ]; then
+    seven_day_util=$(printf "%.0f" "$seven_day_util" 2>/dev/null)
+  fi
 
-    parts=()
+  parts=()
 
-    if [ -n "$five_hour_util" ] && [[ "$five_hour_util" =~ ^[0-9]+$ ]]; then
-      five_hour_bar=$(render_usage_bar "$five_hour_util" 10)
-      parts+=("Session: $(usage_limit_color "$five_hour_util")${five_hour_util}%$(rst) [${five_hour_bar}]")
-    fi
+  if [ -n "$five_hour_util" ] && [[ "$five_hour_util" =~ ^[0-9]+$ ]]; then
+    five_hour_bar=$(render_usage_bar "$five_hour_util" 10)
+    parts+=("Session: $(usage_limit_color "$five_hour_util")${five_hour_util}%$(rst) [${five_hour_bar}]")
+  fi
 
-    if [ -n "$seven_day_util" ] && [[ "$seven_day_util" =~ ^[0-9]+$ ]]; then
-      seven_day_bar=$(render_usage_bar "$seven_day_util" 10)
-      parts+=("Week: $(usage_limit_color "$seven_day_util")${seven_day_util}%$(rst) [${seven_day_bar}]")
-    fi
+  if [ -n "$seven_day_util" ] && [[ "$seven_day_util" =~ ^[0-9]+$ ]]; then
+    seven_day_bar=$(render_usage_bar "$seven_day_util" 10)
+    parts+=("Week: $(usage_limit_color "$seven_day_util")${seven_day_util}%$(rst) [${seven_day_bar}]")
+  fi
 
-    if [ ${#parts[@]} -gt 0 ]; then
-      usage_limits_txt="🎯 "
-      for i in "${!parts[@]}"; do
-        if [ "$i" -gt 0 ]; then
-          usage_limits_txt+="  "
-        fi
-        usage_limits_txt+="${parts[$i]}"
-      done
-    fi
+  if [ ${#parts[@]} -gt 0 ]; then
+    usage_limits_txt="🎯 "
+    for i in "${!parts[@]}"; do
+      if [ "$i" -gt 0 ]; then
+        usage_limits_txt+="  "
+      fi
+      usage_limits_txt+="${parts[$i]}"
+    done
   fi
 fi
 
