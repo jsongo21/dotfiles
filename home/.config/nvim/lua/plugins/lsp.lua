@@ -108,13 +108,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         local opts = { buffer = ev.buf }
 
+        -- remove gr* defaults to avoid timeoutlen delay on our gr mapping
+        for _, key in ipairs({ 'grn', 'grr', 'gri', 'grt', 'gra', 'grx' }) do
+            pcall(vim.keymap.del, 'n', key, { buffer = ev.buf })
+        end
+
         local nmap = function(keys, func, desc)
             if desc then desc = 'LSP: ' .. desc end
             vim.keymap.set('n', keys, func, { buffer = ev.buf, desc = desc, remap = false })
         end
 
         nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-        nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        nmap('gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
         nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
         nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
         nmap('K', vim.lsp.buf.hover, 'Hover definition')
@@ -122,19 +127,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
         nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         nmap(
             '<leader>ws',
-            require('telescope.builtin').lsp_dynamic_workspace_symbols,
+            function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
             '[W]orkspace [S]ymbol'
         )
         nmap(
             '<leader>ds',
-            require('telescope.builtin').lsp_document_symbols,
+            function() require('telescope.builtin').lsp_document_symbols() end,
             '[D]ocument [S]ymbol'
         )
         vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 
         nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-        nmap('[d', vim.diagnostic.goto_next, 'Goto [N]ext')
-        nmap(']d', vim.diagnostic.goto_prev, 'Goto [P]rev')
+        nmap('[d', function() vim.diagnostic.jump({ count = 1 }) end, 'Goto [N]ext')
+        nmap(']d', function() vim.diagnostic.jump({ count = -1 }) end, 'Goto [P]rev')
         nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
 
         nmap('<leader>rs', function()
@@ -184,7 +189,7 @@ require('mason-lspconfig').setup({
         'vimls',
         'yamlls',
     },
-    automatic_enable = false,
+    automatic_enable = true,
 })
 
 -- blink.cmp
