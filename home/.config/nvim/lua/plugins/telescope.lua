@@ -2,7 +2,7 @@ return {
     -- Fuzzy Finder (files, lsp, etc)
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        branch = 'master',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-live-grep-args.nvim',
@@ -23,6 +23,7 @@ return {
 
             telescope.setup({
                 defaults = {
+                    preview = { treesitter = false },
                     file_ignore_patterns = { 'node_modules', 'yarn.lock', 'package-lock.json' },
                     dynamic_preview_title = true,
                     path_display = { 'filename_first' },
@@ -63,6 +64,19 @@ return {
                 },
             })
             telescope.load_extension('live_grep_args')
+
+            -- Neovim 0.12: status table uses __mode="kv" (weak values), so layout
+            -- can be GC'd between the guard check and preview_fn execution. Pinning
+            -- layout as a strong local prevents collection during the call.
+            local Picker = require('telescope.pickers')._Picker
+            local ts_state = require('telescope.state')
+            local orig_refresh = Picker.refresh_previewer
+            Picker.refresh_previewer = function(self)
+                local status = ts_state.get_status(self.prompt_bufnr)
+                local _layout = status.layout
+                if not _layout then return end
+                orig_refresh(self)
+            end
 
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })

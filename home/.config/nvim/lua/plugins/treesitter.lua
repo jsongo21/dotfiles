@@ -2,14 +2,10 @@ return {
     {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
-        },
+        branch = 'main',
         build = ':TSUpdate',
         config = function()
-            local configs = require('nvim-treesitter.configs')
-            ---@diagnostic disable-next-line: missing-fields
-            configs.setup({
+            require('nvim-treesitter').setup({
                 auto_install = true,
                 ensure_installed = {
                     'bash',
