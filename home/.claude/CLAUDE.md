@@ -130,3 +130,5 @@ After implementing a list of changes, perform a critical self-review pass before
 - If stuck on a persistent problem after multiple attempts, use the `systematic-debugging` skill or perform a Fagan inspection
 - When contributing to open source: match existing code style, read CONTRIBUTING.md first, no placeholder comments
 - **You must not state something is fixed unless you have confirmed it by testing, measuring output, or building the application**
+
+@RTK.md
