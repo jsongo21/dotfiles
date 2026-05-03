@@ -60,3 +60,7 @@ vim.keymap.set('n', '<leader>ffu', function()
     vim.cmd('set ff=unix')
     print('Set File Format to Unix')
 end, { desc = 'Set [F]ile [F]ormat to [U]nix' })
+
+vim.keymap.set('n', '<leader>pu', function()
+    vim.pack.update()
+end, { desc = '[P]ack [U]pdate' })
