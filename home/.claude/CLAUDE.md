@@ -1,74 +1,4 @@
-# Global Rules
-## Writing & Communication Style
-- Never use overused AI phrases: comprehensive, robust, best-in-class, feature-rich, production-ready, enterprise-grade, seamlessly, smoking gun
-- No smart quotes, em dashes, double dashes or emojis unless requested
-- No sycophancy, marketing speak, or unnecessary summary paragraphs
-- Write as an engineer explaining to a colleague, not someone selling a product
-- Be direct, concise and specific. If a sentence adds no value, delete it
-- Active voice, concrete examples
-- Final check: does it sound like a person or Wikipedia crossed with a press release?
-## Spelling
-**Always use Australian English spelling in all responses, documentation, comments, and code identifiers.**
-## Documentation
-- Keep signal-to-noise ratio high - preserve domain insights, omit filler and fluff
-- Start with what it does, not why it's amazing
-- Configuration and examples over feature lists
-- "Setup" not "Getting Started with emojis". "Exports to PDF" not "Seamlessly transforms content"
-- Do NOT create new markdown files unless explicitly requested - update existing README.md or keep notes in conversation
-- Code comments: explain "why" not "what", only for complex logic. No process comments ("improved", "fixed", "enhanced")
-
-## ARCHITECTURE & DESIGN
-
-### Design Principles
-- Favour simplicity - start with working MVP, iterate. Avoid unnecessary abstractions and only when a pattern repeats 3+ times
-- Follow SOLID principles - small interfaces, composition, depend on abstractions
-- Reuse and align with existing components, utilities, and logic where possible
-- Use appropriate design patterns (repository, DI, circuit breaker, strategy, observer, factory) based on context
-- For greenfield projects: provide a single Makefile entrypoint to lint, test, version, build and run
-
-### Code Quality
-- Functions: max 50 lines (split if larger)
-- Files: max 700 lines (split if larger)
-- Cyclomatic complexity: under 10
-- Tests run quickly (seconds), no external service dependencies
-- Tests should have assertions and must verify behaviour
-- Build time: optimise if over 1 minute
-- Coverage: 80% minimum for new code
-
-### Configuration
-- Use .env or config files as single source of truth, ensure .env is gitignored
-- Provide .env.example with all required variables
-- Validate environment variables on startup
-
-## Security
-- Never hardcode credentials, tokens, or secrets. Never commit sensitive data
-- Never trust user input - validate and sanitise all inputs
-- Parameterised queries only - never string concatenation for SQL
-- Never expose internal errors or system details to end users
-- Follow principle of least privilege. Rate-limit APIs. Keep dependencies updated
-## TESTING & QUALITY ASSURANCE
-
-## Error Handling
-- Structured logging (JSON) with correlation IDs. Log levels: ERROR, WARN, INFO, DEBUG
-- Meaningful errors for developers, safe errors for end users. Never log sensitive data
-- Graceful degradation over complete failure. Retry with exponential backoff for transient failures
-
-## Testing
-- Test-first for bugs: write failing test, fix, verify, check no regressions
-- Descriptive test names. Arrange-Act-Assert pattern. Table-driven tests for multiple cases
-- One assertion per test where practical. Test edge cases and error paths
-- Mock external dependencies. Group tests in `test/` or `tests/`
-
-## LANGUAGE SPECIFIC RULES
-### TypeScript
-- Prefer TypeScript over JavaScript. Strict mode always
-- Avoid `any` (use `unknown`), prefer discriminated unions over enums, `readonly` for immutables
-- Const by default, async/await over promise chains, optional chaining and nullish coalescing
-- Never hardcode styles - use theme/config
-
-### Bash
-- `#!/usr/bin/env bash` with `set -euo pipefail`
-- Quote all variable expansions. Use `[[ ]]` for conditionals. Trap for error handling
+@~/ai/AGENTS.md
 
 ## Tool Usage
 
@@ -78,13 +8,13 @@
 - Always quote all paths in bash commands
 
 ### Tool Priorities
+- Use `code_skim` for exploring large files/codebases without reading full implementations
 - Use purpose-built tools over manual approaches (e.g. get_library_docs for documentation, calculator for maths)
 - Use tools to search documentation before making assumptions - don't guess
-- Use `code_skim` for exploring large files/codebases without reading full implementations
 - Delegate to sub-agents in parallel where possible, instruct them to return only key information
 
 ### Code Intelligence
-- Prefer LSP over Grep/Glob/Read for code navigation, e.g:
+- Prefer LSP over Grep/Glob/Read for code navigation:
   - `goToDefinition` / `goToImplementation` to jump to source
   - `findReferences` for all usages across the codebase
   - `workspaceSymbol` to locate a symbol; `documentSymbol` to list symbols in a file
@@ -94,42 +24,21 @@
 - Before changing a function signature, run `findReferences` to see the blast radius
 - Use Grep/Glob only for text/pattern searches (comments, strings, config values) where LSP doesn't help
 - After editing, attend to any LSP diagnostics surfaced and fix them before moving on
-### CLAUDE.md Features
+
+## Skills & Tasks
 - Use relevant skills to extend capabilities
 - Use tasks/TODOs to track work in progress. When working from a dev plan, keep tasks and plan in sync
 - When creating/updating CLAUDE.md files: use the `authoring-claude-md` skill first
 - Do not include line numbers when referencing files in CLAUDE.md
+- If stuck on a persistent problem after multiple attempts, use the `systematic-debugging` skill
 
-#### Sub-agent Coordination
+## Sub-agent Coordination
 - Sub-agents have their own context window - good for parallel research, inspection, or separate features
 - Define clear boundaries per agent. Specify which files each agent owns
 - Include "you are one of several agents" in instructions
 - Set explicit success criteria. Combine small updates to prevent over-splitting
 - Sub-agents can compete and erase each other's changes - ensure no overlap
-
-##### Agent Teams
-- Only use agent teams when the user has explicitly requested you to use agent teams
-
-## Self-Review Protocol
-
-After implementing a list of changes, perform a critical self-review pass before reporting completion, fixing any issues you find.
-
-
-## Rules
-
-**Before declaring any task complete, verify**: linting passes, code builds, all tests pass (new + existing), no debug statements remain, error handling in place.
-
-- Never perform git add/commit/push operations
-- Never hardcode credentials, unique identifiers, or localhost URLs
-- Never give time estimates for tasks
-- Never add process comments ("improved function", "optimised version", "# FIX:")
-- Never implement placeholder or mocked functionality unless explicitly instructed
-- Never build or develop for Windows unless explicitly instructed
-- Edit only what's necessary - make precise, minimal changes unless instructed otherwise
-- Implement requirements in full or discuss with the user why you can't - don't defer work
-- If stuck on a persistent problem after multiple attempts, use the `systematic-debugging` skill or perform a Fagan inspection
-- When contributing to open source: match existing code style, read CONTRIBUTING.md first, no placeholder comments
-- **You must not state something is fixed unless you have confirmed it by testing, measuring output, or building the application**
+- Only use agent teams when the user has explicitly requested it
 
 @RTK.md
 # graphify
