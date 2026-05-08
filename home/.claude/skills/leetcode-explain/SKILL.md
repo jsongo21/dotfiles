@@ -1,6 +1,6 @@
 ---
 name: leetcode-explain
-description: Explains a LeetCode problem clearly: what it's asking, constraints, examples, and algorithmic approaches with complexity. Use when the user pastes a LeetCode problem, shares a problem URL, or asks to understand a specific problem.
+description: "Explains a LeetCode problem clearly: what it's asking, constraints, examples, and algorithmic approaches with complexity. Use when the user pastes a LeetCode problem, shares a problem URL, or asks to understand a specific problem."
 ---
 
 # LeetCode Problem Explainer
