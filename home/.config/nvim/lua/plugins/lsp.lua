@@ -101,6 +101,28 @@ end
 -- lsp attach
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+vim.diagnostic.config({
+    virtual_text = {
+        source = 'if_many',
+        spacing = 2,
+    },
+    float = {
+        border = 'rounded',
+        source = 'if_many',
+    },
+    jump = {
+        on_jump = function(diagnostic, bufnr)
+            if not diagnostic then return end
+
+            vim.diagnostic.open_float({
+                bufnr = bufnr,
+                scope = 'cursor',
+                focusable = false,
+            })
+        end,
+    },
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
@@ -138,8 +160,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
 
         nmap('<leader>vd', vim.diagnostic.open_float, 'Open [F]loat')
-        nmap('[d', function() vim.diagnostic.jump({ count = 1 }) end, 'Goto [N]ext')
-        nmap(']d', function() vim.diagnostic.jump({ count = -1 }) end, 'Goto [P]rev')
         nmap('<leader>vl', '<cmd>Telescope diagnostics<cr>', '[L]ist')
 
         nmap('<leader>rs', function()
