@@ -34,7 +34,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "eaa34887d444cb002e1b165fac399ae4bbc771f7",
+      "rev": "7b01e2974a47d489bb92f47a41e4c0088ea8f86e",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/nvim-mini/mini.splitjoin"
     },
     "minuet-ai.nvim": {
-      "rev": "b61ae30216f9cfe8630f4e21982aa98706665614",
+      "rev": "449cf6ac16fbc5529f834c10e5fc1be7c75c3ffb",
       "src": "https://github.com/milanglacier/minuet-ai.nvim"
     },
     "nvim-lint": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "8f7e64066e2641d5e7d494962a9c7051e3d38dd5",
+      "rev": "3de240997fc3208eb29df5e5c17ba4665961bd84",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-surround": {
@@ -95,7 +95,7 @@
       "src": "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
     },
     "nvim-web-devicons": {
-      "rev": "2795c26c916bb3c57dde308b82be51971fa92747",
+      "rev": "7d8dad2c837fcdf2e65997e68657c1a21c568074",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "oil.nvim": {
@@ -156,7 +156,7 @@
       "src": "https://github.com/tpope/vim-sleuth"
     },
     "vim-wakatime": {
-      "rev": "24495fb7cc9613eaf0ce45540fb8d096a30d08e9",
+      "rev": "3d2c6d581f717ee6ffd824ba90dba56de1a68927",
       "src": "https://github.com/wakatime/vim-wakatime"
     },
     "vimtex": {
