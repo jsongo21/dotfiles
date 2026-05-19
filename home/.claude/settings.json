@@ -121,13 +121,14 @@
       "Read(~/Library/Application Support/1Password/**)",
       "Read(~/Library/Keychains/**)",
       "Read(*.env)",
-      "Bash(rm:*)",
       "Bash(curl:*)"
     ],
     "ask": [
+      "Bash(curl:*)",
       "Bash(git add:*)",
       "Bash(gh pr create:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(rm:*)"
     ],
     "defaultMode": "default"
   },
