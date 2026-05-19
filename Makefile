@@ -7,7 +7,7 @@ CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 .PHONY: stow link-codex-skills link-codex-agents install
 
 stow:
-	stow --target=$(HOME) --dir=$(CURDIR) home
+	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
 
 link-codex-skills:
 	@mkdir -p $(CODEX_SKILLS)
