@@ -26,6 +26,15 @@
           "name": "qwen3.5-9b"
         }
       }
+    },
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "gemma4:12b": {}
+      }
     }
   }
 }

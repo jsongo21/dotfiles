@@ -117,3 +117,4 @@ After implementing a list of changes, perform a critical self-review pass before
 - If stuck on a persistent problem after multiple attempts, perform a systematic Fagan inspection before trying another fix
 - When contributing to open source: match existing code style, read CONTRIBUTING.md first, no placeholder comments
 - **You must not state something is fixed unless you have confirmed it by testing, measuring output, or building the application**
+- Never include AI tool attributions ("Generated with Claude Code", "Co-Authored-By: Claude", "Generated with Codex", etc.) in PR descriptions, commit messages, or any user-facing content
