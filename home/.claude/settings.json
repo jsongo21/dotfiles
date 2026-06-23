@@ -156,7 +156,8 @@
     "csharp-lsp@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": true,
     "mcp-server-dev@claude-plugins-official": true,
-    "claude-api@anthropic-agent-skills": true
+    "claude-api@anthropic-agent-skills": true,
+    "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
     "karpathy-skills": {
@@ -170,8 +171,17 @@
         "source": "github",
         "repo": "anthropics/skills"
       }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
     }
   },
-  "editorMode": "vim",
-  "tui": "fullscreen"
+  "syntaxHighlightingDisabled": false,
+  "effortLevel": "low",
+  "tui": "fullscreen",
+  "theme": "custom:my-theme",
+  "editorMode": "vim"
 }
