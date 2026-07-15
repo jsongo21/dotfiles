@@ -1,118 +1,229 @@
+tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "azure/functions"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "koekeishiya/formulae"
 tap "microsoft/git"
 tap "nikitabobko/tap"
+# Zstandard is a real-time compression algorithm
 brew "zstd"
+# New file format for still image compression
 brew "jpeg-xl"
+# Image format providing lossless and lossy compression for web images
 brew "webp"
+# Codec library for encoding and decoding AV1 video streams
 brew "aom"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Smooth out the rough edges of AWS SSO (temporarily, until AWS makes it better)
 brew "aws-sso-util"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Simple command-line tool to read AWS CloudWatch logs
 brew "awslogs"
+# Microsoft Azure CLI 2.0
 brew "azure-cli"
+# XML-based font configuration API for X Windows
 brew "fontconfig"
+# Core application library for C
 brew "glib"
+# Vector graphics library with cross-device output support
 brew "cairo"
+# Cross-platform make
 brew "cmake"
+# Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima", restart_service: :changed
+# GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Secure runtime for JavaScript and TypeScript
 brew "deno"
+# Load/unload environment variables based on $PWD
 brew "direnv"
+# Pack, ship and run any application as a lightweight container
 brew "docker"
+# Isolated development environments using Docker
 brew "docker-compose"
+# Platform keystore credential helper for Docker
 brew "docker-credential-helper"
+# Text processing system for reStructuredText
 brew "docutils"
+# Library for encoding and decoding .avif files
 brew "libavif"
+# GitHub command-line tool
+brew "gh"
+# OpenType text shaping engine
 brew "harfbuzz"
+# Library for JPEG-2000 image manipulation
 brew "openjpeg"
+# Interpreter for PostScript and PDF
 brew "ghostscript"
+# Official GitLab CI runner
 brew "gitlab-runner", restart_service: :changed
+# Database migrations CLI tool
 brew "golang-migrate"
+# Fast linters runner for Go
 brew "golangci-lint"
+# Image manipulation
 brew "netpbm"
+# GNU triangulated surface library
 brew "gts"
+# Library to render SVG files using Cairo
 brew "librsvg"
+# Utilities for manipulating PostScript documents
 brew "psutils"
+# GNU troff text-formatting system
 brew "groff"
+# Development kit for the Java programming language
 brew "openjdk"
+# Java language specific implementation of the Language Server Protocol
 brew "jdtls"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Kubernetes command-line interface
 brew "kubernetes-cli"
+# LLM inference in C/C++
 brew "llama.cpp"
+# Package manager for the Lua programming language
 brew "luarocks"
+# Bare libuv bindings for lua
 brew "luv"
+# Simple tool to make locally trusted development certificates
 brew "mkcert"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Create, run, and share large language models (LLMs)
 brew "ollama"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# AI coding agent, built for the terminal
 brew "opencode"
+# Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Draw UML diagrams
 brew "plantuml"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Command-line shell and scripting language
 brew "powershell", link: false
+# Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# Protocol buffers (Google's data interchange format)
 brew "protobuf"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+# CLI proxy to minimize LLM token consumption
 brew "rtk"
+# Login and retrieve AWS temporary credentials using a SAML IDP
 brew "saml2aws"
+# Generate type safe Go from SQL
 brew "sqlc"
+# SQL linter and auto-formatter for Humans
 brew "sqlfluff"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Code-search similar to ack
 brew "the_silver_searcher"
+# Terminal multiplexer
 brew "tmux"
+# Watch files and take action when they change
 brew "watchman"
+# General-purpose lossless data-compression library
 brew "zlib"
+# UNIX shell (command interpreter)
 brew "zsh"
+# Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Additional completion definitions for zsh
 brew "zsh-completions"
+# Zsh port of Fish shell's history search
 brew "zsh-history-substring-search"
+# Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-brew "azure/functions/azure-functions-core-tools"
-brew "azure/functions/azure-functions-core-tools@4"
-brew "hashicorp/tap/terraform"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# View, print, and comment on PDF documents
 cask "adobe-acrobat-reader"
-cask "nikitabobko/tap/aerospace"
+cask "aerospace"
+# GPU-accelerated terminal emulator
 cask "alacritty"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
+# Desktop password and login vault
 cask "bitwarden"
+# Automated testing of webapps for Google Chrome
 cask "chromedriver"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Universal database tool and SQL client
 cask "dbeaver-community"
+# Voice and text chat software
 cask "discord"
+# Collaborative team software
 cask "figma"
+# Web browser
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
+# Update maps and software, sync with Garmin Connect and register your device
 cask "garmin-express"
+# Cross-platform Git credential storage for multiple hosting providers
+cask "git-credential-manager"
+# Web browser
 cask "google-chrome"
+# Client for the Google Drive storage service
 cask "google-drive"
+# Video and photo editor
 cask "insta360-studio"
+# Keep your computer awake
 cask "jiggler"
+# Open-source screen recorder built with web technology
 cask "kap"
+# Discover, download, and run local LLMs
 cask "lm-studio"
+# Provides updates to various Microsoft products
 cask "microsoft-auto-update"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
+# VPN client for secure internet access and private browsing
 cask "nordvpn"
+# Open-source software for live streaming and screen recording
 cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Identity verification provider
 cask "okta-verify"
+# Get up and running with large language models locally
+cask "ollama-app"
+# Pomodoro timer
 cask "pomatez"
+# Collaboration platform for API development
 cask "postman"
+# Command-line shell and scripting language
 cask "powershell"
+# Tool to reverse the direction of scrolling
 cask "scroll-reverser"
+# Plugin for AWS CLI to start and end sessions that connect to managed instances
 cask "session-manager-plugin"
+# Team communication and collaboration software
 cask "slack"
+# Music streaming service
 cask "spotify"
+# Open-source media center
 cask "stremio"
+# Real time file synchronisation software
 cask "syncthing-app"
+# Open-source code editor
 cask "visual-studio-code"
+# Native desktop client for WhatsApp
 cask "whatsapp"
+# Voice-to-text dictation with AI-powered auto-editing
+cask "wispr-flow"
+# Video communication and virtual meeting platform
 cask "zoom"
+# Indoor cycling game
 cask "zwift"
 vscode "anthropic.claude-code"
 vscode "beeverfeever.kanagawa-vscode"
@@ -186,3 +297,7 @@ vscode "vue.volar"
 vscode "wakatime.vscode-wakatime"
 vscode "wayou.vscode-todo-highlight"
 vscode "zhuangtongfa.material-theme"
+npm "@openai/codex"
+npm "ccusage"
+npm "corepack"
+npm "docx"
