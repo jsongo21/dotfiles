@@ -1,10 +1,10 @@
 ---
 name: microsoft-foundry
-description: "Deploy, evaluate, fine-tune, and manage Foundry agents end-to-end: Docker build, ACR push, hosted/prompt agent create, batch eval, continuous eval, prompt optimizer, Agent Optimizer scaffold, agent.yaml, dataset curation from traces, model fine-tuning (SFT/DPO/RFT). USE FOR: deploy agent, hosted agent, create agent, add tool to agent, invoke agent, evaluate agent, continuous eval, continuous monitoring, optimize prompt, improve prompt, optimize agent instructions, agent optimizer, deploy model, Foundry project, RBAC, role assignment, permissions, quota, capacity, region, troubleshoot agent, deployment failure, AI Services, create Foundry resource, provision, knowledge index, customize deployment, onboard, availability, fine-tune, SFT, DPO, RFT, training-data, grader, distillation, fine-tuned model, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare)."
+description: "Deploy, evaluate, fine-tune, and manage Foundry agents end-to-end with azd: hosted agent scaffold/run/deploy, prompt agent create, batch eval, continuous eval, prompt optimizer, Agent Optimizer scaffold, agent.yaml, dataset curation from traces, model fine-tuning (SFT/DPO/RFT). USE FOR: azd ai agent, azd provision/deploy, deploy agent, hosted agent, create agent, add tool to agent, invoke agent, evaluate agent, continuous eval, continuous monitoring, optimize prompt, improve prompt, optimize agent instructions, agent optimizer, deploy model, Foundry project, RBAC, role assignment, permissions, quota, capacity, region, troubleshoot agent, deployment failure, AI Services, create Foundry resource, provision, knowledge index, customize deployment, onboard, availability, fine-tune, SFT, DPO, RFT, training-data, grader, distillation, fine-tuned model, large file upload. DO NOT USE FOR: Azure Functions, App Service, general Azure deploy (use azure-deploy), general Azure prep (use azure-prepare)."
 license: MIT
 metadata:
   author: Microsoft
-  version: "1.1.24"
+  version: "1.1.40"
 ---
 
 # Microsoft Foundry Skill
@@ -13,7 +13,7 @@ This skill helps developers work with Microsoft Foundry resources, covering mode
 
 ## Pre-Execution Requirements
 
-> **MANDATORY: Before executing ANY workflow, you MUST first call the Azure MCP `foundry` tool and inspect the available Foundry MCP tools and related parameters.** Treat this initial `foundry` call as a discovery/help step. For this skill, Azure MCP `foundry` is the required entry point for Foundry-related MCP operations.
+Before using Foundry MCP operations, call the Azure MCP `foundry` tool and inspect the available Foundry MCP tools and related parameters. Treat this as the discovery/help step for MCP-based workflows.
 
 ## Sub-Skills
 
@@ -23,13 +23,15 @@ This skill includes specialized sub-skills for specific workflows. **Use these i
 
 | Sub-Skill | When to Use | Reference |
 |-----------|-------------|-----------|
-| **deploy** | Containerize, build, push to ACR, create/update/clone agent deployments | [deploy](foundry-agent/deploy/deploy.md) |
+| **deploy** | Deploy hosted agents to Foundry, smoke-test a deployment, create or update prompt agents, and manage agent versions and multi-environment deploys. | [deploy](foundry-agent/deploy/deploy.md) |
 | **invoke** | Send messages to an agent, single or multi-turn conversations | [invoke](foundry-agent/invoke/invoke.md) |
+| **routine** | Schedule or event-trigger Foundry agents with routines; use `azd` for CRUD, enable/disable, manual dispatch, and viewing past runs, or define routines in `azure.yaml`. | [routine](foundry-agent/routine/routine.md) |
 | **invocations-ws** | Build, deploy, and connect to hosted agents that speak the `invocations_ws` duplex WebSocket protocol — voice agents, real-time streams, and signaling for out-of-band media transports. | [invocations-ws](foundry-agent/invocations-ws/invocations-ws.md) |
 | **observe** | Evaluate agent quality, run batch evals, analyze failures, optimize prompts, improve agent instructions, compare versions, set up CI/CD monitoring, and enable continuous production evaluation | [observe](foundry-agent/observe/observe.md) |
 | **trace** | Query traces, analyze latency/failures, correlate eval results to specific responses via App Insights `customEvents` | [trace](foundry-agent/trace/trace.md) |
 | **troubleshoot** | View hosted agent logs, query telemetry, diagnose failures | [troubleshoot](foundry-agent/troubleshoot/troubleshoot.md) |
-| **create** | Create new hosted agent applications. Supports Microsoft Agent Framework, LangGraph, or custom frameworks in Python or C#, across `responses`, `invocations`, or `invocations_ws` protocols. | [create](foundry-agent/create/create-hosted.md) |
+| **create (quick start)** | Create a new hosted Foundry agent from scratch end-to-end — scaffold, provision or use an existing Foundry project, deploy, and smoke-test. Opinionated happy-path that accepts common overrides (language, region, sample, topic, existing project, existing model). For anything not covered by the quickstart, use **create**. | [create/quick-start-hosted.md](foundry-agent/create/quick-start-hosted.md) |
+| **create** | Use when the standard end-to-end happy path doesn't fit — lifting existing agent code into the project, deploying outside the default code path, wiring connections at scaffold time, advanced setup, or recovering from a failed quickstart run. | [create](foundry-agent/create/create-hosted.md) |
 | **agent-optimizer** | Make existing Python hosted-agent code optimization-ready, configure eval.yaml, run Agent Optimizer jobs, apply candidates locally, and deploy through azd after review. | [agent-optimizer](foundry-agent/agent-optimizer/agent-optimizer.md) |
 | **eval-datasets** | Harvest production traces into evaluation datasets, manage dataset versions and splits, track evaluation metrics over time, detect regressions, and maintain full lineage from trace to deployment. Use for: create dataset from traces, dataset versioning, evaluation trending, regression detection, dataset comparison, eval lineage. | [eval-datasets](foundry-agent/eval-datasets/eval-datasets.md) |
 | **project/create** | Creating a new Azure AI Foundry project for hosting agents and models. Use when onboarding to Foundry or setting up new infrastructure. | [project/create/create-foundry-project.md](project/create/create-foundry-project.md) |
@@ -65,11 +67,13 @@ Match user intent to the correct agent workflow. Read each sub-skill in order be
 
 | User Intent | Workflow (read in order) |
 |-------------|------------------------|
-| Create a new agent from scratch | [create](foundry-agent/create/create-hosted.md) → [deploy](foundry-agent/deploy/deploy.md) → [invoke](foundry-agent/invoke/invoke.md) |
+| Create a new hosted agent end-to-end (scaffold + deploy + test) | [quick-start-hosted](foundry-agent/create/quick-start-hosted.md) (self-contained end-to-end) |
+| Anything beyond the standard quickstart (existing code, deployment customization, scaffold-time connections, recovery) | [create](foundry-agent/create/create-hosted.md) → [deploy](foundry-agent/deploy/deploy.md) → [invoke](foundry-agent/invoke/invoke.md) |
 | Optimize existing Python hosted agent | [agent-optimizer](foundry-agent/agent-optimizer/agent-optimizer.md) → scaffold/review → eval.yaml → optimize → apply candidate → deploy → invoke |
 | Deploy an agent (code already exists) | deploy (includes eval-suite setup) → invoke → observe (evaluate/optimize) |
 | Update/redeploy an agent after code changes | deploy (includes eval-suite setup) → invoke → observe (evaluate/optimize) |
 | Invoke/test/chat with an agent | invoke |
+| Schedule/event-trigger an agent, or CRUD/enable/disable/dispatch a routine | routine |
 | Optimize / improve agent prompt or instructions | observe (Step 4: Optimize) |
 | Evaluate and optimize agent (full loop) | observe |
 | Enable continuous evaluation monitoring | observe (Step 6: CI/CD & Monitoring) |
@@ -98,7 +102,7 @@ Every agent source folder can keep Foundry-specific cache and overlay state unde
 
 ## Agent: Setup References
 
-- [Standard Agent Setup](references/standard-agent-setup.md) - Standard capability-host setup with customer-managed data, search, and AI Services resources.
+- [Standard Agent Setup](references/standard-agent-setup.md) — advanced setup for production workloads that need data-residency control (bring-your-own Cosmos DB / Storage / AI Search via a Foundry capability host). The default `azd ai agent` flow uses **Basic Agent Setup** and does **not** provision `capabilityHosts/agents` — do not flag its absence as a bug. For default post-provision state, see the "Expected env-var fingerprint" section in [foundry-agent/create/create-hosted.md](foundry-agent/create/create-hosted.md).
 
 ## Agent: Common Project Context Resolution
 
@@ -162,10 +166,12 @@ If the selected environment exposes older `testSuites[]` metadata but not `evalu
 If `eval.yaml` exists in the selected agent root, parse it before generating new suites:
 
 - `agent.name` -> target agent candidate; verify it matches the selected azd/metadata agent before using it.
-- `dataset_file` -> local seed dataset candidate.
+- `dataset.local_uri` -> local seed dataset candidate; legacy `dataset_file` may be normalized in memory.
+- `dataset.name` / `dataset.version` -> registered dataset candidate.
+- `validation_dataset` -> optional validation dataset candidate.
 - `evaluators[]` -> candidate Foundry evaluator names; verify with `evaluator_catalog_get` before treating them as remote evaluators.
 - `name` -> local eval/suite candidate; verify remotely before persisting as `suiteName`.
-- `options.eval_model`, `options.pass_threshold`, `max_samples`, `trace_days`, and `generation_instruction` -> setup defaults.
+- `options.eval_model`, `options.optimization_model`, `options.max_candidates`, `options.optimization_config.model_search_space`, `options.pass_threshold`, `max_samples`, `trace_days`, and `generation_instruction` -> setup defaults.
 
 Treat `eval.yaml` as local evaluation intent, not proof that a Foundry suite exists. Persist synced suite/dataset/evaluator references to `.foundry` only after remote lookup or registration succeeds.
 
@@ -176,7 +182,7 @@ Layer sources in this order:
 1. Explicit user input and values already selected in the session
 2. azd environment values for deployment context
 3. `.foundry/agent-metadata*.yaml` overlay values and remote suite/cache references
-4. `agent.yaml` and `eval.yaml` local source configuration
+4. `azure.yaml` and `eval.yaml` local source configuration
 5. User prompts for anything still missing
 
 If azd and metadata both provide the same value and they differ, stop and ask which source is authoritative. If they match, use the azd value and avoid rewriting the duplicate on future metadata writes.
@@ -184,7 +190,7 @@ If azd and metadata both provide the same value and they differ, stop and ask wh
 | Effective Value | Preferred Source | Used By |
 |-----------------|------------------|---------|
 | Project endpoint | azd env | deploy, invoke, observe, trace, troubleshoot |
-| Agent name/version | azd agent variables, then `agent.yaml` | invoke, observe, trace, troubleshoot |
+| Agent name/version | azd agent variables, then `azure.yaml` | invoke, observe, trace, troubleshoot |
 | ACR | azd env | deploy |
 | Evaluation suites and cache paths | `.foundry/agent-metadata*.yaml` | observe, eval-datasets |
 | Local seed dataset/evaluator intent | `eval.yaml` | observe, eval-datasets |
@@ -236,3 +242,23 @@ Use `agent_get` MCP tool to determine an agent's type when needed.
 ## SDK Quick Reference
 
 - [Python](references/sdk/foundry-sdk-py.md)
+
+## Network Isolation Errors
+
+Applies to **any** call against a Foundry project or its parent Foundry account — Foundry MCP tools, `azd`, `az` CLI, `curl`, REST, or SDK.
+
+If an error matches `Public access is disabled` / `PublicNetworkAccessDisabled` / `403 Forbidden` from a private endpoint / connection timeout / the project endpoint FQDN resolves to a public IP, this typically means the parent Foundry account has `publicNetworkAccess=Disabled` or `Enabled from selected IP addresses`, and the current shell is outside its VNet.
+
+Only if the error is ambiguous, confirm against the Foundry account using a management-plane call (works from anywhere with reader access):
+
+```bash
+az cognitiveservices account show \
+  --name <account> --resource-group <rg> \
+  --query "properties.{publicNetworkAccess:publicNetworkAccess, networkAcls:networkAcls, privateEndpointConnections:privateEndpointConnections[].properties.privateLinkServiceConnectionState.status}"
+```
+
+`publicNetworkAccess: "Disabled"` — or `"Enabled"` together with non-empty `networkAcls.ipRules` / `virtualNetworkRules` — confirms isolation. If `publicNetworkAccess: "Enabled"` and `networkAcls` is empty, the failure is a caller-side network issue (e.g. Private DNS resolving the FQDN to a public IP from inside a VNet with a private endpoint), not an account-config issue.
+
+If it's indeed a network isolation issue, supported connection options are documented in [Choose a secure connection method to Foundry](https://learn.microsoft.com/azure/foundry/how-to/configure-private-link#choose-a-secure-connection-method-to-foundry).
+
+> ℹ️ Foundry MCP tools cannot reach a VNet-isolated project even from inside the VNet.
