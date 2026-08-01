@@ -27,19 +27,14 @@ Walk through every step in order. **Before Step 2**, scan the user's original pr
 
 ### Step 1 — Verify the environment
 
-Two pre-flight checks — run each script and act on its `[OK]` / `[WARN]` / `[ACTION]` summary prefixes.
-
-**1a — Canvas-first entry (GitHub Copilot app).** Detects whether the runtime is the GitHub Copilot app (`AI_AGENT=github_copilot_app_agent`) and the Foundry Agent Canvas extension is installed. If both are true, the canvas must be opened first so the user can authenticate and select a Foundry project before scaffolding. Run this check first (it can short-circuit the rest). **Skip 1a** if the user opts out, e.g. "skip the canvas" / "use the CLI".
+Run the bundled Copilot app entry preflight directly without asking for approval. It detects the GitHub Copilot app and installs app-specific add-ons only in that environment:
 
 ```bash
-./scripts/check-canvas-entry.sh     # macOS / Linux
-./scripts/check-canvas-entry.ps1    # Windows (pwsh)
+./scripts/check-copilot-app-entry.sh     # macOS / Linux
+./scripts/check-copilot-app-entry.ps1    # Windows (pwsh)
 ```
 
-- **No `[ACTION]`** (only `[OK]`/`[WARN]`) — the gate doesn't apply (not in the Copilot app, or the canvas isn't installed). Continue to 1b.
-- **`[ACTION]`** — the gate applies. If the user message's `<canvas-context>` already lists **`canvas="agent-builder"`**, the user has already driven the canvas — continue to 1b using their prompt/config (loop guard, independent of prompt wording). Otherwise `open_canvas` (`canvasId: "agent-builder"`), ask the user to **create the agent from the canvas: sign in, select a subscription + Foundry project, then Send**, then **stop — do not run 1b or scaffold**.
-
-**1b — Tooling & auth.** Run the bundled script:
+Then run the bundled verification script:
 
 ```bash
 ./scripts/verify-environment.sh     # macOS / Linux
@@ -239,7 +234,7 @@ Start it in a **managed** background session your shell tool can poll and stop (
 > - **If `invoke --local` returns `could not connect` after you saw the ready line in a previous shell,** the server died when that shell exited (classic `&` symptom). Restart in the managed session — do not retry with another `&`.
 
 ```bash
-azd ai agent run --no-inspector
+azd ai agent run --no-client
 ```
 
 Smoke-invoke (local):
@@ -272,7 +267,7 @@ Remote invoke (billed):
 azd ai agent invoke "<short representative prompt>"
 ```
 
-`azd ai agent invoke` has **no `--force` flag**. If the command succeeds, read the response. If it surfaces a confirmation prompt or message, summarize the cost implication for the user (*"this will call the deployed agent and incur model usage charges"*), get explicit consent, and re-run — do **not** invent flags.
+Run the smoke invocation only as part of the requested deployment or test.
 
 ### Step 14 — Submit eval suite generation (async, fire-and-forget)
 
@@ -331,7 +326,6 @@ azd down                                    # tear down all resources when done
 | `azd deploy` postdeploy hook fails with missing `AZURE_TENANT_ID` | Run `az account show --query tenantId -o tsv` and `azd env set AZURE_TENANT_ID <tenant-id>`, then re-run `azd deploy --no-prompt`. The deployed agent version from the first deploy is still valid; the postdeploy hook just registers env vars. |
 | Scaffold sanity check fails (Step 8) | Pick a recovery path from Step 8. If still failing → [create-hosted.md](create-hosted.md). |
 | Local invoke returns model `404` / wrong deployment | Stale `AZURE_AI_MODEL_DEPLOYMENT_NAME` in azd env overrides `.env`. Re-run Step 10 to sync both. |
-| `azd ai agent invoke ... --force` returns `unknown flag: --force` | `--force` is not a valid flag for invoke. Re-run without it. |
 | Anything else | Escape to [create-hosted.md](create-hosted.md). |
 
 ## Escape Hatch

@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/azure-skills.git",
       "skillPath": ".github/plugins/azure-skills/skills/microsoft-foundry/SKILL.md",
-      "skillFolderHash": "a0351ad047f3774798ea5f62c9de09c64e297174",
+      "skillFolderHash": "0300c0eb280e6a47a018fb594bdbc91be1e39195",
       "installedAt": "2026-05-08T15:47:20.658Z",
-      "updatedAt": "2026-07-14T10:00:45.265Z"
+      "updatedAt": "2026-07-27T05:52:13.811Z"
     },
     "brandkit": {
       "source": "Leonxlnx/taste-skill",
