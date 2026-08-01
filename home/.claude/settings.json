@@ -61,6 +61,7 @@
       "Bash(wc *)",
       "Bash(which *)",
       "Bash(xargs *)",
+      "Bash(git add *)",
       "Read(~/.claude)",
       "Skill",
       "WebFetch",
@@ -120,12 +121,10 @@
       "Read(~/.ssh/**)",
       "Read(~/Library/Application Support/1Password/**)",
       "Read(~/Library/Keychains/**)",
-      "Read(*.env)",
-      "Bash(curl:*)"
+      "Read(*.env)"
     ],
     "ask": [
       "Bash(curl:*)",
-      "Bash(git add:*)",
       "Bash(gh pr create:*)",
       "Bash(git commit:*)",
       "Bash(rm:*)"
