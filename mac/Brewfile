@@ -167,6 +167,8 @@ cask "figma"
 # Web browser
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
+# Bridge helper for fx_cast Firefox extension to enable Chromecast support
+cask "fx-cast-bridge"
 # Update maps and software, sync with Garmin Connect and register your device
 cask "garmin-express"
 # Cross-platform Git credential storage for multiple hosting providers
@@ -201,7 +203,6 @@ cask "ollama-app"
 cask "pomatez"
 # Collaboration platform for API development
 cask "postman"
-# Command-line shell and scripting language
 cask "powershell"
 # Tool to reverse the direction of scrolling
 cask "scroll-reverser"
