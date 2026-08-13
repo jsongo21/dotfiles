@@ -3,8 +3,9 @@ CLAUDE_SKILLS := $(HOME)/.claude/skills
 CODEX_SKILLS := $(HOME)/.codex/skills
 SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
+OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
 
-.PHONY: stow link-codex-skills link-codex-agents install
+.PHONY: stow link-codex-skills link-codex-agents link-opencode-agents install
 
 stow:
 	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
@@ -34,4 +35,16 @@ link-codex-agents:
 		ln -s "$(SHARED_AGENTS)" "$(CODEX_AGENTS)" && echo "linked AGENTS.md"; \
 	fi
 
-install: stow link-codex-skills link-codex-agents
+link-opencode-agents:
+	@mkdir -p $(dir $(OPENCODE_AGENTS))
+	@if [ -L "$(OPENCODE_AGENTS)" ] && [ -e "$(OPENCODE_AGENTS)" ]; then \
+		echo "skip AGENTS.md (already linked)"; \
+	elif [ -L "$(OPENCODE_AGENTS)" ]; then \
+		rm "$(OPENCODE_AGENTS)" && ln -s "$(SHARED_AGENTS)" "$(OPENCODE_AGENTS)" && echo "relinked AGENTS.md (was broken)"; \
+	elif [ -e "$(OPENCODE_AGENTS)" ]; then \
+		echo "skip AGENTS.md (exists, not a symlink)"; \
+	else \
+		ln -s "$(SHARED_AGENTS)" "$(OPENCODE_AGENTS)" && echo "linked AGENTS.md"; \
+	fi
+
+install: stow link-codex-skills link-codex-agents link-opencode-agents
