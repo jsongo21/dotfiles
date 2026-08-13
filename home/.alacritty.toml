@@ -122,6 +122,13 @@ multiplier = 3
 
 [window]
 dynamic_title = true
+decorations_theme_variant = "Dark"
+opacity = 0.75
+blur = true
+
+[window.padding]
+x = 10
+y = 10
 
 [window.dimensions]
 columns = 1000
