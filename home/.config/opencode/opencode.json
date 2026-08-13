@@ -33,7 +33,11 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "gemma4:12b": {}
+        "gemma4:12b": {},
+        "gemma4:12b-it-qat": {
+          "_launch": true,
+          "name": "gemma4:12b-it-qat"
+        }
       }
     }
   }
