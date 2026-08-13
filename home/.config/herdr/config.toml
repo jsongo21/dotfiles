@@ -1,0 +1,22 @@
+# Emulates ~/.tmux.conf: mouse on, true-colour, tmux-resurrect/continuum-style
+# auto save/restore. See https://herdr.dev/docs/config-reference/
+
+[ui]
+mouse_capture = true      # tmux: set -g mouse on
+copy_on_select = true     # mouse selection copies to clipboard, no tmux equivalent
+
+[session]
+resume_agents_on_restore = true  # tmux: @continuum-restore 'on' (restore panes/agents on boot)
+
+[experimental]
+pane_history = true  # tmux-resurrect saves pane scrollback too
+
+[theme]
+name = "catppuccin"
+auto_switch = true
+
+[keys]
+prefix = "ctrl+b"        # tmux default prefix, unchanged in .tmux.conf
+new_tab = "prefix+c"     # tmux: bind c new-window (herdr default, kept explicit)
+split_vertical = "prefix+%"    # tmux: bind % split-window -h (side-by-side panes)
+split_horizontal = "prefix+\"" # tmux: bind '"' split-window (stacked panes)
