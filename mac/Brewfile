@@ -220,8 +220,8 @@ cask "syncthing-app"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Voice-to-text dictation with AI-powered auto-editing
-cask "wispr-flow"
+# Whisper dictation/transcription app
+cask "opensuperwhisper"
 # Video communication and virtual meeting platform
 cask "zoom"
 # Indoor cycling game
