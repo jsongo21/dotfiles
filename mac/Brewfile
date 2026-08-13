@@ -4,6 +4,7 @@ tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "microsoft/git"
+tap "my-monkeys/tap"
 tap "nikitabobko/tap"
 # Zstandard is a real-time compression algorithm
 brew "zstd"
@@ -221,7 +222,7 @@ cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 # Whisper dictation/transcription app
-cask "opensuperwhisper"
+cask "my-monkeys/tap/opensuperwhisper", trusted: true
 # Video communication and virtual meeting platform
 cask "zoom"
 # Indoor cycling game
