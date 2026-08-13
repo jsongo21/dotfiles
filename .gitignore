@@ -4,3 +4,7 @@ home/.config/systemd
 home/.config/.avalonia-build-tasks
 
 yay-bin
+home/.config/herdr/herdr-client.log
+home/.config/herdr/herdr-server.log
+home/.config/herdr/session-history.json
+home/.config/herdr/session.json

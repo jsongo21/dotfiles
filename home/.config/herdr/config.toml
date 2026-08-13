@@ -4,6 +4,7 @@
 [ui]
 mouse_capture = true      # tmux: set -g mouse on
 copy_on_select = true     # mouse selection copies to clipboard, no tmux equivalent
+confirm_close = true
 
 [session]
 resume_agents_on_restore = true  # tmux: @continuum-restore 'on' (restore panes/agents on boot)
@@ -12,7 +13,7 @@ resume_agents_on_restore = true  # tmux: @continuum-restore 'on' (restore panes/
 pane_history = true  # tmux-resurrect saves pane scrollback too
 
 [theme]
-name = "catppuccin"
+name = "tokyo-night"
 auto_switch = true
 
 [keys]
