@@ -8,4 +8,6 @@ home/.config/herdr/herdr-client.log
 home/.config/herdr/herdr-server.log
 home/.config/herdr/session-history.json
 home/.config/herdr/session.json
+home/.config/herdr/release-notes.json
 home/.agents/skills/microsoft-foundry
+home/.agents/.skill-lock.json
