@@ -1,3 +1,14 @@
+-- Roslyn's apphost only checks a hardcoded default .NET install location,
+-- not Homebrew's -- set it on Neovim's own process env so every spawned
+-- child (including roslyn-language-server, however/whenever it's started)
+-- inherits it. Setting it via per-client cmd_env is unreliable because
+-- roslyn.nvim's own bootstrapping can start the client before our
+-- vim.lsp.config() override for it has taken effect.
+pcall(function()
+    local prefix = vim.trim(vim.fn.system('brew --prefix dotnet 2>/dev/null'))
+    if vim.v.shell_error == 0 and prefix ~= '' then vim.env.DOTNET_ROOT = prefix .. '/libexec' end
+end)
+
 local lmstudio_model = nil
 pcall(function()
     local out =
