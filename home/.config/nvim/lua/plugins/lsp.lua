@@ -4,10 +4,12 @@
 -- inherits it. Setting it via per-client cmd_env is unreliable because
 -- roslyn.nvim's own bootstrapping can start the client before our
 -- vim.lsp.config() override for it has taken effect.
-pcall(function()
-    local prefix = vim.trim(vim.fn.system('brew --prefix dotnet 2>/dev/null'))
-    if vim.v.shell_error == 0 and prefix ~= '' then vim.env.DOTNET_ROOT = prefix .. '/libexec' end
-end)
+if vim.fn.has('mac') == 1 then
+    pcall(function()
+        local prefix = vim.trim(vim.fn.system('brew --prefix dotnet 2>/dev/null'))
+        if vim.v.shell_error == 0 and prefix ~= '' then vim.env.DOTNET_ROOT = prefix .. '/libexec' end
+    end)
+end
 
 local lmstudio_model = nil
 pcall(function()
