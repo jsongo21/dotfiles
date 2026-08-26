@@ -191,3 +191,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 [[on-window-detected]]
     if.app-id = 'net.whatsapp.WhatsApp'
     run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'fr.my-monkey.opensuperwhisper'
+    run = 'layout floating'
