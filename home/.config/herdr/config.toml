@@ -1,3 +1,4 @@
+onboarding = false
 # Emulates ~/.tmux.conf: mouse on, true-colour, tmux-resurrect/continuum-style
 # auto save/restore. See https://herdr.dev/docs/config-reference/
 
@@ -6,6 +7,7 @@ mouse_capture = true      # tmux: set -g mouse on
 copy_on_select = true     # mouse selection copies to clipboard, no tmux equivalent
 confirm_close = true
 
+agent_panel_sort = "spaces"
 [session]
 resume_agents_on_restore = true  # tmux: @continuum-restore 'on' (restore panes/agents on boot)
 
