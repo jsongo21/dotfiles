@@ -190,6 +190,11 @@
       }
     }
   },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "syntaxHighlightingDisabled": false,
   "effortLevel": "low",
   "tui": "fullscreen",
