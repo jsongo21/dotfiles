@@ -1,7 +1,6 @@
 # Global Agent Rules
 - Never use the em dash "—". Use plain dash "-" instead
 - Always use Australian English spelling in all responses, documentation, comments, and code identifiers
-- When writing commit messages, NEVER auto-add your agent name as co-author
 - Always use Conventional Commits format for commit messages (e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`)
 - Keep commit messages short and single-line, no multi-line bodies
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
