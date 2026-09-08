@@ -5,7 +5,7 @@ SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
 
-.PHONY: stow link-codex-skills link-codex-agents link-opencode-agents install
+.PHONY: stow link-codex-skills link-agents install
 
 stow:
 	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
@@ -24,27 +24,18 @@ link-codex-skills:
 		fi \
 	done
 
-link-codex-agents:
-	@if [ -L "$(CODEX_AGENTS)" ] && [ -e "$(CODEX_AGENTS)" ]; then \
-		echo "skip AGENTS.md (already linked)"; \
-	elif [ -L "$(CODEX_AGENTS)" ]; then \
-		rm "$(CODEX_AGENTS)" && ln -s "$(SHARED_AGENTS)" "$(CODEX_AGENTS)" && echo "relinked AGENTS.md (was broken)"; \
-	elif [ -e "$(CODEX_AGENTS)" ]; then \
-		echo "skip AGENTS.md (exists, not a symlink)"; \
-	else \
-		ln -s "$(SHARED_AGENTS)" "$(CODEX_AGENTS)" && echo "linked AGENTS.md"; \
-	fi
+link-agents:
+	@for target in $(CODEX_AGENTS) $(OPENCODE_AGENTS); do \
+		mkdir -p "$$(dirname "$$target")"; \
+		if [ -L "$$target" ] && [ -e "$$target" ]; then \
+			echo "skip $$target (already linked)"; \
+		elif [ -L "$$target" ]; then \
+			rm "$$target" && ln -s "$(SHARED_AGENTS)" "$$target" && echo "relinked $$target (was broken)"; \
+		elif [ -e "$$target" ]; then \
+			echo "skip $$target (exists, not a symlink)"; \
+		else \
+			ln -s "$(SHARED_AGENTS)" "$$target" && echo "linked $$target"; \
+		fi \
+	done
 
-link-opencode-agents:
-	@mkdir -p $(dir $(OPENCODE_AGENTS))
-	@if [ -L "$(OPENCODE_AGENTS)" ] && [ -e "$(OPENCODE_AGENTS)" ]; then \
-		echo "skip AGENTS.md (already linked)"; \
-	elif [ -L "$(OPENCODE_AGENTS)" ]; then \
-		rm "$(OPENCODE_AGENTS)" && ln -s "$(SHARED_AGENTS)" "$(OPENCODE_AGENTS)" && echo "relinked AGENTS.md (was broken)"; \
-	elif [ -e "$(OPENCODE_AGENTS)" ]; then \
-		echo "skip AGENTS.md (exists, not a symlink)"; \
-	else \
-		ln -s "$(SHARED_AGENTS)" "$(OPENCODE_AGENTS)" && echo "linked AGENTS.md"; \
-	fi
-
-install: stow link-codex-skills link-codex-agents link-opencode-agents
+install: stow link-codex-skills link-agents
