@@ -3,6 +3,7 @@
 - Always use Australian English spelling in all responses, documentation, comments, and code identifiers
 - When writing commit messages, NEVER auto-add your agent name as co-author
 - Always use Conventional Commits format for commit messages (e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`)
+- Keep commit messages short and single-line, no multi-line bodies
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
 - When making technical decisions, do not give much weight to development cost. Instead, prefer quality, simplicity, robustness, scalability, and long term maintainability.
 - For one-off or infrequent operational work, start with the simplest direct end-to-end path. Do not build wrappers, control planes, policy layers, custom verifiers, or automation unless the direct path exposes a concrete blocker or repeated need that justifies the added machinery.
