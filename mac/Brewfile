@@ -6,16 +6,12 @@ tap "homebrew/services"
 tap "microsoft/git"
 tap "my-monkeys/tap"
 tap "nikitabobko/tap"
-# Zstandard is a real-time compression algorithm
-brew "zstd"
-# New file format for still image compression
-brew "jpeg-xl"
-# Image format providing lossless and lossy compression for web images
-brew "webp"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
+# Zstandard is a real-time compression algorithm
+brew "zstd"
 # Smooth out the rough edges of AWS SSO (temporarily, until AWS makes it better)
 brew "aws-sso-util"
 # Official Amazon AWS command-line interface
@@ -38,18 +34,22 @@ brew "colima", restart_service: :changed
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Pack, ship and run any application as a lightweight container
-brew "docker"
+brew "docker", link: false
 # Isolated development environments using Docker
 brew "docker-compose"
 # Platform keystore credential helper for Docker
 brew "docker-credential-helper"
 # Text processing system for reStructuredText
 brew "docutils"
+# New file format for still image compression
+brew "jpeg-xl"
 # Library for encoding and decoding .avif files
 brew "libavif"
 # GitHub command-line tool
@@ -76,6 +76,8 @@ brew "librsvg"
 brew "psutils"
 # GNU troff text-formatting system
 brew "groff"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
 # Development kit for the Java programming language
 brew "openjdk"
 # Java language specific implementation of the Language Server Protocol
@@ -155,6 +157,8 @@ cask "alacritty"
 cask "basictex"
 # Desktop password and login vault
 cask "bitwarden"
+# Video editing and image design platform
+cask "capcut"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
 # Anthropic's official Claude AI desktop app
@@ -200,6 +204,8 @@ cask "obsidian"
 cask "okta-verify"
 # Get up and running with large language models locally
 cask "ollama-app"
+# macOS dictation with local Whisper/Parakeet transcription
+cask "my-monkeys/tap/opensuperwhisper", trusted: true
 # Pomodoro timer
 cask "pomatez"
 # Collaboration platform for API development
@@ -221,8 +227,6 @@ cask "syncthing-app"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Whisper dictation/transcription app
-cask "my-monkeys/tap/opensuperwhisper", trusted: true
 # Video communication and virtual meeting platform
 cask "zoom"
 # Indoor cycling game
