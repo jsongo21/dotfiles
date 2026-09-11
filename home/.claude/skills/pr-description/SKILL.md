@@ -21,12 +21,21 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 ```
 ## Summary
 
-<1 sentence summary of what the PR does and why.>
+<1 sentence summary of what the PR does.>
+
+### Why
+
+<1-3 sentences on the problem or need driving this change -- the bug, the request, the constraint. Omit if the Summary sentence already fully covers it.>
 
 ### Changes
 
 - Keep to 3-5 dot points max. One point per logical change, not per file
 - Group related changes aggressively -- if 10 files got the same kind of change, that is one dot point
+
+### Visuals
+
+- A diagram when it clarifies a flow, architecture, or before/after shape better than prose -- e.g. Mermaid `flowchart`/`sequenceDiagram` for request flows, dispatch/registry restructures, or state transitions
+- Omit this section if a diagram wouldn't add anything beyond the Changes bullets
 
 ### Notes
 
@@ -40,10 +49,10 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 
 ## Style rules
 
-- Output the description inside a plain fenced code block (triple backticks with no language hint)
+- Output the description inside a plain fenced code block (triple backticks with no language hint), except any Mermaid diagram in Visuals, which stays in its own ```mermaid fence within the body
 - No bold title -- the summary sentence is the opener, nothing before it
 - Use `-` for all bullet levels, never `*`. Do not list individual files -- summarise the changes at a higher level
 - No marketing language, no filler sentences
-- "Notes" section is optional -- only include it if there is something meaningful to flag
+- "Why", "Visuals", "Notes" and "Screenshots" are all optional -- only include a section if it earns its place
 - Use Australian English spelling
 - Be direct and specific -- say what changed and why, not just what the files are called
