@@ -5,6 +5,7 @@
 - Always use Conventional Commits format for commit messages (e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`)
 - Keep commit messages short and single-line, no multi-line bodies
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
+- When writing documentation, code comments, or PR/commit descriptions, never reference the current session or conversation as a source (e.g. "confirmed via this session", "as decided by you", "per our discussion") - state facts and decisions directly, since session context is not available to future readers
 - When making technical decisions, do not give much weight to development cost. Instead, prefer quality, simplicity, robustness, scalability, and long term maintainability.
 - For one-off or infrequent operational work, start with the simplest direct end-to-end path. Do not build wrappers, control planes, policy layers, custom verifiers, or automation unless the direct path exposes a concrete blocker or repeated need that justifies the added machinery.
 - When doing bug fixes, always start with reproducing the bug in an E2E setting as closely aligned with how an end user would experience it as possible. This makes sure you find the real problem so your fix will actually solve it.
