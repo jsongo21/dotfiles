@@ -49,7 +49,6 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 
 ## Style rules
 
-- Output the description inside a plain fenced code block (triple backticks with no language hint), except any Mermaid diagram in Visuals, which stays in its own ```mermaid fence within the body
 - No bold title -- the summary sentence is the opener, nothing before it
 - Use `-` for all bullet levels, never `*`. Do not list individual files -- summarise the changes at a higher level
 - No marketing language, no filler sentences
