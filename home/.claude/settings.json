@@ -169,6 +169,7 @@
     "andrej-karpathy-skills@karpathy-skills": false,
     "mcp-server-dev@claude-plugins-official": false,
     "claude-api@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": true,
     "ponytail@ponytail": true
   },
   "extraKnownMarketplaces": {
