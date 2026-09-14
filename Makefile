@@ -6,6 +6,7 @@ CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
 SKILLS_CLI := npx --yes skills
 FRONTEND_DESIGN_SOURCE := https://github.com/anthropics/skills
+MATTHEW_POCOCK_SOURCE := mattpocock/skills
 
 .PHONY: stow link-codex-skills link-agents skills install
 
@@ -42,6 +43,7 @@ link-agents:
 
 skills:
 	$(SKILLS_CLI) add $(FRONTEND_DESIGN_SOURCE) --skill frontend-design --global --agent '*' --yes
+	$(SKILLS_CLI) add $(MATTHEW_POCOCK_SOURCE) --skill grill-me tdd diagnosing-bugs improve-codebase-architecture --global --agent '*' --yes
 	$(SKILLS_CLI) update --global
 
 install: stow link-codex-skills link-agents
