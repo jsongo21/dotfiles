@@ -1,0 +1,2 @@
+# Start the Codex composer in Vim Normal mode.
+vim_mode_default = true
