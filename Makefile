@@ -4,8 +4,10 @@ CODEX_SKILLS := $(HOME)/.codex/skills
 SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
+SKILLS_CLI := npx --yes skills
+FRONTEND_DESIGN_SOURCE := https://github.com/anthropics/skills
 
-.PHONY: stow link-codex-skills link-agents install
+.PHONY: stow link-codex-skills link-agents skills install
 
 stow:
 	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
@@ -37,5 +39,9 @@ link-agents:
 			ln -s "$(SHARED_AGENTS)" "$$target" && echo "linked $$target"; \
 		fi \
 	done
+
+skills:
+	$(SKILLS_CLI) add $(FRONTEND_DESIGN_SOURCE) --skill frontend-design --global --agent '*' --yes
+	$(SKILLS_CLI) update --global
 
 install: stow link-codex-skills link-agents
