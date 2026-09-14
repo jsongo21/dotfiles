@@ -54,6 +54,23 @@ stow linux  # Linux only
 
 This creates symlinks from the package directories to `~/`. For example, `stow home` links `~/dotfiles/home/.zshrc` to `~/.zshrc`.
 
+### Agent skills
+
+The Skills CLI manages third-party skill downloads and updates across supported
+agent harnesses. The Makefile provides the repeatable commands:
+
+```bash
+cd ~/dotfiles
+make skills  # Install configured skills and update global skills
+```
+
+The desired third-party skills are listed in `skills.json`. The Skills CLI's
+`.agents/.skill-lock.json` records the installed versions and hashes.
+
+Skills managed by the CLI are not committed to this repository. Stow and the
+existing link targets continue to manage local dotfiles skills and shared agent
+instructions.
+
 ## Structure
 
 ```
@@ -128,4 +145,3 @@ This overwrites the Brewfile with all currently installed formulae, casks, and t
 - The `.stow-local-ignore` file prevents git metadata and README from being symlinked
 - Firefox `user.js` needs to be manually copied to your Firefox profile directory
 - Claude Code settings in `home/.claude/` include custom skills and global instructions
-

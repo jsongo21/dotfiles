@@ -4,8 +4,10 @@ CODEX_SKILLS := $(HOME)/.codex/skills
 SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
+SKILLS_CLI := npx --yes skills
+SKILLS_MANIFEST := skills.json
 
-.PHONY: stow link-codex-skills link-agents install
+.PHONY: stow link-codex-skills link-agents skills install
 
 stow:
 	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
@@ -37,5 +39,8 @@ link-agents:
 			ln -s "$(SHARED_AGENTS)" "$$target" && echo "linked $$target"; \
 		fi \
 	done
+
+skills:
+	@python3 -c 'import json, shlex, subprocess; cli = shlex.split("$(SKILLS_CLI)"); manifest = json.load(open("$(SKILLS_MANIFEST)")); [subprocess.run(cli + ["add", entry["source"], "--skill", *entry["names"], "--global", "--agent", "*", "--yes"], check=True) for entry in manifest["skills"]]; subprocess.run(cli + ["update", "--global"], check=True)'
 
 install: stow link-codex-skills link-agents
