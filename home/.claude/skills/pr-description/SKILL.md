@@ -47,6 +47,21 @@ The base branch is `$ARGUMENTS` if provided, otherwise default to `master`.
 - Omit this section if there are no UI changes
 ```
 
+3. When creating or updating the PR, assign it to the authenticated GitHub user:
+
+```bash
+gh pr edit <number> --add-assignee @me
+```
+
+If the PR has just been created, capture its number or URL first, then run the
+assignment command. Confirm the assignee in the final response.
+
+4. When writing a temporary Markdown body for `gh pr create` or `gh pr edit`,
+   verify that the file begins with `## Summary` before submitting it. If using
+   `apply_patch` to create the file, the patch prefix is not body content: add
+   exactly one patch `+` marker per line, so the file itself never starts with
+   a literal `+`.
+
 ## Style rules
 
 - No bold title -- the summary sentence is the opener, nothing before it
