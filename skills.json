@@ -1,0 +1,21 @@
+{
+  "skills": [
+    {
+      "source": "vercel-labs/skills",
+      "names": ["find-skills"]
+    },
+    {
+      "source": "https://github.com/anthropics/skills",
+      "names": ["frontend-design"]
+    },
+    {
+      "source": "mattpocock/skills",
+      "names": [
+        "grill-me",
+        "tdd",
+        "diagnosing-bugs",
+        "improve-codebase-architecture"
+      ]
+    }
+  ]
+}

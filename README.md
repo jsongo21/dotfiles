@@ -64,6 +64,9 @@ cd ~/dotfiles
 make skills  # Install configured skills and update global skills
 ```
 
+The desired third-party skills are listed in `skills.json`. The Skills CLI's
+`.agents/.skill-lock.json` records the installed versions and hashes.
+
 Skills managed by the CLI are not committed to this repository. Stow and the
 existing link targets continue to manage local dotfiles skills and shared agent
 instructions.

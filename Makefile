@@ -5,8 +5,7 @@ SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
 SKILLS_CLI := npx --yes skills
-FRONTEND_DESIGN_SOURCE := https://github.com/anthropics/skills
-MATTHEW_POCOCK_SOURCE := mattpocock/skills
+SKILLS_MANIFEST := skills.json
 
 .PHONY: stow link-codex-skills link-agents skills install
 
@@ -42,8 +41,6 @@ link-agents:
 	done
 
 skills:
-	$(SKILLS_CLI) add $(FRONTEND_DESIGN_SOURCE) --skill frontend-design --global --agent '*' --yes
-	$(SKILLS_CLI) add $(MATTHEW_POCOCK_SOURCE) --skill grill-me tdd diagnosing-bugs improve-codebase-architecture --global --agent '*' --yes
-	$(SKILLS_CLI) update --global
+	@python3 -c 'import json, shlex, subprocess; cli = shlex.split("$(SKILLS_CLI)"); manifest = json.load(open("$(SKILLS_MANIFEST)")); [subprocess.run(cli + ["add", entry["source"], "--skill", *entry["names"], "--global", "--agent", "*", "--yes"], check=True) for entry in manifest["skills"]]; subprocess.run(cli + ["update", "--global"], check=True)'
 
 install: stow link-codex-skills link-agents
