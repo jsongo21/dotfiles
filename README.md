@@ -9,7 +9,7 @@ Personal configuration files for macOS and Linux development environments.
 - **Editor**: Neovim with Lua-based configuration
 - **Multiplexer**: tmux with plugins via tpm
 - **Claude**: Claude Code settings and custom skills
-- **Browser**: Firefox user.js preferences
+- **Browser**: Cross-platform Firefox `user.js` preferences
 
 ## Installation
 
@@ -81,6 +81,8 @@ instructions.
 │   ├── .zshrc
 │   ├── .tmux.conf
 │   └── .alacritty.toml
+├── firefox/           # Cross-platform Firefox preferences
+│   └── user.js
 ├── mac/               # macOS-specific
 │   ├── Brewfile
 │   └── .config/
@@ -143,5 +145,6 @@ This overwrites the Brewfile with all currently installed formulae, casks, and t
 ## Notes
 
 - The `.stow-local-ignore` file prevents git metadata and README from being symlinked
-- Firefox `user.js` needs to be manually copied to your Firefox profile directory
+- Run `make firefox` to choose a Firefox profile and link `user.js` into it. You
+  can also pass a profile number directly with `./install/firefox.sh 1`.
 - Claude Code settings in `home/.claude/` include custom skills and global instructions
