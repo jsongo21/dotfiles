@@ -1,7 +1,13 @@
 # Reference: https://github.com/i3/i3/blob/next/etc/config
 
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
 # Start aerospace at login
 start-at-login = true
+# Automatically reload the config when this file is saved
+auto-reload-config = true
 # i3 doesn't have "normalizations" feature that why we disable them here.
 # But the feature is very helpful.
 # Normalizations eliminate all sorts of weird tree configurations that don't make sense.
@@ -11,6 +17,9 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 
 # Mouse follows focus when focused monitor changes
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Keep the configured workspaces available even when they are empty.
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
@@ -105,93 +114,93 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 
 [[on-window-detected]]
-    if.app-id = 'com.anthropic.claudefordesktop'
+    if = 'test %{app-bundle-id} = com.anthropic.claudefordesktop'
     run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.AppStore'
+    if = 'test %{app-bundle-id} = com.apple.AppStore'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.ActivityMonitor'
+    if = 'test %{app-bundle-id} = com.apple.ActivityMonitor'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.calculator'
+    if = 'test %{app-bundle-id} = com.apple.calculator'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.finder'
+    if = 'test %{app-bundle-id} = com.apple.finder'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.iCal'
+    if = 'test %{app-bundle-id} = com.apple.iCal'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.finder'
+    if = 'test %{app-bundle-id} = com.apple.finder'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.iphonesimulator'
+    if = 'test %{app-bundle-id} = com.apple.iphonesimulator'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.1password.1password'
+    if = 'test %{app-bundle-id} = com.1password.1password'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.bitwarden.desktop'
+    if = 'test %{app-bundle-id} = com.bitwarden.desktop'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.google.android.studio'
+    if = 'test %{app-bundle-id} = com.google.android.studio'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.microsoft.Outlook'
+    if = 'test %{app-bundle-id} = com.microsoft.Outlook'
     run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-    if.app-id = 'com.microsoft.teams2'
+    if = 'test %{app-bundle-id} = com.microsoft.teams2'
     run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-    if.app-id = 'com.microsoft.VSCode'
+    if = 'test %{app-bundle-id} = com.microsoft.VSCode'
     run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-    if.app-id = 'com.whoosh.whooshgame'
+    if = 'test %{app-bundle-id} = com.whoosh.whooshgame'
     run = ['macos-native-fullscreen off']
 
 [[on-window-detected]]
-    if.app-id = 'com.postmanlabs.mac'
+    if = 'test %{app-bundle-id} = com.postmanlabs.mac'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.tinyspeck.slackmacgap'
+    if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'com.spotify.client'
+    if = 'test %{app-bundle-id} = com.spotify.client'
     run = ['layout floating', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
-    if.app-id = 'com.cisco.secureclient.gui'
+    if = 'test %{app-bundle-id} = com.cisco.secureclient.gui'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'md.obsidian'
+    if = 'test %{app-bundle-id} = md.obsidian'
     run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-    if.app-id = 'org.alacritty'
+    if = 'test %{app-bundle-id} = org.alacritty'
     run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-    if.app-id = 'net.whatsapp.WhatsApp'
+    if = 'test %{app-bundle-id} = net.whatsapp.WhatsApp'
     run = 'layout floating'
 
 [[on-window-detected]]
-    if.app-id = 'fr.my-monkey.opensuperwhisper'
+    if = 'test %{app-bundle-id} = fr.my-monkey.opensuperwhisper'
     run = 'layout floating'
