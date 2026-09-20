@@ -62,14 +62,18 @@ agent harnesses. The Makefile provides the repeatable commands:
 ```bash
 cd ~/dotfiles
 make skills  # Install configured skills and update global skills
+make link-agent-skills  # Link repo-owned skills into the configured harnesses
+make test-skills  # Test the skill linker without touching live harnesses
 ```
 
 The desired third-party skills are listed in `skills.json`. The Skills CLI's
 `.agents/.skill-lock.json` records the installed versions and hashes.
 
-Skills managed by the CLI are not committed to this repository. Stow and the
-existing link targets continue to manage local dotfiles skills and shared agent
-instructions.
+Skills managed by the CLI are not committed to this repository. They live in
+the real `~/.agents/skills` directory, while repo-owned skills remain in the
+dotfiles tree. The linker creates per-skill symlinks, so real skill directories
+and symlinked skills can coexist in each harness. Add another harness by
+overriding `SKILL_HARNESS_DIRS` with a colon-separated list of skill paths.
 
 ## Structure
 

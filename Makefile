@@ -1,30 +1,23 @@
 SHELL := /bin/bash
-CLAUDE_SKILLS := $(HOME)/.claude/skills
-CODEX_SKILLS := $(HOME)/.codex/skills
 SHARED_AGENTS := $(HOME)/ai/AGENTS.md
 CODEX_AGENTS := $(HOME)/.codex/AGENTS.md
 OPENCODE_AGENTS := $(HOME)/.config/opencode/AGENTS.md
 SKILLS_CLI := npx --yes skills
 SKILLS_MANIFEST := skills.json
+SKILLS_AGENTS ?= claude-code codex opencode
 
-.PHONY: stow link-codex-skills link-agents skills firefox install
+.PHONY: stow link-agent-skills link-codex-skills link-agents skills test-skills firefox install
 
 stow:
-	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' home
+	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' --ignore='skills$$' --ignore='\.skill-lock\.json$$' home
 
-link-codex-skills:
-	@mkdir -p $(CODEX_SKILLS)
-	@for skill in $(CLAUDE_SKILLS)/*/; do \
-		name=$$(basename "$$skill"); \
-		target=$(CODEX_SKILLS)/$$name; \
-		if [ -L "$$target" ]; then \
-			echo "skip $$name (already linked)"; \
-		elif [ -e "$$target" ]; then \
-			echo "skip $$name (exists, not a symlink)"; \
-		else \
-			ln -s "$$skill" "$$target" && echo "linked $$name"; \
-		fi \
-	done
+link-agent-skills:
+	@AGENT_SKILLS_DIR="$(HOME)/.agents/skills" SKILL_HARNESS_DIRS="$(SKILL_HARNESS_DIRS)" ./install/link-skills.sh --apply
+
+link-codex-skills: link-agent-skills
+
+test-skills:
+	@./tests/link-skills.sh
 
 link-agents:
 	@for target in $(CODEX_AGENTS) $(OPENCODE_AGENTS); do \
@@ -41,9 +34,9 @@ link-agents:
 	done
 
 skills:
-	@python3 -c 'import json, shlex, subprocess; cli = shlex.split("$(SKILLS_CLI)"); manifest = json.load(open("$(SKILLS_MANIFEST)")); [subprocess.run(cli + ["add", entry["source"], "--skill", *entry["names"], "--global", "--agent", "*", "--yes"], check=True) for entry in manifest["skills"]]; subprocess.run(cli + ["update", "--global"], check=True)'
+	@python3 -c 'import json, shlex, subprocess; cli = shlex.split("$(SKILLS_CLI)"); agents = sum((["--agent", agent] for agent in shlex.split("$(SKILLS_AGENTS)")), []); manifest = json.load(open("$(SKILLS_MANIFEST)")); [subprocess.run(cli + ["add", entry["source"], "--skill", *entry["names"], "--global", *agents, "--yes"], check=True) for entry in manifest["skills"]]; subprocess.run(cli + ["update", "--global"], check=True)'
 
 firefox:
 	@./install/firefox.sh
 
-install: stow link-codex-skills link-agents
+install: stow link-agent-skills link-agents

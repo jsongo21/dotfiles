@@ -3,3 +3,6 @@
 \.DS_Store
 
 README.md
+
+\.skill-lock\.json$
+skills$
