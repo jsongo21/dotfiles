@@ -63,6 +63,27 @@ for target_dir in "${configured_harness_dirs[@]}"; do
   run_change mkdir -p "$target_dir"
 done
 
+remove_stale_links() {
+  local target_dir target link_target
+
+  for target_dir in "${configured_harness_dirs[@]}"; do
+    [[ -d "$target_dir" ]] || continue
+    for target in "$target_dir"/*; do
+      [[ -L "$target" && ! -e "$target" ]] || continue
+      link_target="$(readlink "$target")"
+      case "$link_target" in
+        "$AGENT_SKILLS_DIR"/*)
+          run_change rm -f "$target"
+          printf '%s %s (stale shared skill link)\n' \
+            "$([[ "$APPLY_CHANGES" = 1 ]] && printf removed || printf would-remove)" "$target"
+          ;;
+      esac
+    done
+  done
+}
+
+remove_stale_links
+
 link_skill() {
   local source="$1"
   local name="${source##*/}"
@@ -118,9 +139,15 @@ for source_root in "$SHARED_SKILLS_DIR" "$LOCAL_SKILLS_DIR"; do
     [[ -d "$skill" ]] || continue
     [[ -f "$skill/SKILL.md" ]] || continue
     name="${skill##*/}"
-    [[ -e "$AGENT_SKILLS_DIR/$name" || -L "$AGENT_SKILLS_DIR/$name" ]] && continue
-    run_change ln -s "$skill" "$AGENT_SKILLS_DIR/$name"
-    printf '%s %s -> %s\n' "$([[ "$APPLY_CHANGES" = 1 ]] && printf linked || printf would-link)" "$AGENT_SKILLS_DIR/$name" "$skill"
+    if [[ -e "$AGENT_SKILLS_DIR/$name" ]]; then
+      continue
+    elif [[ -L "$AGENT_SKILLS_DIR/$name" ]]; then
+      run_change ln -sfn "$skill" "$AGENT_SKILLS_DIR/$name"
+      printf '%s %s -> %s\n' "$([[ "$APPLY_CHANGES" = 1 ]] && printf relinked || printf would-relink)" "$AGENT_SKILLS_DIR/$name" "$skill"
+    else
+      run_change ln -s "$skill" "$AGENT_SKILLS_DIR/$name"
+      printf '%s %s -> %s\n' "$([[ "$APPLY_CHANGES" = 1 ]] && printf linked || printf would-link)" "$AGENT_SKILLS_DIR/$name" "$skill"
+    fi
     link_skill "$AGENT_SKILLS_DIR/$name"
   done
 done

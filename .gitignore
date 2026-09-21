@@ -1,4 +1,5 @@
 .DS_STORE
+graphify-out/
 home/.config/nvim/plugin/packer_compiled.lua
 home/.config/systemd
 home/.config/.avalonia-build-tasks
@@ -18,6 +19,7 @@ home/.agents/skills/grill-me
 home/.claude/skills/frontend-design
 home/.claude/skills/diagnosing-bugs
 home/.claude/skills/improve-codebase-architecture
+home/.claude/skills/synced
 home/.claude/skills/tdd
 home/.claude/skills/grill-me
 home/.agents/skills/frontend-design

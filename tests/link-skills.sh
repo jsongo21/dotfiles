@@ -41,6 +41,16 @@ ln -s "$TEST_ROOT/old-target" "$relink_dir/find-skills"
 run_linker "$relink_dir" --apply >/dev/null
 [[ "$(readlink "$relink_dir/find-skills")" = "$TEST_ROOT/shared/find-skills" ]]
 
+stale_shared="$TEST_ROOT/shared/find-skills"
+stale_harness="$TEST_ROOT/stale-harness"
+mkdir -p "$stale_harness"
+rm -f "$stale_shared"
+ln -s "$TEST_ROOT/removed-source" "$stale_shared"
+ln -s "$TEST_ROOT/shared/removed-source" "$stale_harness/removed-source"
+run_linker "$stale_harness" --apply >/dev/null
+[[ "$(readlink "$stale_shared")" = "$SOURCE" ]]
+[[ ! -e "$stale_harness/removed-source" && ! -L "$stale_harness/removed-source" ]]
+
 if SKILL_HARNESS_DIRS="relative/path" "$LINKER" --dry-run >/dev/null 2>&1; then
   printf 'Expected relative harness path to fail\n' >&2
   exit 1
