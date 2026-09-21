@@ -34,7 +34,7 @@ link-agents:
 	done
 
 skills:
-	@python3 -c 'import json, shlex, subprocess; cli = shlex.split("$(SKILLS_CLI)"); agents = sum((["--agent", agent] for agent in shlex.split("$(SKILLS_AGENTS)")), []); manifest = json.load(open("$(SKILLS_MANIFEST)")); [subprocess.run(cli + ["add", entry["source"], "--skill", *entry["names"], "--global", *agents, "--yes"], check=True) for entry in manifest["skills"]]; subprocess.run(cli + ["update", "--global"], check=True)'
+	@SKILLS_CLI="$(SKILLS_CLI)" SKILLS_MANIFEST="$(SKILLS_MANIFEST)" SKILLS_AGENTS="$(SKILLS_AGENTS)" python3 install/skills.py
 
 firefox:
 	@./install/firefox.sh
