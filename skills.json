@@ -5,6 +5,10 @@
       "names": ["find-skills"]
     },
     {
+      "source": "vercel-labs/agent-skills",
+      "names": ["web-design-guidelines"]
+    },
+    {
       "source": "https://github.com/anthropics/skills",
       "names": ["frontend-design"]
     },
