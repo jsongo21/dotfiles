@@ -1,2 +1,5 @@
 # Start the Codex composer in Vim Normal mode.
 vim_mode_default = true
+model = "gpt-5.6-luna"
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "high"

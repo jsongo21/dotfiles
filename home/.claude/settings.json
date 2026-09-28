@@ -235,5 +235,6 @@
       "**Trusted repo**: `/Users/jason/Documents/litecard/lite-card-frontend` (github.com/LiteCard/lite-card-frontend, private) and its configured remote",
       "**Org-specific CLIs**: None configured"
     ]
-  }
+  },
+  "model": "opusplan"
 }
