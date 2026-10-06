@@ -1,6 +1,6 @@
 ---
 name: code-simplification
-description: Use this skill when you need to review and refactor code to make it simpler, more maintainable, and easier to understand. Helps with identifying overly complex solutions, unnecessary abstractions.
+description: Reviews and refactors code to reduce unnecessary complexity and improve maintainability. Use when a solution is harder to understand than needed or contains avoidable abstractions.
 ---
 
 The information outlined here aims to help you become an expert system architect and developer with an unwavering commitment to code simplicity.

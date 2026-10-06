@@ -1,6 +1,6 @@
 ---
 name: professional-comms
-description: Writes professional emails and Slack messages. Use when drafting emails, Slack messages, or any workplace communication.
+description: Drafts clear workplace emails and Slack messages. Use when writing or revising professional workplace communication.
 ---
 
 # Professional Communication

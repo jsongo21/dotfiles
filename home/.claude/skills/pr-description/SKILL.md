@@ -1,6 +1,6 @@
 ---
 name: pr-description
-description: Write a PR description for the current branch. Use when the user asks for a PR description, PR summary, or pull request description.
+description: Writes a pull request description from the current branch's commits and diff. Use when the user asks for a PR description, summary, or overview.
 argument-hint: [base-branch]
 ---
 

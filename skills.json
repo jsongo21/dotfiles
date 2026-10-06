@@ -20,6 +20,21 @@
         "diagnosing-bugs",
         "improve-codebase-architecture"
       ]
+    },
+    {
+      "source": "Graphify-Labs/graphify",
+      "names": ["graphify"]
+    },
+    {
+      "source": "DietrichGebert/ponytail",
+      "names": [
+        "ponytail",
+        "ponytail-audit",
+        "ponytail-debt",
+        "ponytail-gain",
+        "ponytail-help",
+        "ponytail-review"
+      ]
     }
   ]
 }
