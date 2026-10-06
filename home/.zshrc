@@ -116,6 +116,17 @@ alias vim="nvim"
 alias vi="nvim"
 alias zrc="source ~/.zshrc"
 
+claude() {
+    case "${1:-}" in
+        -h|--help|-p|--print|--version|auth|doctor|help|install|mcp|plugin|remote-control|update|version)
+            command claude "$@"
+            ;;
+        *)
+            command claude --remote-control "$@"
+            ;;
+    esac
+}
+
 RPROMPT="%{$fg[green]%}[%D{%c}]"
 
 if type brew &>/dev/null; then
