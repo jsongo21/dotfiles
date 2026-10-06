@@ -67,12 +67,10 @@
       "Skill",
       "WebFetch",
       "WebSearch",
-      "Write(~/.claude/agents/**)",
+      "Edit(~/.claude/agents/**)",
       "Read(~/.claude/commands/**)",
       "Read(~/.claude/hooks/**)",
-      "Write(~/.claude/skills/**)",
-      "Edit(~/.claude/skills/**)",
-      "Edit(~/.claude/agents/**)"
+      "Edit(~/.claude/skills/**)"
     ],
     "deny": [
       "Bash(/usr/bin/sudo *)",
@@ -127,11 +125,11 @@
     "ask": [
       "Bash(curl:*)",
       "Bash(gh pr create:*)",
-      "Bash(git commit:*)",
       "Bash(rm:*)"
     ],
     "defaultMode": "auto"
   },
+  "model": "opusplan",
   "hooks": {
     "PreToolUse": [
       {
@@ -235,6 +233,5 @@
       "**Trusted repo**: `/Users/jason/Documents/litecard/lite-card-frontend` (github.com/LiteCard/lite-card-frontend, private) and its configured remote",
       "**Org-specific CLIs**: None configured"
     ]
-  },
-  "model": "opusplan"
+  }
 }
