@@ -13,17 +13,6 @@ alias sl='ls'
 alias reload='source ~/.bashrc'
 alias xreload='xrdb ~/.Xresources'
 
-claude() {
-    case "${1:-}" in
-        -h|--help|-p|--print|--version|auth|doctor|help|install|mcp|plugin|remote-control|update|version)
-            command claude "$@"
-            ;;
-        *)
-            command claude --remote-control "$@"
-            ;;
-    esac
-}
-
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
