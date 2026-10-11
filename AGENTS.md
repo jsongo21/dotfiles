@@ -18,6 +18,10 @@ This is a personal, public dotfiles repository.
 - Use `make skills` to install configured skills and `make link-agent-skills` to link them.
 - Run `./tests/link-skills.sh` after changing the skill linker.
 
+## Git
+
+- Committing and pushing directly to `master` is allowed in this repo. This overrides the global no-commit-to-main rule.
+
 ## Verification
 
 - Run `git diff --check` before committing.
