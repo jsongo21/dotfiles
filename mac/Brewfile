@@ -130,8 +130,6 @@ brew "sqlfluff"
 brew "stow"
 # Code-search similar to ack
 brew "the_silver_searcher"
-# Terminal multiplexer
-brew "tmux"
 # Watch files and take action when they change
 brew "watchman"
 # General-purpose lossless data-compression library
