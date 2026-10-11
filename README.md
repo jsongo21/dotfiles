@@ -7,7 +7,7 @@ Personal configuration files for macOS and Linux development environments.
 - **Shell**: Zsh with oh-my-zsh, custom aliases and functions
 - **Terminal**: Alacritty configuration
 - **Editor**: Neovim with Lua-based configuration
-- **Multiplexer**: tmux with plugins via tpm
+- **Multiplexer**: herdr
 - **Claude**: Claude Code settings and custom skills
 - **Browser**: Cross-platform Firefox `user.js` preferences
 
@@ -83,7 +83,6 @@ overriding `SKILL_HARNESS_DIRS` with a colon-separated list of skill paths.
 │   ├── .config/
 │   │   └── nvim/     # Neovim configuration
 │   ├── .zshrc
-│   ├── .tmux.conf
 │   └── .alacritty.toml
 ├── firefox/           # Cross-platform Firefox preferences
 │   └── user.js
@@ -103,7 +102,6 @@ See `mac/Brewfile` for macOS packages or `install/pacman-packages` for Arch Linu
 
 Core tools:
 - neovim
-- tmux
 - ripgrep
 - fzf
 - asdf (version manager)
@@ -143,8 +141,7 @@ This overwrites the Brewfile with all currently installed formulae, casks, and t
 ## Post-Installation
 
 1. Set zsh as default shell: `chsh -s $(which zsh)`
-2. Install tmux plugins: Open tmux and press `prefix + I`
-3. Install Neovim plugins: Open nvim and run `:Lazy sync`
+2. Install Neovim plugins: Open nvim and run `:Lazy sync`
 
 ## Notes
 

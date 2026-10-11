@@ -1,6 +1,6 @@
 sudo apt update && sudo apt upgrade
 
-sudo apt install tmux zsh ripgrep build-essential nodejs npm
+sudo apt install zsh ripgrep build-essential nodejs npm
 # install zsh completions
 echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-completions/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-completions.list
 curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-completions/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-completions.gpg > /dev/null
@@ -22,8 +22,5 @@ sudo apt-get install golang-go neovim python-dev python-pip python3-dev python3-
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 	 ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-
-# install tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Done"
