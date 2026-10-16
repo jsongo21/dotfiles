@@ -2,30 +2,50 @@
   "skills": [
     {
       "source": "vercel-labs/skills",
-      "names": ["find-skills"]
+      "names": [
+        "find-skills"
+      ]
     },
     {
       "source": "vercel-labs/agent-skills",
-      "names": ["web-design-guidelines"]
+      "names": [
+        "web-design-guidelines"
+      ]
     },
     {
       "source": "https://github.com/anthropics/skills",
-      "names": ["frontend-design"]
+      "names": [
+        "frontend-design"
+      ]
     },
     {
       "source": "mattpocock/skills",
       "names": [
         "grill-me",
+        "grilling",
+        "grill-with-docs",
         "tdd",
         "diagnosing-bugs",
         "improve-codebase-architecture",
+        "codebase-design",
+        "domain-modeling",
+        "to-spec",
+        "to-tickets",
+        "triage",
+        "implement",
+        "prototype",
+        "research",
+        "pr",
+        "handoff",
         "teach",
         "setup-matt-pocock-skills"
       ]
     },
     {
       "source": "Graphify-Labs/graphify",
-      "names": ["graphify"]
+      "names": [
+        "graphify"
+      ]
     },
     {
       "source": "DietrichGebert/ponytail",
