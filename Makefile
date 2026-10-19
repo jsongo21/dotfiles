@@ -6,10 +6,13 @@ SKILLS_CLI := npx --yes skills
 SKILLS_MANIFEST := skills.json
 SKILLS_AGENTS ?= claude-code codex opencode
 
-.PHONY: stow link-agent-skills link-codex-skills link-agents skills test-skills firefox install
+.PHONY: stow codex-config link-agent-skills link-codex-skills link-agents skills test-skills firefox install
 
 stow:
-	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' --ignore='skills$$' --ignore='\.skill-lock\.json$$' home
+	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' --ignore='skills$$' --ignore='\.skill-lock\.json$$' --ignore='^/\.codex/config\.toml$$' home
+
+codex-config:
+	@python3 install/codex-config.py
 
 link-agent-skills:
 	@AGENT_SKILLS_DIR="$(HOME)/.agents/skills" SKILL_HARNESS_DIRS="$(SKILL_HARNESS_DIRS)" ./install/link-skills.sh --apply
@@ -39,4 +42,4 @@ skills:
 firefox:
 	@./install/firefox.sh
 
-install: stow link-agent-skills link-agents
+install: stow codex-config link-agent-skills link-agents

@@ -8,6 +8,7 @@ This is a personal, public dotfiles repository.
 - Prefer the existing Makefile targets over ad hoc installation commands.
 - Keep platform-specific configuration in `mac/`, `linux/`, and other platform directories.
 - Do not use `stow --adopt` without reviewing the resulting diff.
+- `home/.codex/config.toml` is not stowed. Run `make codex-config` to merge it into the local `~/.codex/config.toml`, which keeps Codex's own trust and UI state out of git.
 - Ask before deleting or overwriting existing user configuration.
 
 ## Skills
