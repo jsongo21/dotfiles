@@ -27,4 +27,5 @@ This is a personal, public dotfiles repository.
 
 - Run `git diff --check` before committing.
 - Run the smallest relevant test suite after changes.
+- Never commit Codex-written state: `[projects.*]` trust entries, `[hooks.state*]`, `[tui.model_availability_nux]` or `screen_reader_detection_done`.
 - Do not commit secrets, machine-specific state, generated Graphify output, or downloaded skill metadata.
