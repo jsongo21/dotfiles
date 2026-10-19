@@ -31,8 +31,5 @@ def main() -> None:
             + ["--yes"]
         )
 
-    run(cli + ["update", "--global"])
-
-
 if __name__ == "__main__":
     main()

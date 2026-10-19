@@ -18,7 +18,8 @@ This is a personal, public dotfiles repository.
 - Keep repo-owned shared skills in `home/.agents/skills/`.
 - Keep Claude-specific skills in `home/.claude/skills/`.
 - Record Skills CLI-managed sources in `skills.json`.
-- Use `make skills` to install configured skills and `make link-agent-skills` to link them.
+- Keep each skill name in one source only: `skills.json` for remote Skills CLI sources, `home/.agents/skills/` for repo-owned shared skills, and `home/.claude/skills/` for Claude-only skills.
+- Use `make skills` to install configured remote skills and link all skill sources to their harnesses. Use `make link-agent-skills` to refresh links without installing or updating remote skills.
 - Run `./tests/link-skills.sh` after changing the skill linker.
 
 ## Git

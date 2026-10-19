@@ -38,6 +38,7 @@ link-agents:
 
 skills:
 	@SKILLS_CLI="$(SKILLS_CLI)" SKILLS_MANIFEST="$(SKILLS_MANIFEST)" SKILLS_AGENTS="$(SKILLS_AGENTS)" python3 install/skills.py
+	@$(MAKE) link-agent-skills
 
 firefox:
 	@./install/firefox.sh

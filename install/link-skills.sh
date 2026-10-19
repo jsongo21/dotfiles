@@ -6,6 +6,7 @@ REPO_DIR="$(cd -- "$SCRIPT_DIR/.." >/dev/null 2>&1 && pwd)"
 SHARED_SKILLS_DIR="$REPO_DIR/home/.agents/skills"
 LOCAL_SKILLS_DIR="$REPO_DIR/home/.claude/skills"
 AGENT_SKILLS_DIR="${AGENT_SKILLS_DIR:-$HOME/.agents/skills}"
+CLAUDE_SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 LOCAL_SKILLS_REAL_DIR="$(realpath "$LOCAL_SKILLS_DIR")"
 
 # Override with a colon-separated list when another harness is installed.
@@ -62,6 +63,8 @@ for target_dir in "${configured_harness_dirs[@]}"; do
   validate_harness_dir "$target_dir"
   run_change mkdir -p "$target_dir"
 done
+validate_harness_dir "$CLAUDE_SKILLS_DIR"
+run_change mkdir -p "$CLAUDE_SKILLS_DIR"
 
 remove_stale_links() {
   local target_dir target link_target
@@ -82,14 +85,14 @@ remove_stale_links() {
   done
 }
 
-remove_stale_links
-
 link_skill() {
   local source="$1"
+  shift
+  local -a target_dirs=("$@")
   local name="${source##*/}"
   local target_dir target target_real
 
-  for target_dir in "${configured_harness_dirs[@]}"; do
+  for target_dir in "${target_dirs[@]}"; do
     [[ -n "$target_dir" ]] || continue
     if [[ -e "$target_dir" ]]; then
       if ! target_real="$(realpath "$target_dir")"; then
@@ -118,6 +121,24 @@ link_skill() {
   done
 }
 
+remove_claude_only_shared_links() {
+  local source name target source_real target_real
+
+  [[ -d "$LOCAL_SKILLS_DIR" ]] || return 0
+  for source in "$LOCAL_SKILLS_DIR"/*; do
+    [[ -d "$source" && -f "$source/SKILL.md" ]] || continue
+    name="${source##*/}"
+    target="$AGENT_SKILLS_DIR/$name"
+    [[ -L "$target" && -e "$target" ]] || continue
+    source_real="$(realpath "$source")"
+    target_real="$(realpath "$target")"
+    [[ "$source_real" = "$target_real" ]] || continue
+    run_change rm -f "$target"
+    printf '%s %s (Claude-only skill source)\n' \
+      "$([[ "$APPLY_CHANGES" = 1 ]] && printf removed || printf would-remove)" "$target"
+  done
+}
+
 link_root() {
   local root="$1"
   local skill
@@ -126,18 +147,19 @@ link_root() {
   for skill in "$root"/*; do
     [[ -d "$skill" ]] || continue
     [[ -f "$skill/SKILL.md" ]] || continue
-    link_skill "$skill"
+    link_skill "$skill" "${configured_harness_dirs[@]}"
   done
 }
 
-# Prefer the CLI-managed shared pool. Repo-local skills are added when they are
-# not already present in that pool.
+remove_claude_only_shared_links
+remove_stale_links
+
+# Shared skills reach every configured harness. Claude-only skills stay in
+# Claude's directory and never enter the shared pool.
 link_root "$AGENT_SKILLS_DIR"
-for source_root in "$SHARED_SKILLS_DIR" "$LOCAL_SKILLS_DIR"; do
-  [[ -d "$source_root" ]] || continue
-  for skill in "$source_root"/*; do
-    [[ -d "$skill" ]] || continue
-    [[ -f "$skill/SKILL.md" ]] || continue
+if [[ -d "$SHARED_SKILLS_DIR" ]]; then
+  for skill in "$SHARED_SKILLS_DIR"/*; do
+    [[ -d "$skill" && -f "$skill/SKILL.md" ]] || continue
     name="${skill##*/}"
     if [[ -e "$AGENT_SKILLS_DIR/$name" ]]; then
       continue
@@ -148,6 +170,13 @@ for source_root in "$SHARED_SKILLS_DIR" "$LOCAL_SKILLS_DIR"; do
       run_change ln -s "$skill" "$AGENT_SKILLS_DIR/$name"
       printf '%s %s -> %s\n' "$([[ "$APPLY_CHANGES" = 1 ]] && printf linked || printf would-link)" "$AGENT_SKILLS_DIR/$name" "$skill"
     fi
-    link_skill "$AGENT_SKILLS_DIR/$name"
+    link_skill "$AGENT_SKILLS_DIR/$name" "${configured_harness_dirs[@]}"
   done
-done
+fi
+
+if [[ -d "$LOCAL_SKILLS_DIR" ]]; then
+  for skill in "$LOCAL_SKILLS_DIR"/*; do
+    [[ -d "$skill" && -f "$skill/SKILL.md" ]] || continue
+    link_skill "$skill" "$CLAUDE_SKILLS_DIR"
+  done
+fi

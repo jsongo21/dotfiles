@@ -10,7 +10,9 @@ TEST_ROOT="$(mktemp -d)"
 trap 'rm -rf "$TEST_ROOT"' EXIT
 
 run_linker() {
-  AGENT_SKILLS_DIR="$TEST_ROOT/shared" SKILL_HARNESS_DIRS="$1" "$LINKER" "${2:---dry-run}"
+  AGENT_SKILLS_DIR="$TEST_ROOT/shared" \
+    CLAUDE_SKILLS_DIR="$TEST_ROOT/claude" \
+    SKILL_HARNESS_DIRS="$1" "$LINKER" "${2:---dry-run}"
 }
 
 dry_run_dir="$TEST_ROOT/dry-run"
@@ -26,9 +28,13 @@ run_linker "$apply_dir" --apply >/dev/null
 [[ "$(readlink "$apply_dir/find-skills")" = "$TEST_ROOT/shared/find-skills" ]]
 
 local_dir="$TEST_ROOT/local"
+mkdir -p "$TEST_ROOT/shared" "$local_dir"
+ln -s "$LOCAL_SOURCE" "$TEST_ROOT/shared/code-review"
+ln -s "$TEST_ROOT/shared/code-review" "$local_dir/code-review"
 run_linker "$local_dir" --apply >/dev/null
-[[ "$(readlink "$TEST_ROOT/shared/code-review")" = "$LOCAL_SOURCE" ]]
-[[ "$(readlink "$local_dir/code-review")" = "$TEST_ROOT/shared/code-review" ]]
+[[ ! -e "$TEST_ROOT/shared/code-review" && ! -L "$TEST_ROOT/shared/code-review" ]]
+[[ ! -e "$local_dir/code-review" && ! -L "$local_dir/code-review" ]]
+[[ "$(readlink "$TEST_ROOT/claude/code-review")" = "$LOCAL_SOURCE" ]]
 
 real_dir="$TEST_ROOT/real"
 mkdir -p "$real_dir/find-skills"
