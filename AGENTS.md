@@ -8,7 +8,9 @@ This is a personal, public dotfiles repository.
 - Prefer the existing Makefile targets over ad hoc installation commands.
 - Keep platform-specific configuration in `mac/`, `linux/`, and other platform directories.
 - Do not use `stow --adopt` without reviewing the resulting diff.
-- `home/.codex/config.toml` is not stowed. Run `make codex-config` to merge it into the local `~/.codex/config.toml`, which keeps Codex's own trust and UI state out of git.
+- `home/.codex/config.toml` is the tracked source for shared Codex settings and is not stowed. The live `~/.codex/config.toml` must remain a local file because Codex writes trust and UI state there.
+- To apply shared Codex settings, run `make codex-config` (also included in `make install`). The merge starts from `home/.codex/config.toml`, so its values win for shared settings. It preserves only Codex-owned local state: `[projects.*]`, `[hooks.state*]`, `[tui.model_availability_nux]`, and `screen_reader_detection_done` under `[tui]`. Other settings found only in the live config are not retained; put settings that should be version-controlled in `home/.codex/config.toml`.
+- When changing the merge behaviour, update `install/codex-config.py` and this guidance together. Do not commit Codex-written state from the live config.
 - Ask before deleting or overwriting existing user configuration.
 
 ## Skills
