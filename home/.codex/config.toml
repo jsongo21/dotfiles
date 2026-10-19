@@ -1,5 +1,22 @@
 # Start the Codex composer in Vim Normal mode.
-vim_mode_default = true
-model = "gpt-5.6-luna"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+approvals_reviewer = "auto_review"
+model = "gpt-6-luna"
 model_reasoning_effort = "medium"
 plan_mode_reasoning_effort = "high"
+
+[sandbox_workspace_write]
+network_access = true
+
+[tui]
+vim_mode_default = true
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "five-hour-limit", "weekly-limit", "used-tokens"]
+status_line_use_colors = true
+
+[features]
+hooks = true
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest", "--headless"]
