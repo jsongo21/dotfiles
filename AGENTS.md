@@ -15,7 +15,7 @@ This is a personal, public dotfiles repository.
 
 ## Skills
 
-- Keep repo-owned shared skills in `home/.agents/skills/`.
+- Keep repo-owned shared skills in `home/.agents/skills/`. The directory is created when the first one is added; all current shared skills come from `skills.json`.
 - Keep Claude-specific skills in `home/.claude/skills/`.
 - Record Skills CLI-managed sources in `skills.json`.
 - Keep each skill name in one source only: `skills.json` for remote Skills CLI sources, `home/.agents/skills/` for repo-owned shared skills, and `home/.claude/skills/` for Claude-only skills.

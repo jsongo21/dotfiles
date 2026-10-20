@@ -13,6 +13,12 @@
       ]
     },
     {
+      "source": "vercel-labs/skills",
+      "names": [
+        "find-skills"
+      ]
+    },
+    {
       "source": "mattpocock/skills",
       "names": [
         "grill-me",
@@ -30,7 +36,10 @@
         "pr",
         "handoff",
         "teach",
-        "setup-matt-pocock-skills"
+        "setup-matt-pocock-skills",
+        "codebase-design",
+        "domain-modeling",
+        "grilling"
       ]
     },
     {
