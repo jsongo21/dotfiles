@@ -13,3 +13,5 @@
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 - Before using "dynamic workflows", "ultra code" or any harness feature that immediately spawns a large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
 - Never commit or push directly to main/master. Always create a branch and open a PR, even for a small, urgent, or "obviously safe" fix - there is no size/urgency exception.
+- Remove a subagent's git worktree once its PR merges (`git worktree remove`, then `git worktree prune`)
+- Use the `pr` skill to write the PR body whenever opening a pull request after implementing a change
