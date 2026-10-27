@@ -1,17 +1,17 @@
 # Global Agent Rules
 - Never use the em dash "—". Use plain dash "-" instead
-- Always use Australian English spelling in all responses, documentation, comments, and code identifiers
-- When writing commit messages, NEVER auto-add your agent name as co-author (Codex has no built-in attribution setting for this, unlike Claude Code)
-- Always use Conventional Commits format for commit messages (e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`)
-- Keep commit messages short and single-line, no multi-line bodies
-- Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
-- When writing documentation, code comments, or PR/commit descriptions, never reference the current session or conversation as a source (e.g. "confirmed via this session", "as decided by you", "per our discussion") - state facts and decisions directly, since session context is not available to future readers
-- When making technical decisions, do not give much weight to development cost. Instead, prefer quality, simplicity, robustness, scalability, and long term maintainability.
-- For one-off or infrequent operational work, start with the simplest direct end-to-end path. Do not build wrappers, control planes, policy layers, custom verifiers, or automation unless the direct path exposes a concrete blocker or repeated need that justifies the added machinery.
-- When doing bug fixes, always start with reproducing the bug in an E2E setting as closely aligned with how an end user would experience it as possible. This makes sure you find the real problem so your fix will actually solve it.
-- When end-to-end testing a product, be picky about the UI you see and be obsessed with pixel perfection. If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
-- Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
-- Before using "dynamic workflows", "ultra code" or any harness feature that immediately spawns a large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
-- Never commit or push directly to main/master. Always create a branch and open a PR, even for a small, urgent, or "obviously safe" fix - there is no size/urgency exception.
+- Write all responses, documentation, comments and commit messages in Australian English, following ASD-STE100 Simplified Technical English. Use Australian spelling in code identifiers
+- Never add co-author trailers or agent attribution to commit messages or PR descriptions
+- Write commit messages as one-line Conventional Commits (e.g. `feat: add x`), with no body
+- Never edit CHANGELOG.md or auto-generated files
+- Never cite the session or conversation in docs, comments, or PR and commit descriptions. State facts and decisions directly
+- Ignore development cost in technical decisions. Prefer quality, simplicity, robustness, scalability and long-term maintainability
+- For one-off or rare operational work, use the simplest direct path. Add wrappers, policy layers, verifiers or automation only after a concrete blocker or repeated need
+- For bug fixes, first reproduce the bug end-to-end, as an end user would meet it. Then the fix targets the real problem
+- When testing end-to-end, check the UI for pixel perfection. Fix anything that looks off, even if unrelated. Fix lint errors, test failures and flaky tests the same way
+- Before using a feature that spawns many subagents (e.g. "dynamic workflows", "ultra code"), explain the tradeoffs and get explicit approval
+- Never commit or push to main/master. Open a PR from a branch, with no size or urgency exception
 - Remove a subagent's git worktree once its PR merges (`git worktree remove`, then `git worktree prune`)
-- Use the `pr` skill to write the PR body whenever opening a pull request after implementing a change
+- Write PR bodies with the `pr` skill
+- Run Playwright in headless mode, for both the MCP browser and scripts
+- If the Playwright MCP server runs headed, restart it with the `--headless` argument
