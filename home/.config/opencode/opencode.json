@@ -15,6 +15,12 @@
     "codesearch": "allow",
     "skill": "allow"
   },
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest", "--headless"]
+    }
+  },
   "provider": {
     "lmstudio": {
       "name": "LM Studio (local)",
