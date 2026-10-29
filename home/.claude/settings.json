@@ -124,9 +124,6 @@
       "Read(~/Library/Keychains/**)",
       "Read(*.env)"
     ],
-    "ask": [
-      "Bash(rm:*)"
-    ],
     "defaultMode": "auto"
   },
   "model": "opusplan",
@@ -138,6 +135,10 @@
           {
             "type": "command",
             "command": "rtk hook claude"
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/rm-tmp.py\""
           }
         ]
       }
@@ -189,8 +190,16 @@
   },
   "syntaxHighlightingDisabled": false,
   "effortLevel": "low",
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-and-agents-md"
+      }
+    }
+  },
   "tui": "fullscreen",
   "theme": "custom:my-theme",
   "editorMode": "vim",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "skipDangerousModePermissionPrompt": true
 }

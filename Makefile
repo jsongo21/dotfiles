@@ -6,7 +6,7 @@ SKILLS_CLI := npx --yes skills
 SKILLS_MANIFEST := skills.json
 SKILLS_AGENTS ?= claude-code codex opencode
 
-.PHONY: stow claude-mcp codex-config link-agent-skills link-codex-skills link-agents skills test-skills firefox install
+.PHONY: stow claude-mcp codex-config link-agent-skills link-codex-skills link-agents skills test-skills test-hooks firefox install
 
 stow:
 	stow --target=$(HOME) --dir=$(CURDIR) --ignore='.DS_Store' --ignore='skills$$' --ignore='\.skill-lock\.json$$' --ignore='^/\.codex/config\.toml$$' home
@@ -24,6 +24,9 @@ link-codex-skills: link-agent-skills
 
 test-skills:
 	@./tests/link-skills.sh
+
+test-hooks:
+	@./tests/rm-tmp-hook.sh
 
 link-agents:
 	@for target in $(CODEX_AGENTS) $(OPENCODE_AGENTS); do \
