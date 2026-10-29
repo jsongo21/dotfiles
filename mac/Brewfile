@@ -161,6 +161,8 @@ cask "capcut"
 cask "chromedriver"
 # Anthropic's official Claude AI desktop app
 cask "claude"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
 # Universal database tool and SQL client
 cask "dbeaver-community"
 # Voice and text chat software
@@ -301,7 +303,6 @@ vscode "vue.volar"
 vscode "wakatime.vscode-wakatime"
 vscode "wayou.vscode-todo-highlight"
 vscode "zhuangtongfa.material-theme"
-npm "@openai/codex"
 npm "ccusage"
 npm "corepack"
 npm "docx"
