@@ -126,16 +126,12 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opusplan",
+  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Bash",
         "hooks": [
-          {
-            "type": "command",
-            "command": "rtk hook claude"
-          },
           {
             "type": "command",
             "command": "python3 -I \"$HOME/.claude/hooks/rm-tmp.py\""
@@ -190,6 +186,14 @@
   },
   "syntaxHighlightingDisabled": false,
   "effortLevel": "low",
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "pluginConfigs": {
     "cc-plugin-agents-md@builtin": {
       "options": {
@@ -198,8 +202,8 @@
     }
   },
   "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
   "theme": "custom:my-theme",
   "editorMode": "vim",
-  "remoteControlAtStartup": true,
-  "skipDangerousModePermissionPrompt": true
+  "remoteControlAtStartup": true
 }
