@@ -122,7 +122,8 @@
       "Read(~/.ssh/**)",
       "Read(~/Library/Application Support/1Password/**)",
       "Read(~/Library/Keychains/**)",
-      "Read(*.env)"
+      "Read(*.env)",
+      "SendFeedback"
     ],
     "defaultMode": "auto"
   },
@@ -158,17 +159,16 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "csharp-lsp@claude-plugins-official": true,
     "mcp-server-dev@claude-plugins-official": false,
-    "claude-api@anthropic-agent-skills": true,
+    "claude-api@anthropic-agent-skills": false,
     "frontend-design@claude-plugins-official": false,
-    "code-review@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
+    "code-review@claude-plugins-official": false,
+    "code-simplifier@claude-plugins-official": false,
     "playwright@claude-plugins-official": false,
-    "claude-md-management@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "claude-md-management@claude-plugins-official": false,
+    "codex@openai-codex": false,
+    "cowork-plugin-management@synced": false,
+    "cc-plugin-easel@builtin": false
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -205,5 +205,9 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "custom:my-theme",
   "editorMode": "vim",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "computer-use": "off"
+  }
 }
