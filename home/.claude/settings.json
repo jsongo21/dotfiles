@@ -128,6 +128,10 @@
     "defaultMode": "auto"
   },
   "model": "opus",
+  "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "computer-use": "off"
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -206,8 +210,5 @@
   "theme": "custom:my-theme",
   "editorMode": "vim",
   "remoteControlAtStartup": true,
-  "disableClaudeAiConnectors": true,
-  "skillOverrides": {
-    "computer-use": "off"
-  }
+  "autoMemoryEnabled": false
 }
