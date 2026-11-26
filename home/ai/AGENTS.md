@@ -15,3 +15,8 @@
 - Write PR bodies with the `pr` skill
 - Run Playwright in headless mode, for both the MCP browser and scripts
 - If the Playwright MCP server runs headed, restart it with the `--headless` argument
+
+## Local resource use
+
+- Run the smallest relevant test set first. Before starting a CPU-intensive local job, such as a full test suite or build, check for heavy jobs in other agent sessions on this machine. Wait for those jobs to finish before you start. Use the tool's worker limit to start with at most two workers. Use serial mode if the tool has no worker limit but supports serial execution.
+- On macOS, prefix heavy commands with `/usr/sbin/taskpolicy -b` to give the command and its child processes background priority. If the sandbox blocks the priority change, keep the worker limit and run without the prefix.
