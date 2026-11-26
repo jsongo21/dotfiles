@@ -75,6 +75,12 @@
       "names": [
         "modern-web-guidance"
       ]
+    },
+    {
+      "source": "https://github.com/haydenschmitty/floorplan",
+      "names": [
+        "floorplan"
+      ]
     }
   ]
 }
