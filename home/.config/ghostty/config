@@ -1,0 +1,34 @@
+# Ghostty configuration
+# Reload with cmd+shift+, (Ghostty does not reload on file change)
+
+# Font
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 12
+
+# Theme: follows the macOS light/dark appearance
+theme = light:TokyoNight Day,dark:TokyoNight
+
+# Window
+window-theme = auto
+background-opacity = 0.75
+background-blur = true
+window-padding-x = 10
+window-padding-y = 10
+# Size in cells. Ghostty limits it to the screen size
+window-width = 1000
+window-height = 100
+
+# Scrolling
+mouse-scroll-multiplier = 3
+
+# Make the macOS Option key act as Alt
+macos-option-as-alt = true
+
+# Key bindings
+# Ghostty defaults handle alt+left/right, cmd+left/right and cmd+backspace
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+keybind = shift+home=scroll_to_top
+keybind = shift+end=scroll_to_bottom
+keybind = alt+backspace=text:\x1b\x7f
+keybind = ctrl+space=text:\x00

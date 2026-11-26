@@ -176,6 +176,8 @@ cask "font-jetbrains-mono-nerd-font"
 cask "fx-cast-bridge"
 # Update maps and software, sync with Garmin Connect and register your device
 cask "garmin-express"
+# Fast, native terminal emulator
+cask "ghostty"
 # Cross-platform Git credential storage for multiple hosting providers
 cask "git-credential-manager"
 # Web browser
