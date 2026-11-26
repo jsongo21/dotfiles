@@ -10,6 +10,8 @@ home/.config/herdr/herdr-server.log
 home/.config/herdr/session-history.json
 home/.config/herdr/session.json
 home/.config/herdr/release-notes.json
+home/.config/herdr/herdr.sock.agent
+home/.config/herdr/session-snapshots/
 home/.agents/.skill-lock.json
 home/.agents/skills/frontend-design
 home/.agents/skills/diagnosing-bugs
